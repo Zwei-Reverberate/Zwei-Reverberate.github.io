@@ -46,7 +46,7 @@
     <!--<script type="text/javascript">
       if (document.images) {
         var avatar = new Image();
-        avatar.src = '/imgs/https:/i0.hdslb.com/bfs/face/306dcd4a34f7c60537e793be6e4b85f6f625b013.jpg'
+        avatar.src = '/imgs/53_00000.png'
         var previews = 'preview1.jpg,preview2.jpg,preview3.jpg,preview4.jpg,preview5.jpg,preview6.jpg,preview7.jpg'.split(',')
         var previewsPreLoad = []
         for(var i = 0; i < length; i++) {
@@ -115,20 +115,48 @@
                 
                 
                 
-                <li class="current">
-                    <a href="/categories">
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
                         <i class="fa fa-list"></i>分类
                     </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/categories/%E6%95%B0%E5%AD%A6/">数学</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
                 </li>
                 
                 
                 
                 
                 
-                <li class="">
-                    <a href="/tags">
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
                         <i class="fa fa-tags"></i>标签
                     </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/tags/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/">离散数学</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/%E6%A0%91%E8%AE%BA/">树论</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
                 </li>
                 
                 
@@ -208,7 +236,7 @@
             <i class="fa fa-quote-right"></i>
         </div>
         <div class="author-panel text-center">
-            <img src="https://i0.hdslb.com/bfs/face/306dcd4a34f7c60537e793be6e4b85f6f625b013.jpg" width="140" height="140"
+            <img src="/imgs/53_00000.png" width="140" height="140"
                  alt="个人头像" class="author-image">
             <p class="author-description"></p>
         </div>
@@ -242,7 +270,7 @@
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2020/05/28/hello-world/">Hello World</a>
+                    <a href="/2020/05/29/%E6%A0%B9%E6%A0%91%E5%8F%8A%E5%93%88%E5%A4%AB%E6%9B%BC%E7%AE%97%E6%B3%95/">根树及哈夫曼算法</a>
                 </span>
             </li>
             
@@ -264,7 +292,7 @@
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2020/05/28/hello-world/">Hello World</a>
+                    <a href="/2020/05/29/%E6%A0%B9%E6%A0%91%E5%8F%8A%E5%93%88%E5%A4%AB%E6%9B%BC%E7%AE%97%E6%B3%95/">根树及哈夫曼算法</a>
                 </span>
             </li>
             
@@ -296,6 +324,10 @@
             <div class="tab-content">
                 
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/" style="font-size: 9.86367145084763px;" class="tag-cloud-link">离散数学</a>
+    
+    <a href="/tags/%E6%A0%91%E8%AE%BA/" style="font-size: 8.46203461188555px;" class="tag-cloud-link">树论</a>
     
 </div>
                 
