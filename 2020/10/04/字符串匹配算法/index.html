@@ -1,0 +1,204 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>字符串匹配算法 - Zwei&#39;s Blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="Brute-Force算法
+顺序遍历母串，将每个字符作为匹配的起始字符，判断是否匹配子串。最坏时间复杂度O(m*n)
+1234567891011121314151617181920212223242,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Zwei&#39;s Blog" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Zwei&#39;s Blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">字符串匹配算法</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">字符串匹配算法</h1>
+        <div class="stuff">
+            <span>十月 04, 2020</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p><strong>Brute-Force算法</strong></p>
+<p>顺序遍历母串，将每个字符作为匹配的起始字符，判断是否匹配子串。最坏时间复杂度O(m*n)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"pch.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">char</span>* <span class="title">strStr</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *, <span class="keyword">const</span> <span class="keyword">char</span> *)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">char</span> str[<span class="number">20</span>] = &#123;<span class="string">'a'</span>, <span class="string">'o'</span>,<span class="string">'n'</span>,<span class="string">'e'</span>,<span class="string">'a'</span>,<span class="string">'p'</span>,<span class="string">'p'</span>,<span class="string">'l'</span>,<span class="string">'e'</span> &#125;;</span><br><span class="line">	<span class="keyword">char</span> target[<span class="number">10</span>] = &#123; <span class="string">'a'</span>,<span class="string">'p'</span>,<span class="string">'p'</span> &#125;;<span class="comment">//测试用例</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; *strStr(str, target) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; *(strStr(str, target)+<span class="number">1</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">char</span>* <span class="title">strStr</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *str, <span class="keyword">const</span> <span class="keyword">char</span> *target)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!*target) <span class="keyword">return</span> (<span class="keyword">char</span>*)str;</span><br><span class="line">    <span class="comment">//如果target为空，则返回str,注意str为const char*,可用（char*)转换为函数相对应的类型</span></span><br><span class="line">	<span class="keyword">char</span> *p1 = (<span class="keyword">char</span>*)str;<span class="comment">//p1指向str开头</span></span><br><span class="line">	<span class="keyword">while</span> (*p1)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">char</span>*p1Begin = p1, *p2 = (<span class="keyword">char</span>*)target;</span><br><span class="line">		<span class="keyword">while</span> (*p1&amp;&amp;*p2&amp;&amp;*p1 == *p2)</span><br><span class="line">		&#123;</span><br><span class="line">			p1++;</span><br><span class="line">			p2++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (!*p2) <span class="keyword">return</span> p1Begin;<span class="comment">//完全匹配target则返回p1Begin，否则p1向后移动一位进入新的循环</span></span><br><span class="line">		p1 = p1Begin + <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>Rabin-Karp算法</strong></p>
+<p>将每一个匹配字符串映射为一个hash值。例如，将子串转换为一个多进制数，比较它的值与字母串中相同长度子串的hash值，如果相同，再细致地按字符确认字符串是否相同。顺序计算母串hash值的过程中，使用增量计算的方法：扣除最高位的hash值，增加最低位的hash值。因此能在平均情况下做到O(m+n)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"pch.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> RADIX = <span class="number">256</span>;</span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> PRIME = <span class="number">101</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printMatchingResult</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pval, <span class="keyword">int</span> s)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">rabinKarp</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>*t, <span class="keyword">const</span> <span class="keyword">char</span>*p)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	rabinKarp(<span class="string">"ABABABABC"</span>, <span class="string">"ABAB"</span>);</span><br><span class="line">	rabinKarp(<span class="string">"AAAAAAA"</span>, <span class="string">"AAA"</span>);</span><br><span class="line">	rabinKarp(<span class="string">"XYXZdeOXZZKWXYZ"</span>, <span class="string">"WXYZ"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printMatchingResult</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pval, <span class="keyword">int</span> s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s; i++)</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; pval;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">rabinKarp</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>*t, <span class="keyword">const</span> <span class="keyword">char</span>*p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"**********************************************\n"</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; t &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">int</span> nt = <span class="built_in">strlen</span>(t), np = <span class="built_in">strlen</span>(p);</span><br><span class="line">	<span class="keyword">int</span> pval = <span class="number">0</span>, tval = <span class="number">0</span>, h = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; np - <span class="number">1</span>; i++)</span><br><span class="line">		h = (h*RADIX) % PRIME;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i &lt; np; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		pval = (RADIX*pval + p[i]) % PRIME;</span><br><span class="line">		tval = (RADIX*tval + t[i]) % PRIME;</span><br><span class="line">	&#125;<span class="comment">//计算出匹配字符串长度的hash值</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= nt - np; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (pval == tval)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">int</span> j;</span><br><span class="line">			<span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; np; j++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span> (t[i + j] != p[j])</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> (j == np)</span><br><span class="line">				printMatchingResult(p, i);</span><br><span class="line">		&#125;<span class="comment">//hash值相同，然后再对字符串进行逐一比较</span></span><br><span class="line">		<span class="keyword">if</span> (i == nt - np)</span><br><span class="line">			<span class="keyword">return</span>;<span class="comment">//剩余字符长度不足以匹配，直接结束</span></span><br><span class="line"></span><br><span class="line">		tval = ((tval - t[i] * h)*RADIX + t[i + np]) % PRIME;</span><br><span class="line">		<span class="keyword">if</span> (tval &lt; <span class="number">0</span>)</span><br><span class="line">			tval = tval + PRIME;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>KMP算法</strong></p>
+<p>核心思路：将已有的匹配信息通过next数组记录下来，用以减少不必要的匹配。O(m+n)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"pch.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Kmp</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>*mainString, <span class="keyword">const</span> <span class="keyword">char</span>*typeString)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> *<span class="title">getNext</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>*typeString)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; Kmp(<span class="string">"Abbbbca"</span>, <span class="string">"bc"</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Kmp</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>*mainString,<span class="keyword">const</span> <span class="keyword">char</span>*typeString)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span>*next = getNext(typeString);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> lenMainString = <span class="built_in">strlen</span>(mainString);</span><br><span class="line">	<span class="keyword">int</span> lenTypeString = (<span class="keyword">int</span>)<span class="built_in">strlen</span>(typeString);<span class="comment">//强制类型转换，因为d可以为负值</span></span><br><span class="line">	<span class="keyword">int</span> c = <span class="number">0</span>, d = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span> (c &lt; lenMainString&amp;&amp;d &lt; lenTypeString)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (d == <span class="number">-1</span> || mainString[c] == typeString[d])</span><br><span class="line">		&#123;</span><br><span class="line">			c++;</span><br><span class="line">			d++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> d = next[d];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">free</span>(next);</span><br><span class="line">	<span class="keyword">return</span> d == lenTypeString ? c - d : <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> *<span class="title">getNext</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>*typeString)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> lenTypeString = (<span class="keyword">int</span>)<span class="built_in">strlen</span>(typeString);</span><br><span class="line">	<span class="keyword">int</span>* next = (<span class="keyword">int</span>*)<span class="built_in">calloc</span>(lenTypeString, <span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line">	next[<span class="number">0</span>] = <span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">int</span> c = <span class="number">0</span>, d = <span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">while</span> (c &lt; lenTypeString - <span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (d == <span class="number">-1</span> || typeString[c] == typeString[d])</span><br><span class="line">		&#123;</span><br><span class="line">			c++;</span><br><span class="line">			d++;</span><br><span class="line">			next[c] = (typeString[c] != typeString[d] ? d : next[d]);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> d = next[d];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='https://link.hhtjim.com/163/4993317.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='https://link.hhtjim.com/163/786262.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='false'
+        data-ci='77d40e4a7682915056e7'
+        data-cs='4ceb4624eca954c774c0ecf25eaef91c40f490e4'
+        data-r='BlogComments'
+        data-o='Zwei-Reverberate'
+        data-a='Zwei-Reverberate'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
