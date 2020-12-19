@@ -1,0 +1,314 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>机器学习基础概念 - Zwei&#39;s Blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="1.什么是机器学习
+应用于数据科学领域的一种数学建模
+
+本质是借助数学模型理解数据
+
+​        当我们给模型装上可以适应观测数据的可调参数时，“学习”就开始了；此时的程序被认为具有从数据中“,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Zwei&#39;s Blog" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Zwei&#39;s Blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">机器学习基础概念</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">机器学习基础概念</h1>
+        <div class="stuff">
+            <span>十二月 19, 2020</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag">计算机</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h4 id="1-什么是机器学习"><a href="#1-什么是机器学习" class="headerlink" title="1.什么是机器学习"></a>1.什么是机器学习</h4><ul>
+<li><p>应用于数据科学领域的一种数学建模</p>
+</li>
+<li><p>本质是借助数学模型理解数据</p>
+<blockquote>
+<p>​        当我们给模型装上可以适应观测数据的可调参数时，“学习”就开始了；此时的程序被认为具有从数据中“学习”的能力。一旦模型可以拟合旧的观测数据，那么它们就可以预测并解释新的观测数据。</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="2-机器学习的分类"><a href="#2-机器学习的分类" class="headerlink" title="2.机器学习的分类"></a>2.机器学习的分类</h4><ul>
+<li><p>有监督的学习</p>
+<blockquote>
+<p>​        有监督学习是指对数据的若干特征与若干标签（类型）之间的关联性进行建模的过程；只要模型被确定，就可以应用到新的未知数据上。这类学习过程可以进一步分为分类（classification）任务与回归（regression）任务。在分类任务中，标签都是离散值；而在回归任务中，标签都是连续值。</p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li><p>无监督学习</p>
+<blockquote>
+<p>​        无监督学习是指对不带任何标签的数据特征进行建模，通常被看成是一种“让数据自己介绍自己”的过程。这类模型包括聚类（clustering）任务和降维（dimensionality reduction）任务。聚类算法可以将数据分成不同的组别，而降维算法追求用更简洁的方式表现数据。</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="3-Scikit-Learn"><a href="#3-Scikit-Learn" class="headerlink" title="3.Scikit - Learn"></a>3.Scikit - Learn</h4><ul>
+<li>特征矩阵</li>
+</ul>
+<blockquote>
+<p>​        特征矩阵通常被简记为变量X。它是维度为[n_samples,n_features]的二维矩阵。样本（行）通常是数据集中的每个对象。特征（列）通常是指每个样本都具有的某种量化观测值。</p>
+</blockquote>
+<ul>
+<li>目标数组</li>
+</ul>
+<blockquote>
+<p>​        一个标签或目标数组，通常简记为 y 。目标数组一般是一维数组，其长度就是样本总数 n_samples ，通常都用一维的 NumPy 数组或 Pandas 的Series 表示。目标数组可以是连续的数值类型，也可以是离散的类型 / 标签。</p>
+</blockquote>
+<ul>
+<li>API基本步骤</li>
+</ul>
+<blockquote>
+<p>(1) 通过从 Scikit-Learn 中导入适当的评估器类，选择模型类。<br>(2) 用合适的数值对模型类进行实例化，配置模型超参数（hyperparameter）。<br>(3) 整理数据，通过前面介绍的方法获取特征矩阵和目标数组。<br>(4) 调用模型实例的 fit() 方法对数据进行拟合。<br>(5) 对新数据应用模型：<br>       · 在有监督学习模型中，通常使用 predict() 方法预测新数据的标签；<br>       · 在无监督学习模型中，通常使用 transform() 或 predict() 方法转换或推断数据的性质。</p>
+</blockquote>
+<ul>
+<li>简单的线性回归实例</li>
+</ul>
+<blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">import</span> pandas <span class="keyword">as</span> pd	</span><br><span class="line">&gt;<span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">&gt;<span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">&gt;<span class="comment">#生成样本数据</span></span><br><span class="line">&gt;rng=np.random.RandomState(<span class="number">42</span>)</span><br><span class="line">&gt;x=<span class="number">10</span>*rng.rand(<span class="number">50</span>)</span><br><span class="line">&gt;y=<span class="number">2</span>*x<span class="number">-1</span>+rng.randn(<span class="number">50</span>)</span><br><span class="line">&gt;plt.scatter(x,y)</span><br><span class="line"></span><br><span class="line">&gt;<span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LinearRegression  <span class="comment"># 导入线性回归模型类</span></span><br><span class="line">&gt;<span class="comment"># 将模型实例化，设置超参数的值（此处为拟合直线的截距）</span></span><br><span class="line"></span><br><span class="line">&gt;model = LinearRegression(fit_intercept=<span class="literal">True</span>) </span><br><span class="line">&gt;X = x[:, np.newaxis]  <span class="comment"># 设置目标数组</span></span><br><span class="line">&gt;model.fit(X,y)  <span class="comment"># 将模型应用于数据</span></span><br><span class="line">&gt;print(model.coef_)  <span class="comment"># 对斜率进行拟合</span></span><br><span class="line">&gt;print(model.intercept_)  <span class="comment"># 对截距进行拟合</span></span><br><span class="line"></span><br><span class="line">&gt;xfit=np.linspace(<span class="number">-1</span>,<span class="number">11</span>)  </span><br><span class="line">&gt;Xfit=xfit[:,np.newaxis]</span><br><span class="line">&gt;yfit=model.predict(Xfit)</span><br><span class="line"></span><br><span class="line">&gt;plt.scatter(x,y)</span><br><span class="line">&gt;plt.plot(xfit,yfit)  <span class="comment"># 用模型预测出目标数组的y轴坐标</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<ul>
+<li>有监督学习实例：鸢尾花数据分类</li>
+</ul>
+<blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="string">'''</span></span><br><span class="line"><span class="string">&gt;使用高斯朴素贝叶斯（Gaussian naive Bayes）对数据集进行分类</span></span><br><span class="line"><span class="string">&gt;'''</span></span><br><span class="line"></span><br><span class="line">&gt;<span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">&gt;<span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line">&gt;iris = sns.load_dataset(<span class="string">'iris'</span>)</span><br><span class="line">&gt;print(iris)</span><br><span class="line"></span><br><span class="line">&gt;X_iris = iris.drop(<span class="string">'species'</span>, axis=<span class="number">1</span>)</span><br><span class="line">&gt;y_iris = iris[<span class="string">'species'</span>]  <span class="comment"># 花的品种，目标数组</span></span><br><span class="line"></span><br><span class="line">&gt;<span class="comment">#  分割数据集为训练集和测试集</span></span><br><span class="line">&gt;<span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line">&gt;Xtrain, Xtest, ytrain, ytest = train_test_split(X_iris, y_iris,random_state=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">&gt;<span class="comment">#  选择模型来预测标签</span></span><br><span class="line">&gt;<span class="keyword">from</span> sklearn.naive_bayes <span class="keyword">import</span> GaussianNB  <span class="comment"># 1.选择模型类</span></span><br><span class="line">&gt;model = GaussianNB() <span class="comment"># 2.初始化模型</span></span><br><span class="line">&gt;model.fit(Xtrain, ytrain) <span class="comment"># 3.用模型拟合数据</span></span><br><span class="line">&gt;y_model = model.predict(Xtest)  <span class="comment"># 4.对新数据进行预测</span></span><br><span class="line">&gt;print(y_model)</span><br><span class="line"></span><br><span class="line">&gt;<span class="comment">#  用 accuracy_score 工具验证模型预测结果的准确率（预测的所有结果中，正确结果占总预测样本数的比例）</span></span><br><span class="line">&gt;<span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> accuracy_score</span><br><span class="line">&gt;print(accuracy_score(ytest, y_model))  <span class="comment"># 准确率为97%</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<ul>
+<li>无监督学习示例：鸢尾花数据降维</li>
+</ul>
+<blockquote>
+<p>​        降维的任务是要找到一个可以保留数据本质特征的低维矩阵来表示高维数据。降维通常用于辅助数据可视化工作。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">对鸢尾花数据进行降维</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="keyword">from</span> sklearn.decomposition <span class="keyword">import</span> PCA  <span class="comment"># 选择模型类</span></span><br><span class="line">model=PCA(n_components=<span class="number">2</span>)  <span class="comment"># 设置超参数，初始化模型</span></span><br><span class="line">model.fit(X_iris)  <span class="comment"># 拟合数据，注意这里不用y变量</span></span><br><span class="line">X_2D=model.transform(X_iris)  <span class="comment"># 将数据转换为二维</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 画出结果。先将二维数据插入到鸢尾花的DataFrame中</span></span><br><span class="line">iris[<span class="string">'PCA1'</span>] = X_2D[:, <span class="number">0</span>]</span><br><span class="line">iris[<span class="string">'PCA2'</span>] = X_2D[:, <span class="number">1</span>]</span><br><span class="line">sns.lmplot(<span class="string">"PCA1"</span>, <span class="string">"PCA2"</span>, hue=<span class="string">'species'</span>, data=iris, fit_reg=<span class="literal">False</span>)</span><br><span class="line"><span class="comment"># 虽然 PCA 算法根本不知道花的种类标签，但不同种类的花还是被很清晰地区分开来。这表明用一种比较简单的分类方法就能够有效地学习这份数据</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<ul>
+<li>无监督学习示例：鸢尾花数据聚类</li>
+</ul>
+<blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="string">'''</span></span><br><span class="line"><span class="string">&gt;使用高斯混合模型（GMM）对鸢尾花数据进行聚类</span></span><br><span class="line"><span class="string">&gt;'''</span></span><br><span class="line">&gt;<span class="keyword">from</span> sklearn.mixture <span class="keyword">import</span> GaussianMixture  <span class="comment"># 选择模型类</span></span><br><span class="line">&gt;model=GaussianMixture(n_components=<span class="number">3</span>,covariance_type=<span class="string">'full'</span>)  <span class="comment"># 设置超参数，初始化模型</span></span><br><span class="line">&gt;model.fit(X_iris)  <span class="comment"># 拟合数据，注意不需要y变量</span></span><br><span class="line">&gt;y_gmm=model.predict(X_iris)  <span class="comment"># 确定簇标签</span></span><br><span class="line"></span><br><span class="line">&gt;<span class="comment"># 可视化结果</span></span><br><span class="line">&gt;iris[<span class="string">'cluster'</span>] = y_gmm</span><br><span class="line">&gt;sns.lmplot(<span class="string">"PCA1"</span>, <span class="string">"PCA2"</span>, data=iris, hue=<span class="string">'species'</span>,</span><br><span class="line">&gt;col=<span class="string">'cluster'</span>, fit_reg=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h4 id="4-超参数与模型验证"><a href="#4-超参数与模型验证" class="headerlink" title="4.超参数与模型验证"></a>4.超参数与模型验证</h4><p>模型验证：选择模型和超参数之后，通过训练数据进行学习，对比已知数据的预测值与实际值的差异</p>
+<p>留出集：先从训练模型的数据中留出一部分，然后用这部分留出来的数据来检验模型性能<br>缺点：模型失去了一部分训练机会</p>
+<p>交叉检验：也就是做一组拟合，让数据的每个子集既是训练集，又是验证集。<br>这样就可以获得几个准确率，将几者结合（例如求均值）获取一个更准确的模型总体性能<br>交叉检验的极端：LOO(leave-one-out)每次只有一个样本做测试，其他样本全用于训练</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_iris</span><br><span class="line">iris = load_iris()</span><br><span class="line">X = iris.data</span><br><span class="line">y = iris.target</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">模型验证的方法：留出集</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line">X1,X2,y1,y2=train_test_split(X,y,random_state=<span class="number">0</span>,train_size=<span class="number">0.5</span>)  <span class="comment"># 每个数据集分一半数据</span></span><br><span class="line"></span><br><span class="line">model.fit(X1,y1)  <span class="comment"># 用模型拟合训练数据</span></span><br><span class="line"></span><br><span class="line">y2_model=model.predict(X2)</span><br><span class="line">accuracy_score(y2,y2_model)  <span class="comment"># 在测试集中评估模型的准确率</span></span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">模型验证的方法：交叉检验</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line">y2_model = model.fit(X1, y1).predict(X2)</span><br><span class="line">y1_model = model.fit(X2, y2).predict(X1)</span><br><span class="line">accuracy_score(y1, y1_model), accuracy_score(y2, y2_model)</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="5-选择最优模型"><a href="#5-选择最优模型" class="headerlink" title="5.选择最优模型"></a>5.选择最优模型</h4><ol>
+<li><p>偏差与方差的均衡<br>”最优模型“的问题基本可以看成是找出<strong>偏差</strong>与<strong>方差</strong>平衡点的问题。</p>
+<p>欠拟合：数据本质比模型要复杂，模型没有足够的灵活性来适应数据的所有特征。另一种说法是模型具有高偏差。对于高偏差模型，模型在验证集上的表现与在训练集的表先类似。<br>过拟合：过多地学习了数据的噪音，而不是数据的本质属性。模型过于灵活，在适应数据所有特征的同时，也适应了随机误差。另一种说法就是模型具有高方差。对于高方差模型，模型在验证集上的表现远远不如在训练集上的表现。</p>
+</li>
+</ol>
+<p>   验证曲线：</p>
+<p>   <img src="/2020/12/19/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/1.jpg" alt="1"></p>
+<blockquote>
+<p>训练得分肯定高于验证得分。一般情况下，模型拟合自己接触过的数据，比拟合没接触过的数据效果要好。</p>
+<p>使用复杂度较低的模型（高偏差）时，训练数据往往欠拟合，说明模型对训练数据和新数据都缺乏预测能力。</p>
+<p>而使用复杂度较高的模型（高方差）时，训练数据往往过拟合，说明模型对训练数据预测能力很强，但是对新数据的预测能力很差。</p>
+<p>当使用复杂度适中的模型时，验证曲线得分最高。说明在该模型复杂度条件下，偏差与方差达到均衡状态。</p>
+</blockquote>
+<ol start="2">
+<li><p>Scikit-Learn验证曲线</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> PolynomialFeatures</span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LinearRegression</span><br><span class="line"><span class="keyword">from</span> sklearn.pipeline <span class="keyword">import</span> make_pipeline</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">PolynomialRegression</span><span class="params">(degree=<span class="number">2</span>, **kwargs)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> make_pipeline(PolynomialFeatures(degree),</span><br><span class="line">                            LinearRegression(**kwargs))</span><br><span class="line"><span class="comment"># 生成数据</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">make_data</span><span class="params">(N, err=<span class="number">1.0</span>, rseed=<span class="number">1</span>)</span>:</span></span><br><span class="line">    <span class="comment"># 随机轴样数据</span></span><br><span class="line">    rng = np.random.RandomState(rseed)</span><br><span class="line">    X = rng.rand(N, <span class="number">1</span>) ** <span class="number">2</span></span><br><span class="line">    y = <span class="number">10</span> - <span class="number">1.</span> / (X.ravel() + <span class="number">0.1</span>)</span><br><span class="line">    <span class="keyword">if</span> err &gt; <span class="number">0</span>:</span><br><span class="line">        y += err * rng.randn(N)</span><br><span class="line">    <span class="keyword">return</span> X, y</span><br><span class="line"></span><br><span class="line">X, y = make_data(<span class="number">40</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过数据可视化，将不同次数的多项式拟合曲线画出来</span></span><br><span class="line">%matplotlib inline  </span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">%matplotlib具体作用是当你调用matplotlib.pyplot的绘图函数plot()进行绘图的时候，</span></span><br><span class="line"><span class="string">或者生成一个figure画布的时候，可以直接在你的python console里面生成图像</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn; seaborn.set() <span class="comment"># 设置图形样式</span></span><br><span class="line">X_test = np.linspace(<span class="number">-0.1</span>, <span class="number">1.1</span>, <span class="number">500</span>)[:, <span class="literal">None</span>]</span><br><span class="line">plt.scatter(X.ravel(), y, color=<span class="string">'black'</span>)</span><br><span class="line">axis = plt.axis()</span><br><span class="line"><span class="keyword">for</span> degree <span class="keyword">in</span> [<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>]:</span><br><span class="line">     y_test = PolynomialRegression(degree).fit(X, y).predict(X_test)</span><br><span class="line">     plt.plot(X_test.ravel(), y_test, label=<span class="string">'degree=&#123;0&#125;'</span>.format(degree))</span><br><span class="line">plt.xlim(<span class="number">-0.1</span>, <span class="number">1.0</span>)</span><br><span class="line">plt.ylim(<span class="number">-2</span>, <span class="number">12</span>)</span><br><span class="line">plt.legend(loc=<span class="string">'best'</span>);</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/12/19/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/2.png" alt="1"></p>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">通过可视化验证曲线计算模型验证范围内的训练得分和验证得分</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> validation_curve</span><br><span class="line">degree = np.arange(<span class="number">0</span>, <span class="number">21</span>)</span><br><span class="line">train_score, val_score = validation_curve(PolynomialRegression(), X, y,<span class="string">'polynomialfeatures__degree'</span>,degree, cv=<span class="number">7</span>)</span><br><span class="line">plt.plot(degree, np.median(train_score, <span class="number">1</span>), color=<span class="string">'blue'</span>, label=<span class="string">'training score'</span>)</span><br><span class="line">plt.plot(degree, np.median(val_score, <span class="number">1</span>), color=<span class="string">'red'</span>, label=<span class="string">'validation score'</span>)</span><br><span class="line">plt.legend(loc=<span class="string">'best'</span>)</span><br><span class="line">plt.ylim(<span class="number">0</span>, <span class="number">1</span>)</span><br><span class="line">plt.xlabel(<span class="string">'degree'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'score'</span>)</span><br><span class="line"><span class="comment"># 从验证曲线中可以看出，偏差与方差均衡性最好的是三次多项式</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/12/19/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/3.png" alt="1"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">计算结果，并将模型画在原始数据上</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line">plt.scatter(X.ravel(), y)</span><br><span class="line">lim = plt.axis()</span><br><span class="line">y_test = PolynomialRegression(<span class="number">3</span>).fit(X, y).predict(X_test)</span><br><span class="line">plt.plot(X_test.ravel(), y_test);</span><br><span class="line">plt.axis(lim)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/12/19/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/4.png" alt="1"></p>
+<h4 id="6-学习曲线"><a href="#6-学习曲线" class="headerlink" title="6.学习曲线"></a>6.学习曲线</h4><p>影响模型复杂度的另一个重要因素是最优模型往往受到训练数据量的影响。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成前面5倍的数据</span></span><br><span class="line">X2, y2 = make_data(<span class="number">200</span>)</span><br><span class="line">plt.scatter(X2.ravel(), y2)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/12/19/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/5.png" alt="1"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">用前面的方法画出这个大数据集验证曲线。为了对比，把之前的曲线也画出来</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line">degree = np.arange(<span class="number">21</span>)</span><br><span class="line">train_score2, val_score2 = validation_curve(PolynomialRegression(), X2, y2,</span><br><span class="line"><span class="string">'polynomialfeatures__degree'</span>,</span><br><span class="line">degree, cv=<span class="number">7</span>)</span><br><span class="line">plt.plot(degree, np.median(train_score2, <span class="number">1</span>), color=<span class="string">'blue'</span>,</span><br><span class="line">label=<span class="string">'training score'</span>)</span><br><span class="line">plt.plot(degree, np.median(val_score2, <span class="number">1</span>), color=<span class="string">'red'</span>, label=<span class="string">'validation score'</span>)</span><br><span class="line">plt.plot(degree, np.median(train_score, <span class="number">1</span>), color=<span class="string">'blue'</span>, alpha=<span class="number">0.3</span>,</span><br><span class="line">linestyle=<span class="string">'dashed'</span>)</span><br><span class="line">plt.plot(degree, np.median(val_score, <span class="number">1</span>), color=<span class="string">'red'</span>, alpha=<span class="number">0.3</span>,</span><br><span class="line">linestyle=<span class="string">'dashed'</span>)</span><br><span class="line">plt.legend(loc=<span class="string">'lower center'</span>)</span><br><span class="line">plt.ylim(<span class="number">0</span>, <span class="number">1</span>)</span><br><span class="line">plt.xlabel(<span class="string">'degree'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'score'</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/12/19/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/6.png" alt="1"></p>
+<p>实线是大数据集的验证曲线，而虚线是前面小数据集的验证曲线。从验证曲线可以明显看出，大数据集支持更复杂的模型：虽然得分顶点大概是六次多项式，但是即使到了二十次多项式，过拟合情况也不太严重——验证得分与训练得分依然十分接近。</p>
+<p>通过观察验证曲线的变化趋势，可以发现有两个影响模型效果的因素：<strong>模型复杂度和训练数据集的规模。</strong>通常，我们将模型看成是与训练数据规模相关的函数，通过不断扩大数据集的规模来拟合模型，以此来观察模型的行为。反映训练集规模的训练得分/验证得分曲线被称为学习曲线。</p>
+<p>学习曲线的特征包括以下三点：</p>
+<blockquote>
+<p>特定复杂度的模型对较小的数据集容易过拟合：此时训练得分较高，验证得分较低。<br>特定复杂度的模型对较大的数据集容易欠拟合：随着数据的增大，训练得分会不断降低，而验证得分会不断升高。<br>模型的验证集得分永远不会高于训练集得分：两条曲线一直在靠近，但永远不会交叉。</p>
+</blockquote>
+<p><img src="/2020/12/19/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/7.jpg" alt="1"></p>
+<p>学习曲线最重要的特征是，随着训练样本数量的增加，分数会收敛到定值。因此，一旦数据多到使模型得分已经收敛，那么增加更多的训练样本也无济于事。改善模型性能的唯一方法就是换模型（通常也是换成更复杂的模型）。</p>
+<h4 id="7-特征工程"><a href="#7-特征工程" class="headerlink" title="7.特征工程"></a>7.特征工程</h4><ol>
+<li><p>分类特征<br>表示分类的数据，以”地点“为例。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 假定房屋数据</span></span><br><span class="line">data = [</span><br><span class="line">&#123;<span class="string">'price'</span>: <span class="number">850000</span>, <span class="string">'rooms'</span>: <span class="number">4</span>, <span class="string">'neighborhood'</span>: <span class="string">'Queen Anne'</span>&#125;,</span><br><span class="line">&#123;<span class="string">'price'</span>: <span class="number">700000</span>, <span class="string">'rooms'</span>: <span class="number">3</span>, <span class="string">'neighborhood'</span>: <span class="string">'Fremont'</span>&#125;,</span><br><span class="line">&#123;<span class="string">'price'</span>: <span class="number">650000</span>, <span class="string">'rooms'</span>: <span class="number">3</span>, <span class="string">'neighborhood'</span>: <span class="string">'Wallingford'</span>&#125;,</span><br><span class="line">&#123;<span class="string">'price'</span>: <span class="number">600000</span>, <span class="string">'rooms'</span>: <span class="number">2</span>, <span class="string">'neighborhood'</span>: <span class="string">'Fremont'</span>&#125;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 独热编码，有效增加额外的列</span></span><br><span class="line"><span class="keyword">from</span> sklearn.feature_extraction <span class="keyword">import</span> DictVectorizer</span><br><span class="line">vec = DictVectorizer(sparse=<span class="literal">False</span>, dtype=int)</span><br><span class="line">vec.fit_transform(data)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看特征名称</span></span><br><span class="line">vec.get_feature_names()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显著的缺陷：如果分类特征有许多枚举值，那么数据集的维度就会急剧增加，使用稀疏矩阵解决</span></span><br><span class="line">vec = DictVectorizer(sparse=<span class="literal">True</span>, dtype=int)</span><br><span class="line">vec.fit_transform(data)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>文本特征</p>
+<p>另一种常见的特征工程需求是将文本转换成一组数值。例如，绝大多数社交媒体数据的自动化采集，都是依靠将文本编码成数字的技术手段。数据采集最简单的编码方法之一就是单词统计：给定几个文本，统计每个词出现的次数，然后放到表格中。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">sample = [<span class="string">'problem of evil'</span>,</span><br><span class="line"><span class="string">'evil queen'</span>,</span><br><span class="line"><span class="string">'horizon problem'</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 稀疏矩阵记录了每个短语中每个单词的出现次数</span></span><br><span class="line"><span class="keyword">from</span> sklearn.feature_extraction.text <span class="keyword">import</span> CountVectorizer</span><br><span class="line">vec = CountVectorizer()</span><br><span class="line">X = vec.fit_transform(sample)</span><br><span class="line">print(X)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 带列标签的DataFrame 来表示这个稀疏矩阵</span></span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">print(pd.DataFrame(X.toarray(), columns=vec.get_feature_names()))</span><br><span class="line"><span class="comment"># 缺陷：原始的单词统计会让一些常用词聚集太高的权重，在分类算法中这样并不合理</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 解决这个问题的方法就是通过 TF–IDF（term frequency–inversedocument frequency，词频逆文档频率），通过单词在文档中出现的频率来衡量其权重</span></span><br><span class="line"><span class="keyword">from</span> sklearn.feature_extraction.text <span class="keyword">import</span> TfidfVectorizer</span><br><span class="line">vec = TfidfVectorizer()</span><br><span class="line">X = vec.fit_transform(sample)</span><br><span class="line">print(pd.DataFrame(X.toarray(), columns=vec.get_feature_names()))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>图像特征<br><a href="http://scikit-image.org" target="_blank" rel="noopener">http://scikit-image.org</a></p>
+</li>
+<li><p>衍生特征<br>还有一种有用的特征是输入特征经过数学变换衍生出来的新特征。<br>这种不通过改变模型，而是通过变换输入来改善模型效果的理念，正是许多更强大的机器学习方法的基础。</p>
+</li>
+<li><p>缺失值填充<br>特征工程中还有一种常见需求是处理缺失值。</p>
+</li>
+<li><p>特征管道</p>
+</li>
+</ol>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='https://link.hhtjim.com/163/4993317.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='https://link.hhtjim.com/163/786262.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='false'
+        data-ci='77d40e4a7682915056e7'
+        data-cs='4ceb4624eca954c774c0ecf25eaef91c40f490e4'
+        data-r='BlogComments'
+        data-o='Zwei-Reverberate'
+        data-a='Zwei-Reverberate'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
