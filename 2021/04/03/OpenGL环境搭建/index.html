@@ -1,0 +1,223 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>OpenGL环境搭建 - Zwei&#39;s Blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="在工程创建时也可以创建Cmake项目，这对于跨平台使用更有好处。附：华中科技大学OpenGL环境搭建手册
+
+文件目录设定
+
+Bin: 存放最终的可执行文件Depend: 存放第三方依赖的头文件和库文,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Zwei&#39;s Blog" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Zwei&#39;s Blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">OpenGL环境搭建</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">OpenGL环境搭建</h1>
+        <div class="stuff">
+            <span>四月 03, 2021</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Computer-Graphics/" rel="tag">Computer Graphics</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>在工程创建时也可以创建<a href="https://www.bilibili.com/video/BV1qa4y1e7zP/?spm_id_from=333.788.b_7265636f5f6c697374.2" target="_blank" rel="noopener">Cmake项目</a>，这对于跨平台使用更有好处。<br>附：<a href="https://www.icourse163.org/learn/HUST-1003636001?tid=1457257442#/learn/content?type=detail&id=1232561338&cid=1251029964" target="_blank" rel="noopener">华中科技大学OpenGL环境搭建手册</a></p>
+<ol>
+<li><p>文件目录设定</p>
+<p><img src="https://www.helloimg.com/images/2021/05/05/BgpvY6.jpg" alt></p>
+<p>Bin: 存放最终的可执行文件<br>Depend: 存放第三方依赖的头文件和库文件 （include存放头文件，lib存放库文件）<br>Shader: 存放shader文件<br>Temp: 存放生成可执行文件过程中的一些中间文件<br>Source: VS工程文件</p>
+</li>
+</ol>
+<ol start="2">
+<li><p>工程属性配置</p>
+<p><img src="https://www.helloimg.com/images/2021/05/05/Bgp0en.jpg" alt></p>
+<p><img src="https://www.helloimg.com/images/2021/05/05/BgpNTR.jpg" alt></p>
+</li>
+</ol>
+<p>   <img src="https://www.helloimg.com/images/2021/05/05/BgpQKz.jpg" alt></p>
+<p>   <img src="https://www.helloimg.com/images/2021/05/05/Bgp7n5.jpg" alt> </p>
+<ul>
+<li><p>选择：“所有属性” $\rightarrow$ “所有平台”</p>
+</li>
+<li><p>修改：“输出目录”，“中间目录”，“附加包含目录”，“附加库目录”，“输出文件”，“附加依赖项”</p>
+</li>
+</ul>
+<ol start="3">
+<li><p>利用Cmake生成glfw</p>
+<ul>
+<li>生成的glfw3.lib放入Denpend\lib\</li>
+<li>拷贝include\GLFW到Depend\include</li>
+</ul>
+</li>
+<li><p>配置glad</p>
+<ul>
+<li><p>glad.c文件放入源码目录</p>
+</li>
+<li><p>将glad，KHR放入Depend\include\</p>
+</li>
+</ul>
+</li>
+</ol>
+<ol start="5">
+<li><p>测试: 成功运行窗口程序即可</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"glad/glad.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"GLFW/glfw3.h"</span></span></span><br><span class="line"></span><br><span class="line"> <span class="comment">// 屏幕宽，高</span></span><br><span class="line"><span class="keyword">int</span> screen_width = <span class="number">1280</span>;</span><br><span class="line"><span class="keyword">int</span> screen_height = <span class="number">720</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">// 初始化GLFW</span></span><br><span class="line">	glfwInit();                                                     <span class="comment">// 初始化GLFW</span></span><br><span class="line">	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, <span class="number">3</span>);                  <span class="comment">// OpenGL版本为3.3，主次版本号均设为3</span></span><br><span class="line">	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, <span class="number">3</span>);</span><br><span class="line">	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);  <span class="comment">// 使用核心模式(无需向后兼容性)</span></span><br><span class="line">	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);            <span class="comment">// 如果使用的是Mac OS X系统，需加上这行</span></span><br><span class="line">	glfwWindowHint(GLFW_RESIZABLE, <span class="literal">false</span>);						    <span class="comment">// 不可改变窗口大小</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 创建窗口(宽、高、窗口名称)</span></span><br><span class="line">	<span class="keyword">auto</span> window = glfwCreateWindow(screen_width, screen_height, <span class="string">"window"</span>, <span class="literal">nullptr</span>, <span class="literal">nullptr</span>);</span><br><span class="line">	<span class="keyword">if</span> (window == <span class="literal">nullptr</span>) &#123;                                        <span class="comment">// 如果窗口创建失败，输出Failed to Create OpenGL Context</span></span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Failed to Create OpenGL Context"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">		glfwTerminate();</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	glfwMakeContextCurrent(window);                                 <span class="comment">// 将窗口的上下文设置为当前线程的主上下文</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 初始化GLAD，加载OpenGL函数指针地址的函数</span></span><br><span class="line">	<span class="keyword">if</span> (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Failed to initialize GLAD"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 指定当前视口尺寸(前两个参数为左下角位置，后两个参数是渲染窗口宽、高)</span></span><br><span class="line">	glViewport(<span class="number">0</span>, <span class="number">0</span>, screen_width, screen_height);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 渲染循环</span></span><br><span class="line">	<span class="keyword">while</span> (!glfwWindowShouldClose(window)) &#123;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 清空颜色缓冲</span></span><br><span class="line">		glClearColor(<span class="number">0.0f</span>, <span class="number">0.34f</span>, <span class="number">0.57f</span>, <span class="number">1.0f</span>);</span><br><span class="line">		glClear(GL_COLOR_BUFFER_BIT);</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 交换缓冲并且检查是否有触发事件(比如键盘输入、鼠标移动等）</span></span><br><span class="line">		glfwSwapBuffers(window);</span><br><span class="line">		glfwPollEvents();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 清理所有的资源并正确退出程序</span></span><br><span class="line">	glfwTerminate();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='https://link.hhtjim.com/163/4993317.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='https://link.hhtjim.com/163/786262.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='false'
+        data-ci='77d40e4a7682915056e7'
+        data-cs='4ceb4624eca954c774c0ecf25eaef91c40f490e4'
+        data-r='BlogComments'
+        data-o='Zwei-Reverberate'
+        data-a='Zwei-Reverberate'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

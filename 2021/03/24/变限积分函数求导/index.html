@@ -5,12 +5,15 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Zwei&#39;s Blog</title>
+    <title>变限积分函数求导 - Zwei&#39;s Blog</title>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="Fechin,"> 
-    
+    <meta name="description" content="学习微积分时，也许会遇到这样一种积分上限函数：
+
+问题是要对这样一种形式的函数进行求导。
+我最先看到这个问题的时候直接想的是直接套用积分上限函数求导的性质，将 t 换成 x，直接可以得出 f’(x),"> 
     <meta name="author" content="John Doe"> 
     <link rel="alternative" href="atom.xml" title="Zwei&#39;s Blog" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -35,27 +38,89 @@
 <body class="loading">
     <span id="config-title" style="display:none">Zwei&#39;s Blog</span>
     <div id="loader"></div>
-    <div id="single" class="page">
-    <div id="top">
-        <a class="iconfont icon-left image-icon" href="javascript:history.back()"></a>
-    </div>
-    <div class="section">
-        <div class="article">
-            <div class="main">
-                <div class="content">
-                
-                    <div class="set">
-  <h2>分类</h2>
-  <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CS/">CS</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACGN/">ACGN</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mathematics/">Mathematics</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MAD/">MAD</a><span class="category-list-count">1</span></li></ul>
-</div>
-
-                
-                </div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">变限积分函数求导</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
             </div>
+            <div id="qr"></div>
         </div>
     </div>
+    <div class="scrollbar"></div>
 </div>
 
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">变限积分函数求导</h1>
+        <div class="stuff">
+            <span>三月 24, 2021</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Mathematics/" rel="tag">Mathematics</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>学习微积分时，也许会遇到这样一种积分上限函数：</p>
+<p><img src="https://www.helloimg.com/images/2021/05/05/Bgp2oY.jpg"></p>
+<p>问题是要对这样一种形式的函数进行求导。</p>
+<p>我最先看到这个问题的时候直接想的是直接套用积分上限函数求导的性质，将 t 换成 x，直接可以得出 f’(x)=0。这样的答案显然是不可靠的。于是花了一些时间查阅相关资料，终于大致搞清楚了其中的问题。</p>
+<p>导数，就是一种变化率，这个题目可以看作讨论 x 变化与函数值变化的一种比例关系。在此题中积分上限中的 x 与 积分内部的被积函数 x 是一样的。也就是说，当 x 变化的时候，除了积分上限有变化之外，积分内部的被积函数也在发生变化。显然，如果仅仅考虑上限是不够的。</p>
+<p>事实上，针对此种问题，变限积分求导有更一般性的公式: </p>
+<p><img src="https://www.helloimg.com/images/2021/05/05/BgpcsM.jpg"></p>
+<p>不过，计算变限积分的导数，更多的使用换元法，将被积函数中的自变量去掉。</p>
+<p>这里用换元法对此题的正确解答应为：</p>
+<p><img src="https://www.helloimg.com/images/2021/05/05/BgpTi9.jpg"></p>
+<p>下面写一道类似的题目，读者有兴趣可以自行练习</p>
+<p><img src="https://www.helloimg.com/images/2021/05/05/BgpWzX.jpg"></p>
+<p>求出f(x)的导数</p>
+<p>最后的答案是</p>
+<p><img src="https://www.helloimg.com/images/2021/05/05/BgpO5g.jpg"></p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='https://link.hhtjim.com/163/4993317.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='https://link.hhtjim.com/163/786262.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='false'
+        data-ci='77d40e4a7682915056e7'
+        data-cs='4ceb4624eca954c774c0ecf25eaef91c40f490e4'
+        data-r='BlogComments'
+        data-o='Zwei-Reverberate'
+        data-a='Zwei-Reverberate'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
 </body>
 
 <script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
