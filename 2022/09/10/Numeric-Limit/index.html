@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Numeric Limit | Zwei&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+    <link rel="icon" href="/avatar-default.png">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+  
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Numeric Limit">
+<meta property="og:url" content="https://zweireverberate.icu/2022/09/10/Numeric-Limit/index.html">
+<meta property="og:site_name" content="Zwei&#39;s Blog">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-09-10T06:34:53.000Z">
+<meta property="article:modified_time" content="2022-09-10T06:37:45.486Z">
+<meta property="article:author" content="Zwei">
+<meta property="article:tag" content="C Plus Plus">
+<meta name="twitter:card" content="summary"><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Zwei's Blog" type="application/atom+xml">
+</head>
+
+<body>
+  <div id="wrapper">
+    <header id="header">
+  <h1 id="title">
+    <a href="/">Zwei&#39;s Blog</a>
+  </h1>
+  <nav>
+    
+    
+      
+      <a class="nav-link" href="/">Home</a>
+    
+      
+        <span class="nav-spacer">×</span>
+      
+      <a class="nav-link" href="/archives">Archives</a>
+    
+      
+        <span class="nav-spacer">×</span>
+      
+      <a class="nav-link" href="/about">About</a>
+    
+    
+  </nav>
+</header>
+
+    <div id="content">
+      <article id="post-Numeric-Limit" class="article article-type-post" itemprop="blogPost" itemscope>
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 class="article-title" itemprop="headline name">
+      Numeric Limit
+    </h2>
+  
+
+
+        <div class="article-meta">
+          <time class="article-date" datetime="2022-09-10T06:34:53.000Z" itemprop="datePublished">2022-09-10</time>
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        <p><em><a id="more"></a></em></p>
+<h3 id="1-std-numeric-limits"><a href="#1-std-numeric-limits" class="headerlink" title="1. std::numeric_limits"></a>1. std::numeric_limits</h3><p>C++ 标准库用 template numeric_limits 提供各种数值类型的极值。如需使用需要包含 &lt; limits&gt; 头文件。</p>
+<p>实际上，numeric_limits 并不仅仅提供最大最小值：</p>
+<blockquote>
+<p><em>The <code>numeric_limits</code> class template provides a standardized way to query various properties of arithmetic types.</em> </p>
+</blockquote>
+<p>而是提供了一种标准化的方式来查询数值类型的各种属性（摘自<a href="https://en.cppreference.com/w/cpp/types/numeric_limits" target="_blank" rel="noopener">cppreference</a>），而最大最小值只是诸多属性中的一种。</p>
+<p>相比于传统 C 语言所使用的预处理常量（如 INT_MIN, INT_MAX, FLT_MAX…），新的极值概念有更好的类型安全性，因此提倡使用这种写法。</p>
+<p>numeric_limits 在对所有数值类型提供一个通用的解决方案的同时，也为各个具体的类型提供了特化的版本。这也是使用 template 技术的一个要点（摘自《C++ 标准库 第2版》）：</p>
+<ul>
+<li><p>通用 template，为所有类型提供默认极值</p>
+<pre><code class="c++">namespace std
+{
+    // general numeric limits as default for any type
+    template &lt;typename T&gt;
+    class numeric_limits
+    {
+      public:
+        // by default no specialization for any type T exists
+        static constexpr bool is_specialized = false;
+        ...// other members are meaningless for the template
+    }
+}
+</code></pre>
+</li>
+<li><p>各具体类型的极值，由特化版本提供：</p>
+<pre><code class="c++">namespace std
+{
+    // numeric limits for int
+    template&lt;&gt; class numeric_limits&lt;int&gt;
+    {
+    public:
+        static constexpr bool is_specialized = true;
+        ...
+    }
+}
+</code></pre>
+</li>
+</ul>
+<h3 id="2-Template-parameters"><a href="#2-Template-parameters" class="headerlink" title="2. Template parameters"></a>2. Template parameters</h3><ul>
+<li><p>Member constants （皆为 static）</p>
+<table>
+<thead>
+<tr>
+<th>Member</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>is_specialized</td>
+<td>类型是否有极值</td>
+</tr>
+<tr>
+<td>is_signed</td>
+<td>类型是否有正负号</td>
+</tr>
+<tr>
+<td>is_integer</td>
+<td>是否是整数类型</td>
+</tr>
+<tr>
+<td>is_exact</td>
+<td>计算结果是否不产生舍入误差（此成员对所有整数类型而言均为 True）</td>
+</tr>
+<tr>
+<td>is_bounded</td>
+<td>标识类型数值集是否有限（对所有内建类型而言均为 True）</td>
+</tr>
+<tr>
+<td>is_modulo</td>
+<td>是否用模算数处理溢出（即两数相加，其结果可能因溢出而回绕为较小值）</td>
+</tr>
+<tr>
+<td>is_iec559</td>
+<td>是否遵从 IEC559 及 IEEE754 标准</td>
+</tr>
+<tr>
+<td>radix</td>
+<td>给定类型所使用的基数，即默认进制数。几乎总是2</td>
+</tr>
+<tr>
+<td>digits</td>
+<td>使用 radix 的位数。（如 int 为31）</td>
+</tr>
+<tr>
+<td>digits10</td>
+<td>10进制数字的个数（只有 is_bounded 成立才有意义）</td>
+</tr>
+<tr>
+<td>max_digits10</td>
+<td>必要的10进制数位个数，确保不同的数值总是不同（since C++11）</td>
+</tr>
+<tr>
+<td>min_exponent</td>
+<td>底 radix 的最小负整数指数</td>
+</tr>
+<tr>
+<td>max_exponent</td>
+<td>底 radix 的最大负整数指数</td>
+</tr>
+<tr>
+<td>min_exponent</td>
+<td>底10的最小负整数指数</td>
+</tr>
+<tr>
+<td>max_exponent</td>
+<td>底10的最大负整数指数</td>
+</tr>
+<tr>
+<td>round_style</td>
+<td>舍入风格</td>
+</tr>
+<tr>
+<td>has_infinity</td>
+<td>是否有“正无穷大”的表述</td>
+</tr>
+<tr>
+<td>has_quiet_NaN</td>
+<td>是否拥有 nonsignaling “Not a Number” 表述</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>Member Functions（皆为 static）</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>min()</td>
+<td>返回给定类型的最小值</td>
+</tr>
+<tr>
+<td>max()</td>
+<td>返回给定类型的最大值</td>
+</tr>
+<tr>
+<td>lowest()</td>
+<td>返回给定类型的最大负有限值</td>
+</tr>
+<tr>
+<td>epsilon()</td>
+<td>返回1和最接近1的值之间的差距</td>
+</tr>
+<tr>
+<td>round_error()</td>
+<td>最大舍入误差量度</td>
+</tr>
+<tr>
+<td>infinity()</td>
+<td>返回“正无穷大”（如果有的话）</td>
+</tr>
+<tr>
+<td>quiet_NaN()</td>
+<td>返回 quiet NaN value</td>
+</tr>
+<tr>
+<td>signaling_NaN()</td>
+<td>返回 signaling NaN value</td>
+</tr>
+<tr>
+<td>denorm_min()</td>
+<td>返回最小正值的 denormalized value</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h3 id="3-使用示例"><a href="#3-使用示例" class="headerlink" title="3. 使用示例"></a>3. 使用示例</h3><pre><code class="c++">#include &lt;limits&gt;
+#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+
+struct RowPrinter
+{
+    int m_left; // Left alignment
+    int m_right; // Right alignment
+
+    RowPrinter(int left, int right)
+        :m_left(left), m_right(right)
+    {
+        // Print bool as &#39;true&#39; or &#39;false&#39;
+        // Instead of 0 or 1
+        std::cout &lt;&lt; std::boolalpha;
+    }
+
+    template &lt;typename A&gt;
+    auto printRow(const std::string&amp; label, const A&amp; value) const -&gt; void
+    {
+        std::cout &lt;&lt; std::setw(m_left) &lt;&lt; label
+                  &lt;&lt; std::setw(m_right) &lt;&lt; value &lt;&lt; &quot;\n&quot;;
+    }
+};
+
+#define SHOW_INTEGER_LIMITS(numtype) \
+    showNumericLimits&lt;numtype&gt;(#numtype)
+#define SHOW_FLOAT_LIMITS(numtype) \
+    showFloatPointLimits&lt;numtype&gt;(#numtype)
+
+
+// Function to show the numeric limits
+template &lt;typename T&gt;
+void showNumericLimits(const std::string&amp; name)
+{
+    RowPrinter rp{ 30, 25 };
+
+    std::cout &lt;&lt; &quot;Numeric limits for type: &quot; &lt;&lt; name &lt;&lt; &quot;\n&quot;;
+    std::cout &lt;&lt; std::string(60, &#39;-&#39;) &lt;&lt; &quot;\n&quot;;
+
+    rp.printRow(&quot;Type:&quot;, name);
+    rp.printRow(&quot;Is integer:&quot;, std::numeric_limits&lt;T&gt;::is_integer);
+    rp.printRow(&quot;Is signed:&quot;, std::numeric_limits&lt;T&gt;::is_signed);
+    rp.printRow(&quot;Number of digits:&quot;, std::numeric_limits&lt;T&gt;::digits);
+    rp.printRow(&quot;Number of digits 10:&quot;, std::numeric_limits&lt;T&gt;::digits10);
+    rp.printRow(&quot;Max Number of digits 10:&quot;, std::numeric_limits&lt;T&gt;::max_digits10);
+
+    // RTTI - Run-Time Type Information
+    if (typeid(T) == typeid(uint8_t) || typeid(T) == typeid(int8_t)
+                                     || typeid(T) == typeid(bool)
+                                     || typeid(T) == typeid(char)
+                                     || typeid(T) == typeid(unsigned char))
+    {
+        // Min Abs - smallest positive value
+        // for float point numbers
+        rp.printRow(&quot;Min:&quot;, static_cast&lt;int&gt;(std::numeric_limits&lt;T&gt;::min()));
+        // Smallest value (can be negative)
+        rp.printRow(&quot;Lowest:&quot;, static_cast&lt;int&gt;(std::numeric_limits&lt;T&gt;::lowest()));
+        // Largest value
+        rp.printRow(&quot;Max:&quot;, static_cast&lt;int&gt;(std::numeric_limits&lt;T&gt;::max()));
+    }
+    else 
+    {
+        rp.printRow(&quot;Min:&quot;, std::numeric_limits&lt;T&gt;::min());
+        rp.printRow(&quot;Lowest:&quot;, std::numeric_limits&lt;T&gt;::lowest());
+        rp.printRow(&quot;Max:&quot;, std::numeric_limits&lt;T&gt;::max());
+    }
+
+    rp.printRow(&quot;Size in bytes:&quot;, sizeof(T));
+    rp.printRow(&quot;Size in bits:&quot;, 8 * sizeof(T));
+    std::cout &lt;&lt; &quot;\n&quot;;
+}
+
+// Function to show float points limits
+template &lt;class T&gt;
+void showFloatPointLimits(const std::string&amp; name)
+{
+    RowPrinter rp{ 30, 25 };
+    showNumericLimits&lt;T&gt;(name);
+    rp.printRow(&quot;Epsilon:&quot;, std::numeric_limits&lt;T&gt;::epsilon());
+    rp.printRow(&quot;Min exponent:&quot;, std::numeric_limits&lt;T&gt;::min_exponent10);
+    rp.printRow(&quot;Max exponent:&quot;, std::numeric_limits&lt;T&gt;::max_exponent10);
+}
+
+
+int main()
+{
+    // Boolean type
+    SHOW_INTEGER_LIMITS(bool);
+
+    // Character types
+    SHOW_INTEGER_LIMITS(char);
+    SHOW_INTEGER_LIMITS(unsigned char);
+    SHOW_INTEGER_LIMITS(wchar_t);
+
+    // Standard integers in &lt;cstdint&gt;
+    SHOW_INTEGER_LIMITS(int8_t);
+    SHOW_INTEGER_LIMITS(uint8_t);
+    SHOW_INTEGER_LIMITS(int16_t);
+    SHOW_INTEGER_LIMITS(uint16_t);
+    SHOW_INTEGER_LIMITS(int32_t);
+    SHOW_INTEGER_LIMITS(uint32_t);
+    SHOW_INTEGER_LIMITS(int64_t);
+    SHOW_INTEGER_LIMITS(uint64_t);
+
+    // Integer types
+    SHOW_INTEGER_LIMITS(short);
+    SHOW_INTEGER_LIMITS(unsigned short);
+    SHOW_INTEGER_LIMITS(int);
+    SHOW_INTEGER_LIMITS(unsigned int);
+    SHOW_INTEGER_LIMITS(long);
+    SHOW_INTEGER_LIMITS(unsigned long);
+    SHOW_INTEGER_LIMITS(long long);
+    SHOW_INTEGER_LIMITS(unsigned long long);
+
+    // Floating types
+    SHOW_FLOAT_LIMITS(float);
+    SHOW_FLOAT_LIMITS(double);
+    SHOW_FLOAT_LIMITS(long double);
+
+    return 0;
+}
+</code></pre>
+<p>Output:</p>
+<pre><code class="c++">Numeric limits for type: bool
+------------------------------------------------------------
+                         Type:                     bool
+                   Is integer:                     true
+                    Is signed:                    false
+             Number of digits:                        1
+          Number of digits 10:                        0
+      Max Number of digits 10:                        0
+                          Min:                        0
+                       Lowest:                        0
+                          Max:                        1
+                Size in bytes:                        1
+                 Size in bits:                        8
+
+Numeric limits for type: char
+------------------------------------------------------------
+                         Type:                     char
+                   Is integer:                     true
+                    Is signed:                     true
+             Number of digits:                        7
+          Number of digits 10:                        2
+      Max Number of digits 10:                        0
+                          Min:                     -128
+                       Lowest:                     -128
+                          Max:                      127
+                Size in bytes:                        1
+                 Size in bits:                        8
+
+Numeric limits for type: unsigned char
+------------------------------------------------------------
+                         Type:            unsigned char
+                   Is integer:                     true
+                    Is signed:                    false
+             Number of digits:                        8
+          Number of digits 10:                        2
+      Max Number of digits 10:                        0
+                          Min:                        0
+                       Lowest:                        0
+                          Max:                      255
+                Size in bytes:                        1
+                 Size in bits:                        8
+
+Numeric limits for type: wchar_t
+------------------------------------------------------------
+                         Type:                  wchar_t
+                   Is integer:                     true
+                    Is signed:                    false
+             Number of digits:                       16
+          Number of digits 10:                        4
+      Max Number of digits 10:                        0
+                          Min:                        0
+                       Lowest:                        0
+                          Max:                    65535
+                Size in bytes:                        2
+                 Size in bits:                       16
+
+Numeric limits for type: int8_t
+------------------------------------------------------------
+                         Type:                   int8_t
+                   Is integer:                     true
+                    Is signed:                     true
+             Number of digits:                        7
+          Number of digits 10:                        2
+      Max Number of digits 10:                        0
+                          Min:                     -128
+                       Lowest:                     -128
+                          Max:                      127
+                Size in bytes:                        1
+                 Size in bits:                        8
+
+Numeric limits for type: uint8_t
+------------------------------------------------------------
+                         Type:                  uint8_t
+                   Is integer:                     true
+                    Is signed:                    false
+             Number of digits:                        8
+          Number of digits 10:                        2
+      Max Number of digits 10:                        0
+                          Min:                        0
+                       Lowest:                        0
+                          Max:                      255
+                Size in bytes:                        1
+                 Size in bits:                        8
+
+Numeric limits for type: int16_t
+------------------------------------------------------------
+                         Type:                  int16_t
+                   Is integer:                     true
+                    Is signed:                     true
+             Number of digits:                       15
+          Number of digits 10:                        4
+      Max Number of digits 10:                        0
+                          Min:                   -32768
+                       Lowest:                   -32768
+                          Max:                    32767
+                Size in bytes:                        2
+                 Size in bits:                       16
+
+Numeric limits for type: uint16_t
+------------------------------------------------------------
+                         Type:                 uint16_t
+                   Is integer:                     true
+                    Is signed:                    false
+             Number of digits:                       16
+          Number of digits 10:                        4
+      Max Number of digits 10:                        0
+                          Min:                        0
+                       Lowest:                        0
+                          Max:                    65535
+                Size in bytes:                        2
+                 Size in bits:                       16
+
+Numeric limits for type: int32_t
+------------------------------------------------------------
+                         Type:                  int32_t
+                   Is integer:                     true
+                    Is signed:                     true
+             Number of digits:                       31
+          Number of digits 10:                        9
+      Max Number of digits 10:                        0
+                          Min:              -2147483648
+                       Lowest:              -2147483648
+                          Max:               2147483647
+                Size in bytes:                        4
+                 Size in bits:                       32
+
+Numeric limits for type: uint32_t
+------------------------------------------------------------
+                         Type:                 uint32_t
+                   Is integer:                     true
+                    Is signed:                    false
+             Number of digits:                       32
+          Number of digits 10:                        9
+      Max Number of digits 10:                        0
+                          Min:                        0
+                       Lowest:                        0
+                          Max:               4294967295
+                Size in bytes:                        4
+                 Size in bits:                       32
+
+Numeric limits for type: int64_t
+------------------------------------------------------------
+                         Type:                  int64_t
+                   Is integer:                     true
+                    Is signed:                     true
+             Number of digits:                       63
+          Number of digits 10:                       18
+      Max Number of digits 10:                        0
+                          Min:     -9223372036854775808
+                       Lowest:     -9223372036854775808
+                          Max:      9223372036854775807
+                Size in bytes:                        8
+                 Size in bits:                       64
+
+Numeric limits for type: uint64_t
+------------------------------------------------------------
+                         Type:                 uint64_t
+                   Is integer:                     true
+                    Is signed:                    false
+             Number of digits:                       64
+          Number of digits 10:                       19
+      Max Number of digits 10:                        0
+                          Min:                        0
+                       Lowest:                        0
+                          Max:     18446744073709551615
+                Size in bytes:                        8
+                 Size in bits:                       64
+
+Numeric limits for type: short
+------------------------------------------------------------
+                         Type:                    short
+                   Is integer:                     true
+                    Is signed:                     true
+             Number of digits:                       15
+          Number of digits 10:                        4
+      Max Number of digits 10:                        0
+                          Min:                   -32768
+                       Lowest:                   -32768
+                          Max:                    32767
+                Size in bytes:                        2
+                 Size in bits:                       16
+
+Numeric limits for type: unsigned short
+------------------------------------------------------------
+                         Type:           unsigned short
+                   Is integer:                     true
+                    Is signed:                    false
+             Number of digits:                       16
+          Number of digits 10:                        4
+      Max Number of digits 10:                        0
+                          Min:                        0
+                       Lowest:                        0
+                          Max:                    65535
+                Size in bytes:                        2
+                 Size in bits:                       16
+
+Numeric limits for type: int
+------------------------------------------------------------
+                         Type:                      int
+                   Is integer:                     true
+                    Is signed:                     true
+             Number of digits:                       31
+          Number of digits 10:                        9
+      Max Number of digits 10:                        0
+                          Min:              -2147483648
+                       Lowest:              -2147483648
+                          Max:               2147483647
+                Size in bytes:                        4
+                 Size in bits:                       32
+
+Numeric limits for type: unsigned int
+------------------------------------------------------------
+                         Type:             unsigned int
+                   Is integer:                     true
+                    Is signed:                    false
+             Number of digits:                       32
+          Number of digits 10:                        9
+      Max Number of digits 10:                        0
+                          Min:                        0
+                       Lowest:                        0
+                          Max:               4294967295
+                Size in bytes:                        4
+                 Size in bits:                       32
+
+Numeric limits for type: long
+------------------------------------------------------------
+                         Type:                     long
+                   Is integer:                     true
+                    Is signed:                     true
+             Number of digits:                       31
+          Number of digits 10:                        9
+      Max Number of digits 10:                        0
+                          Min:              -2147483648
+                       Lowest:              -2147483648
+                          Max:               2147483647
+                Size in bytes:                        4
+                 Size in bits:                       32
+
+Numeric limits for type: unsigned long
+------------------------------------------------------------
+                         Type:            unsigned long
+                   Is integer:                     true
+                    Is signed:                    false
+             Number of digits:                       32
+          Number of digits 10:                        9
+      Max Number of digits 10:                        0
+                          Min:                        0
+                       Lowest:                        0
+                          Max:               4294967295
+                Size in bytes:                        4
+                 Size in bits:                       32
+
+Numeric limits for type: long long
+------------------------------------------------------------
+                         Type:                long long
+                   Is integer:                     true
+                    Is signed:                     true
+             Number of digits:                       63
+          Number of digits 10:                       18
+      Max Number of digits 10:                        0
+                          Min:     -9223372036854775808
+                       Lowest:     -9223372036854775808
+                          Max:      9223372036854775807
+                Size in bytes:                        8
+                 Size in bits:                       64
+
+Numeric limits for type: unsigned long long
+------------------------------------------------------------
+                         Type:       unsigned long long
+                   Is integer:                     true
+                    Is signed:                    false
+             Number of digits:                       64
+          Number of digits 10:                       19
+      Max Number of digits 10:                        0
+                          Min:                        0
+                       Lowest:                        0
+                          Max:     18446744073709551615
+                Size in bytes:                        8
+                 Size in bits:                       64
+
+Numeric limits for type: float
+------------------------------------------------------------
+                         Type:                    float
+                   Is integer:                    false
+                    Is signed:                     true
+             Number of digits:                       24
+          Number of digits 10:                        6
+      Max Number of digits 10:                        9
+                          Min:              1.17549e-38
+                       Lowest:             -3.40282e+38
+                          Max:              3.40282e+38
+                Size in bytes:                        4
+                 Size in bits:                       32
+
+                      Epsilon:              1.19209e-07
+                 Min exponent:                      -37
+                 Max exponent:                       38
+Numeric limits for type: double
+------------------------------------------------------------
+                         Type:                   double
+                   Is integer:                    false
+                    Is signed:                     true
+             Number of digits:                       53
+          Number of digits 10:                       15
+      Max Number of digits 10:                       17
+                          Min:             2.22507e-308
+                       Lowest:            -1.79769e+308
+                          Max:             1.79769e+308
+                Size in bytes:                        8
+                 Size in bits:                       64
+
+                      Epsilon:              2.22045e-16
+                 Min exponent:                     -307
+                 Max exponent:                      308
+Numeric limits for type: long double
+------------------------------------------------------------
+                         Type:              long double
+                   Is integer:                    false
+                    Is signed:                     true
+             Number of digits:                       53
+          Number of digits 10:                       15
+      Max Number of digits 10:                       17
+                          Min:             2.22507e-308
+                       Lowest:            -1.79769e+308
+                          Max:             1.79769e+308
+                Size in bytes:                        8
+                 Size in bits:                       64
+
+                      Epsilon:              2.22045e-16
+                 Min exponent:                     -307
+                 Max exponent:                      308
+</code></pre>
+
+      
+    </div>
+    
+    
+    <div class="article-category">
+      
+      
+      
+        <b>Tags:</b>
+        <a class="article-tag-link" href="/tags/C-Plus-Plus/" rel="tag">C Plus Plus</a>
+      
+    </div>
+    
+    
+  </div>
+</article>
+
+  
+<nav id="article-nav" class="article-nav">
+  
+    <a href="/2022/09/29/C-IO/" id="article-nav-newer" class="article-nav-link-wrap newer">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          C++ IO
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/07/02/Git-%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" id="article-nav-older" class="article-nav-link-wrap older">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">
+        
+          Git 学习记录
+        
+      </div>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+    </div>
+  </div>
+  
+
+
+
+
+<div id="settings-container">
+  <div id="dark-mode">dark</div>
+  <div id="sans-font">sans</div>
+</div>
+<script type="text/javascript">
+let d=document,r=d.documentElement.style,f=r.setProperty.bind(r),l=localStorage,s=l.getItem('s')||(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches),n=l.getItem('n'),m=d.getElementById("dark-mode"),b=()=>{f('--bg-color','#fafafa');f('--code-bg-color','#f4f4f4');f('--text-color','#212121');f('--secondary-color','#808080');f('--tertiary-color','#b0b0b0');f('--link-color','#b5c8cf');f('--link-hover-color','#618794');f('--link-bg-color','#dae4e7');f('--selection-color','#dae4e7');m.innerHTML="dark"},c=()=>{f('--bg-color','#212121');f('--code-bg-color','#292929');f('--text-color','#fff');f('--secondary-color','#c0c0c0');f('--tertiary-color','#6e6e6e');f('--link-color','#4d6b75');f('--link-hover-color','#96b1bb');f('--link-bg-color','#5d828e');f('--selection-color','#acc1c9');m.innerHTML="light"},o=d.getElementById("sans-font"),e=()=>{f('--body-stack','"Lora", "Georgia", "Times New Roman", serif');o.innerHTML="sans"},g=()=>{f('--body-stack','"Lato", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "Verdana", sans-serif');o.innerHTML="serif"};m.onclick=()=>{if(s==2){s=1;l.setItem('s',s);c()}else{s=2;l.setItem('s',s);b()}};o.onclick=()=>{if(n==2){n=1;l.setItem('n',n);g()}else{n=2;l.setItem('n',n);e()}};if(!s){s=2;l.setItem('s',2)};if(s==1){c()};if(!n){n=2;l.setItem('n',2)};if(n==1){g()};
+</script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>C++ IO | Zwei&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+    <link rel="icon" href="/avatar-default.png">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+  
+  <meta property="og:type" content="article">
+<meta property="og:title" content="C++ IO">
+<meta property="og:url" content="https://zweireverberate.icu/2022/09/29/C-IO/index.html">
+<meta property="og:site_name" content="Zwei&#39;s Blog">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://www.helloimg.com/images/2022/09/16/Z6tWkq.png">
+<meta property="article:published_time" content="2022-09-28T17:17:37.000Z">
+<meta property="article:modified_time" content="2022-09-28T17:20:24.418Z">
+<meta property="article:author" content="Zwei">
+<meta property="article:tag" content="C Plus Plus">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.helloimg.com/images/2022/09/16/Z6tWkq.png"><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Zwei's Blog" type="application/atom+xml">
+</head>
+
+<body>
+  <div id="wrapper">
+    <header id="header">
+  <h1 id="title">
+    <a href="/">Zwei&#39;s Blog</a>
+  </h1>
+  <nav>
+    
+    
+      
+      <a class="nav-link" href="/">Home</a>
+    
+      
+        <span class="nav-spacer">×</span>
+      
+      <a class="nav-link" href="/archives">Archives</a>
+    
+      
+        <span class="nav-spacer">×</span>
+      
+      <a class="nav-link" href="/about">About</a>
+    
+    
+  </nav>
+</header>
+
+    <div id="content">
+      <article id="post-C-IO" class="article article-type-post" itemprop="blogPost" itemscope>
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 class="article-title" itemprop="headline name">
+      C++ IO
+    </h2>
+  
+
+
+        <div class="article-meta">
+          <time class="article-date" datetime="2022-09-28T17:17:37.000Z" itemprop="datePublished">2022-09-29</time>
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        <p><em><a id="more"></a></em></p>
+<h1 id="1-C-Input-x2F-Output-Library"><a href="#1-C-Input-x2F-Output-Library" class="headerlink" title="1. C++ Input &#x2F; Output Library"></a>1. C++ Input &#x2F; Output Library</h1><p>C++ 借由标准库来处理输入输出。</p>
+<p>特点：</p>
+<ul>
+<li><p>类型安全</p>
+<blockquote>
+<p>IO operations are defined for each of the type. If IO operations are not defined for a particular type, compiler will generate an error.</p>
+</blockquote>
+</li>
+<li><p>基于 streams of bytes 且设备无关</p>
+<blockquote>
+<p>The same set of operations can be appiled to different types of IO devices</p>
+</blockquote>
+</li>
+</ul>
+<h1 id="2-Stream"><a href="#2-Stream" class="headerlink" title="2. Stream"></a>2. Stream</h1><p>C++ IO 基于 stream。</p>
+<p>Stream 是流入和流出程序的字节序列。在输入操作中，data bytes 从输入源 (如键盘，文件，网络或其他程序) 流入程序，在输出操作中，data bytes 从程序流向输出接收器 (如控制台，文件，网络或其他程序)。</p>
+<p>Stream 充当程序和实际 IO 设备之间的中介，这样程序员就可以专注于处理 IO，而不必处理实际设备。</p>
+<ul>
+<li><p>IO 的格式化与非格式化化</p>
+<ul>
+<li><p>格式化 IO</p>
+<p>bytes 被分组并转换为 int, double, string 或用户定义的类型</p>
+</li>
+<li><p>非格式化 IO</p>
+<p>bytes 被视为 raw bytes 并不被转换</p>
+<p>通过重载 stream 插入操作符（&lt;&lt;）和 stream 提取操作符（&gt;&gt;）来支持格式化 IO 操作</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-Stream-Class"><a href="#1-Stream-Class" class="headerlink" title="1. Stream Class"></a>1. Stream Class</h3><p>IO 的种类不尽相同（例如输入、输出、文件访问），因此有对应不同的 stream class：</p>
+<ul>
+<li><p>定义于头文件 &lt; iostream&gt; 的 stream class</p>
+<ul>
+<li>istream, wistream 从流读取数据</li>
+<li>ostream, wostream 向流写入数据</li>
+<li>iostream, wiostream 读写流</li>
+</ul>
+</li>
+<li><p>定义于头文件 &lt; fstream&gt; 的 stream class</p>
+<ul>
+<li>ifstream, wifstream 从文件读取数据</li>
+<li>ofstream, wofstream 向文件写入数据</li>
+<li>fstream, wfstream 读写文件</li>
+</ul>
+</li>
+<li><p>定义于头文件 &lt; sstream&gt; 的 stream class</p>
+<ul>
+<li>istringstream, wistringstream 从 string 读取数据</li>
+<li>ostringstream, wostringstream 向 string 写入数据</li>
+<li>stringstream, wstringstream 读写 string</li>
+</ul>
+</li>
+<li><p>定义于头文件 &lt; iomanip&gt; 的一些格式化函数</p>
+<p>如 stew(), setprecision(), setfill(), setbase() 等</p>
+</li>
+</ul>
+<img src="https://www.helloimg.com/images/2022/09/16/Z6tWkq.png" align="left">
+
+
+
+<p>Stream classes 被设计成模板类：</p>
+<p>这是为了支持不同的字符集 (char and wchar_t in C++98&#x2F;03; and char16_t, char32_t introduced in C++11)，这样就可以根据实际的字符类型进行实例化。大多数 stream 模板类接受两个参数，如：</p>
+<pre><code class="c++">template &lt;class charT, class traits = char_traits&lt;charT&gt; &gt;
+class basic_istream;
+
+template &lt;class charT, class traits = char_traits&lt;charT&gt; &gt;
+class basic_ostream;
+</code></pre>
+<p>其中：</p>
+<ul>
+<li>charT 代表字符类型，如 wchar_t</li>
+<li>traits 属于另一个模板类 char_traits&lt; charT&gt;，定义了字符操作，如字符集的排序顺序</li>
+</ul>
+<p>模板实例化和类型重命名：</p>
+<p>模板类 <code>basic_xxx</code> 可以用一个具体的字符进行实例化，比如 char 和 wchar_t。标准库还用 typedef 来重命名这些类：</p>
+<pre><code class="c++">typedef basic_ios&lt;char&gt;           ios;
+typedef basic_ios&lt;wchar_t&gt;        wios;
+typedef basic_istream&lt;char&gt;       istream;
+typedef basic_istream&lt;wchar_t&gt;    wistream;
+typedef basic_ostream&lt;char&gt;       ostream;
+typedef basic_ostream&lt;wchar_t&gt;    wostream;
+typedef basic_iostream&lt;char&gt;      iostream;
+typedef basic_iostream&lt;wchar_t&gt;   wiostream;
+typedef basic_streambuf&lt;char&gt;     streambuf;
+typedef basic_streambuf&lt;wchar_t&gt;  wstreambuf;
+</code></pre>
+<h3 id="2-Stream-对象无拷贝或赋值"><a href="#2-Stream-对象无拷贝或赋值" class="headerlink" title="2. Stream 对象无拷贝或赋值"></a>2. Stream 对象无拷贝或赋值</h3><p>无法对 Stream 对象拷贝和赋值：</p>
+<pre><code class="c++">ofstream out1, out2;
+out1 = out2; // 错误：无法对 stream 对象赋值
+ofstream print(ofstream); // 错误：不能初始化 ofstream 参数
+out2 = print(out2); // 错误：不能拷贝 stream 参数
+</code></pre>
+<p>由于无法拷贝 stream 对象，因此我门也不能将形参或返回类型设置为 stream 类型。进行 IO 操作的函数通常以引用的方式传递和返回 stream。读写一个 stream 对象会改变其状态，因此传递和返回的引用不能是 const 的。</p>
+<h3 id="3-Stream-Buffer"><a href="#3-Stream-Buffer" class="headerlink" title="3.  Stream Buffer"></a>3.  Stream Buffer</h3><p>stream 并不直接执行读写操作，而是委托给 stream buffer 完成。</p>
+<p>处理 stream 缓冲区的一般性接口十分简单：</p>
+<ul>
+<li>rdbuf() 取得一个 pointer 指向某个 stream 的缓冲区</li>
+<li>stream 的构造函数和 rdbuf() 允许在构造时期设立一个 stream 缓冲区，或在 stream 存在期间改变 stream 缓冲区。不论哪种情况，都必须传递一个 pointer 指向 stream 缓冲区，那个 pointer 正是 rdbuf() 所返回</li>
+</ul>
+<pre><code class="c++">#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+int main()
+{
+    // stream for hexadecimal standard output
+    std::ostream hexout(std::cout.rdbuf());
+    hexout.setf(std::ios::hex, std::ios::basefield);
+    hexout.setf(std::ios::showbase);
+
+    // switch between decimal and hexadecimal output
+    hexout &lt;&lt; &quot;hexout: &quot; &lt;&lt; 177 &lt;&lt; &quot; &quot;;
+    std::cout &lt;&lt; &quot;cout: &quot; &lt;&lt; 177 &lt;&lt; &quot; &quot;;
+    hexout &lt;&lt; &quot;hexout: &quot; &lt;&lt; -49 &lt;&lt; &quot; &quot;;
+    std::cout &lt;&lt; &quot;cout: &quot; &lt;&lt; -49 &lt;&lt; &quot; &quot;;
+    hexout &lt;&lt; std::endl;
+    return 0;
+}
+</code></pre>
+<p>在上面的程式中，声明的 ostream 对象 hexout 和标准 ostream 对象共享同一个缓冲区。因为在构建 hexout 时将 cout.rdbuf() 赋予了它，从而实现了 stream 的紧耦合。</p>
+<p>每一个输出流都管理一个缓冲区，用来保存程序读写的数据。例如，如果执行下面的代码：</p>
+<pre><code class="c++">os &lt;&lt; &quot;Please enter a value: &quot;;
+</code></pre>
+<p>文本串可能立即打印出来，但也有可能被操作系统保存在缓冲区中，随后再打印。有了缓冲机制，操作系统就可以将程序的多个输出操作组合成单一的系统级写操作。由于设备的写操作可能很耗时，所以允许多个输出操作合并可以带来性能上的提升。</p>
+<p>导致缓冲刷新（即，数据真正写到输出设备或文件）的原因有很多：</p>
+<ul>
+<li><p>程序正常结束，作为 main 函数的 return 操作的一部分，缓冲刷新被执行</p>
+</li>
+<li><p>缓冲区满时，需要刷新缓冲，而后新的数据才能继续写入缓冲区</p>
+</li>
+<li><p>使用操纵符 endl, flush 来显式地刷新缓冲区</p>
+</li>
+<li><p>在每个输出操作之后，可以使用操纵符 unitbuf 设置流的内部状态来清空缓冲区</p>
+<p>默认情况下，对 cerr 是设置 unitbuf 的，因此写到 cerr 的内容都是立即刷新的</p>
+</li>
+<li><p>一个输出流可能被关联到另一个流</p>
+<p>在这种情况下，当读写被关联的流时，关联到的流的缓冲区会被刷新</p>
+<p>例如，默认情况下，cin 和 cerr 都被关联到 cout。因此，读 cin 或 写 cerr 都会导致 cout 的缓冲区被刷新</p>
+</li>
+</ul>
+<p>刷新输出缓冲区：</p>
+<pre><code class="c++">std::cout &lt;&lt; &quot;hi!&quot; &lt;&lt; std::endl; // 输出 hi 和一个换行，然后刷新缓冲区
+std::cout &lt;&lt; &quot;hi!&quot; &lt;&lt; std::flush; // 输出 hi，然后刷新缓冲区，不附加任何额外字符
+std::cout &lt;&lt; &quot;hi!&quot; &lt;&lt; std::ends; // 输出 hi 和一个空字符，然后刷新缓冲区
+</code></pre>
+<p>unitbuf 操纵符</p>
+<p>如果想在每次输出操作后都刷新缓冲区，可以使用 unitbuf 操纵符。它告诉流在接下来的每次操作之后都进行一次 flush 操作。而 nounitbuf 操纵符则重置流，使其恢复使用正常的系统管理的缓冲区刷新机制。</p>
+<pre><code class="c++">std::cout &lt;&lt; unitbuf; // 所有输出操作后都会立即刷新缓冲区
+std::cout &lt;&lt; nounitbuf; // 回到正常的缓冲方式
+</code></pre>
+<h3 id="4-标准的-stream-操作符-lt-lt-和-gt-gt"><a href="#4-标准的-stream-操作符-lt-lt-和-gt-gt" class="headerlink" title="4. 标准的 stream 操作符 &lt;&lt; 和 &gt;&gt;"></a>4. 标准的 stream 操作符 &lt;&lt; 和 &gt;&gt;</h3><p>C++ 的操作符 &lt;&lt; 和 &gt;&gt; 分别用于整数中位的左移和右移，然而 basic_istream&lt;&gt; 和 basic_ostream&lt;&gt; 重载了它们，使之称为标准的 stream 操作符。</p>
+<ul>
+<li><p>Output 操作符 &lt;&lt; </p>
+<p>basic_ostream (ostream 和 wostream 当然也算) 将 &lt;&lt; 定义为 output 操作符，对所有基础类型以及 string 类均重载。不包括 void 和 nullptr_t，但包括 char* 和 void*。</p>
+<p>Stream 将其 output 操作符定义为：把第二实参按箭头方向发送到相应的 stream 去。即数据的流动发方向是箭头方向。</p>
+<p>我们可以重载 operator &lt;&lt;，使其第二实参为我门想要的任意数据类型。</p>
+</li>
+<li><p>Input 操作符 &gt;&gt;</p>
+<p>同 Output 操作符 &lt;&lt; 类似。</p>
+</li>
+</ul>
+<h3 id="5-Standard-Stream-Objects"><a href="#5-Standard-Stream-Objects" class="headerlink" title="5. Standard Stream Objects"></a>5. Standard Stream Objects</h3><p>头文件 &lt; iostream&gt; 定义了全局性的标准 stream 对象。是上文所提及的 stream class 的实例化：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>istream</td>
+<td>cin</td>
+<td>从标准 input 通道读取数据</td>
+</tr>
+<tr>
+<td>ostream</td>
+<td>cout</td>
+<td>将一般数据写至标准 output 通道</td>
+</tr>
+<tr>
+<td>ostream</td>
+<td>cerr</td>
+<td>将报错信息写至 error 通道</td>
+</tr>
+<tr>
+<td>ostream</td>
+<td>clog</td>
+<td>将日志信息写至标准 logging 通道</td>
+</tr>
+<tr>
+<td>wistream</td>
+<td>wcin</td>
+<td>从标准 input 通道读取宽字符数据</td>
+</tr>
+<tr>
+<td>wostream</td>
+<td>wcout</td>
+<td>将宽字符一般数据写至标准 output 通道</td>
+</tr>
+<tr>
+<td>wostream</td>
+<td>wcerr</td>
+<td>将宽字符报错信息写至标准 error 通道</td>
+</tr>
+<tr>
+<td>wostream</td>
+<td>wclog</td>
+<td>将宽字符日志信息写至标准 logging 通道</td>
+</tr>
+</tbody></table>
+<h3 id="6-Stream-的状态（State）"><a href="#6-Stream-的状态（State）" class="headerlink" title="6. Stream 的状态（State）"></a>6. Stream 的状态（State）</h3><p>Stream 维护着一个状态，标识 IO 操作是否成功，并能够指出不成功的原因。</p>
+<ul>
+<li><p>表示 stream State 的常量</p>
+<p>Stream 定义了一些类型为 iostate 的常量，用以反映 stream 的状态。</p>
+<ul>
+<li><p>eofbit</p>
+<p>当输入操作到达文件末尾时设置</p>
+</li>
+<li><p>failbit</p>
+<p>最后一个输入操作未能读取预期字符或输出操作未能写入预期字符</p>
+<p>例如 getline() 读取了 n 个字符而没有达到分隔符</p>
+</li>
+<li><p>badbit</p>
+<p>由于 IO 操作（例如文件读&#x2F;写错误）或 stream 缓冲失败而导致的严重错误</p>
+</li>
+<li><p>goodbit</p>
+<p>没有上述错误，值为 0</p>
+</li>
+</ul>
+</li>
+<li><p>用来处理 stream state 的成员函数</p>
+<ul>
+<li><p>good() </p>
+<p>returns true if goodbit is set </p>
+</li>
+<li><p>eof()</p>
+<p>returns true if eofbit is set</p>
+</li>
+<li><p>fail()</p>
+<p>returns true if failbit or badbit is set</p>
+</li>
+<li><p>bad()</p>
+<p>returns true if badbit is set</p>
+</li>
+<li><p>clear()</p>
+<p>clear eofbit, failbit and badbit</p>
+</li>
+<li><p>clear(state)</p>
+<p>Sets a new value for the stream’s internal error state flags</p>
+</li>
+<li><p>rdstate()</p>
+<p>Returns the current internal error state flags of the stream</p>
+</li>
+</ul>
+</li>
+<li><p>使用例</p>
+<pre><code class="c++">// error state flags
+#include &lt;iostream&gt;     // std::cout, std::ios
+#include &lt;sstream&gt;      // std::stringstream
+
+void print_state(const std::ios&amp; stream) 
+{
+    std::cout &lt;&lt; &quot; good()=&quot; &lt;&lt; stream.good();
+    std::cout &lt;&lt; &quot; eof()=&quot; &lt;&lt; stream.eof();
+    std::cout &lt;&lt; &quot; fail()=&quot; &lt;&lt; stream.fail();
+    std::cout &lt;&lt; &quot; bad()=&quot; &lt;&lt; stream.bad();
+}
+
+int main() 
+{
+    std::stringstream stream;
+
+    stream.clear(stream.goodbit);
+    std::cout &lt;&lt; &quot;goodbit:&quot;; print_state(stream); std::cout &lt;&lt; &#39;\n&#39;;
+
+    stream.clear(stream.eofbit);
+    std::cout &lt;&lt; &quot; eofbit:&quot;; print_state(stream); std::cout &lt;&lt; &#39;\n&#39;;
+
+    stream.clear(stream.failbit);
+    std::cout &lt;&lt; &quot;failbit:&quot;; print_state(stream); std::cout &lt;&lt; &#39;\n&#39;;
+
+    stream.clear(stream.badbit);
+    std::cout &lt;&lt; &quot; badbit:&quot;; print_state(stream); std::cout &lt;&lt; &#39;\n&#39;;
+
+    return 0;
+}
+</code></pre>
+</li>
+</ul>
+<h3 id="7-Unformatted-Input-and-Output-Functions"><a href="#7-Unformatted-Input-and-Output-Functions" class="headerlink" title="7.  Unformatted Input and Output Functions"></a>7.  Unformatted Input and Output Functions</h3><p>如上文所言，stream 操作符 &lt;&lt; 和 &gt;&gt; 用于读&#x2F;写格式化数据。</p>
+<p>而对于无格式 (unformatted) 数据的读写，是由另外的成员函数负责。</p>
+<p>二者的区别是无格式数据不跳过起始的空白字符，这由一个所谓 sentry 对象来控制。另外，处理异常的方式也不同。</p>
+<ul>
+<li><p>Unformatted Input</p>
+<p>以下 Unformatted Input 函数定义于 basic_istream&lt; char&gt;，即 istream。其详细使用规则参见 <a href="https://cplusplus.com/reference/istream/istream/" target="_blank" rel="noopener">istream</a></p>
+<ul>
+<li>gcount()</li>
+<li>get()</li>
+<li>getline()</li>
+<li>ignore()</li>
+<li>peek()</li>
+<li>read()</li>
+<li>readsome()</li>
+<li>putback()</li>
+<li>unget()</li>
+</ul>
+</li>
+<li><p>Unformatted Output</p>
+<p>以下 Unformatted Output 函数定位于 basic_ostream&lt; char&gt;，即 ostream。其详细使用规则见 <a href="https://cplusplus.com/reference/ostream/ostream/" target="_blank" rel="noopener">ostream</a></p>
+<ul>
+<li>put()</li>
+<li>wirte()</li>
+</ul>
+</li>
+</ul>
+<h3 id="8-Formatting-Input-x2F-Output"><a href="#8-Formatting-Input-x2F-Output" class="headerlink" title="8. Formatting Input &#x2F; Output"></a>8. Formatting Input &#x2F; Output</h3><p>C++ 提供一组操控器来进行格式化的输入输出。</p>
+<blockquote>
+<p>Manipulators (操控器) 请参阅 《C++ 标准库第二版》(p774)。</p>
+</blockquote>
+<ol>
+<li><code>&lt;iomanip&gt;</code> header: <code>setw()</code>, <code>setprecision()</code>, <code>setbas()</code>, <code>setfill()</code></li>
+<li><code>&lt;iostream&gt;</code> header: <code>fixed|scientific</code>, <code>left|right|internal</code>, <code>boolalpha|noboolalpha</code>, etc.</li>
+</ol>
+<p><strong>默认格式化输出</strong></p>
+<p>ostream 的 &lt;&lt; 被重载以将数值从其内部表示 (e.g 16-&#x2F;32-bit int, 64-bit double) 转化为文本表示。</p>
+<ul>
+<li><p>默认情况下，显示的值的字段宽度刚好足以容纳文本，没有额外的前导或尾随空格</p>
+</li>
+<li><p>对于整数来说，默认情况下将显示所有位数：</p>
+<pre><code class="c++">std::cout &lt;&lt; &quot;|&quot; &lt;&lt; 1 &lt;&lt; &quot;|&quot; &lt;&lt; std::endl;         // |1|
+std::cout &lt;&lt; &quot;|&quot; &lt;&lt; -1 &lt;&lt; &quot;|&quot; &lt;&lt; std::endl;         // |-1|
+std::cout &lt;&lt; &quot;|&quot; &lt;&lt; 123456789 &lt;&lt; &quot;|&quot; &lt;&lt; std::endl;  // |123456789|
+std::cout &lt;&lt; &quot;|&quot; &lt;&lt; -123456789 &lt;&lt; &quot;|&quot; &lt;&lt; std::endl;  // |-123456789|
+</code></pre>
+</li>
+<li><p>For floating-point numbers, the default <em>precison</em> is 6 digits, except that the trailing zeros will not be shown. This default precision (of 6 digits) include all digits before and after the decimal point, but exclude the leading zeros. Scientific notation (E-notation) will be used if the exponent is 6 or more or -5 or less. In scientific notation, the default precision is also 6 digits; the exponent is displayed in 3 digits with plus&#x2F;minus sign (e.g., +006, -005). For example: </p>
+<pre><code class="c++">std::cout &lt;&lt; &quot;|&quot; &lt;&lt; 1.20000 &lt;&lt; &quot;|&quot; &lt;&lt; std::endl;       // |1.2| (trailing zeros not displayed)
+std::cout &lt;&lt; &quot;|&quot; &lt;&lt; 1.23456 &lt;&lt; &quot;|&quot; &lt;&lt; std::endl;       // |1.23456| (default precision is 6 digits)
+std::cout &lt;&lt; &quot;|&quot; &lt;&lt; -1.23456 &lt;&lt; &quot;|&quot; &lt;&lt; std::endl;      // |-1.23456|
+std::cout &lt;&lt; &quot;|&quot; &lt;&lt; 1.234567 &lt;&lt; &quot;|&quot; &lt;&lt; std::endl;      // |1.23457|
+std::cout &lt;&lt; &quot;|&quot; &lt;&lt; 123456.7 &lt;&lt; &quot;|&quot; &lt;&lt; std::endl;      // |123457|
+std::cout &lt;&lt; &quot;|&quot; &lt;&lt; 1234567.89 &lt;&lt; &quot;|&quot; &lt;&lt; std::endl;    // |1.23457e+006| (scientific-notation for e&gt;=6)
+std::cout &lt;&lt; &quot;|&quot; &lt;&lt; 0.0001234567 &lt;&lt; &quot;|&quot; &lt;&lt; std::endl;  // |0.000123457|  (leading zeros not counted towards precision)
+std::cout &lt;&lt; &quot;|&quot; &lt;&lt; 0.00001234567 &lt;&lt; &quot;|&quot; &lt;&lt; std::endl; // |1.23457e-005| (scientific-notation for e&lt;=-5)
+</code></pre>
+</li>
+<li><p>bool values are displayed as 0 or 1 by default, instead of true or false.</p>
+</li>
+</ul>
+<p><strong>Field Width (setw), Fill Character (setfill) and Alignment (left|right|internal)</strong></p>
+<p>ios_base superclass 维护 field-width 和 formatting 的数据成员，并提供相应的成员函数（例如 width(), seef()）来操作它们。</p>
+<p>但是，使用 IO manipulators 更加便利，它返回对调用 stream class 的引用，因此可以在 &lt;&lt; 运算符中连接。 </p>
+<ul>
+<li>setw() manipulator (in &lt; iomanip&gt; header) to set field width</li>
+<li>setfill() manipulator (in &lt; iomanip&gt; header) to set fill character</li>
+<li>left|right|internal manipulator (in &lt; iostream&gt;) to set the text alignment</li>
+</ul>
+<p>默认的 field-width 是 0，即刚好有足够的空间来显示该值。C++ 从不截断数据，如果 field-width 太小，会自动拓展 field。setw() 操作是非粘性的，即只适用于下一次的 IO 操作，操作完成后复位回0。</p>
+<p>使用例：</p>
+<pre><code class="c++">#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+using namespace std;
+int main()
+{
+    // Test setw() - need &lt;iomanip&gt;
+    cout &lt;&lt; &quot;|&quot; &lt;&lt; setw(5) &lt;&lt; 123 &lt;&lt; &quot;|&quot; &lt;&lt; 123 &lt;&lt; endl;  // |  123|123
+             // setw() is non-sticky. &quot;|&quot; and 123 displayed with default width
+    cout &lt;&lt; &quot;|&quot; &lt;&lt; setw(5) &lt;&lt; -123 &lt;&lt; &quot;|&quot; &lt;&lt; 123 &lt;&lt; endl;        // | -123|123
+             // minus sign is included in field width
+    cout &lt;&lt; &quot;|&quot; &lt;&lt; setw(5) &lt;&lt; 1234567 &lt;&lt; &quot;|&quot; &lt;&lt; endl;     // |1234567|
+             // no truncation of data
+
+    // Test setfill() and alignment (left|right|internal)
+    cout &lt;&lt; setfill(&#39;_&#39;);   // Set the fill character (sticky)
+    cout &lt;&lt; setw(6) &lt;&lt; 123 &lt;&lt; setw(4) &lt;&lt; 12 &lt;&lt; endl;      // ___123__12
+    cout &lt;&lt; left;           // left align (sticky)
+    cout &lt;&lt; setw(6) &lt;&lt; 123 &lt;&lt; setw(4) &lt;&lt; 12 &lt;&lt; endl;      // 123___12__
+
+    return 0;
+}
+</code></pre>
+<p>internal 使符号左对齐，但数字右对齐。</p>
+<p><strong>Float–point Format (fixed|scientific) and Precision(setprecision)</strong></p>
+<p>ios_base superclass 维护 floating-point precision 和 display format 的数据成员，并提供成员函数（例如 precision()）来操作它们。</p>
+<p>同样，使用 IO manipulators 更加便利，可以在 &lt;&lt; 中加入：</p>
+<ul>
+<li>setprecision() manipulator(in &lt; iomanip&gt; header) to set the precision of floating-point number</li>
+<li>fixed | scientific manipulators (in &lt; iostream&gt; header) to set the floating-point display format</li>
+</ul>
+<p>浮点数可以以三种模式显示：default | fixed | scientific。</p>
+<p>使用例：</p>
+<pre><code class="c++">#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+
+using namespace std;
+
+int main()
+{
+    // default floating-point format
+    cout &lt;&lt; &quot;|&quot; &lt;&lt; 123.456789 &lt;&lt; &quot;|&quot; &lt;&lt; endl;    // |123.457| (fixed-point format)
+             // default precision is 6, i.e., 6 digits before and after the decimal point
+    cout &lt;&lt; &quot;|&quot; &lt;&lt; 1234567.89 &lt;&lt; &quot;|&quot; &lt;&lt; endl;    // |1.23457e+006| (scientific-notation for e&gt;=6)
+             // default precision is 6, i.e., 6 digits before and after the decimal point
+
+    // showpoint - show trailing zeros in default mode
+    cout &lt;&lt; showpoint &lt;&lt; 123. &lt;&lt; &quot;,&quot; &lt;&lt; 123.4 &lt;&lt; endl; // 123.000,123.400
+    cout &lt;&lt; noshowpoint &lt;&lt; 123. &lt;&lt; endl;               // 123
+
+    // fixed-point formatting
+    cout &lt;&lt; fixed;
+    cout &lt;&lt; &quot;|&quot; &lt;&lt; 1234567.89 &lt;&lt; &quot;|&quot; &lt;&lt; endl;    // |1234567.890000|
+             // default precision is 6, i.e., 6 digits after the decimal point
+
+    // scientific formatting
+    cout &lt;&lt; scientific;
+    cout &lt;&lt; &quot;|&quot; &lt;&lt; 1234567.89 &lt;&lt; &quot;|&quot; &lt;&lt; endl;    // |1.234568e+006|
+             // default precision is 6, i.e., 6 digits after the decimal point
+
+    // Test precision
+    cout &lt;&lt; fixed &lt;&lt; setprecision(2);   // sticky
+    cout &lt;&lt; &quot;|&quot; &lt;&lt; 123.456789 &lt;&lt; &quot;|&quot; &lt;&lt; endl;  // |123.46|
+    cout &lt;&lt; &quot;|&quot; &lt;&lt; 123. &lt;&lt; &quot;|&quot; &lt;&lt; endl;        // |123.00|
+
+    cout &lt;&lt; setprecision(0);
+    cout &lt;&lt; &quot;|&quot; &lt;&lt; 123.456789 &lt;&lt; &quot;|&quot; &lt;&lt; endl;  // |123|
+
+    return 0;
+}
+</code></pre>
+<p><strong>Integral Number Base (dec|oct|hex, setbase)</strong></p>
+<p>C++ 支持十进制，十六进制和八进制的 number base。可以使用以下 manipulators (defined in ios_base class, included in &lt; iostream&gt; header) 来操纵 integral number base。</p>
+<ul>
+<li>hex|dec|oct: Set the integral number base. Negative <code>hex</code> and <code>oct</code> are displayed in 2’s complement format. Alternatively, you can use <code>setbase(8|10|16)</code> (in header <code>&lt;iomanip&gt;</code>).</li>
+<li><code>showbase|noshowbase</code>: write <code>hex</code> values with <code>0x</code> prefix; and <code>oct</code> values with <code>0</code> prefix.</li>
+<li><code>showpos|noshowpos</code>: write positive <code>dec</code> value with + sign.</li>
+<li><code>uppercase|nouppercase</code>: write uppercase in certain insertion operations, e.g., hex digits. It does not convert characters or strings to uppercase!</li>
+</ul>
+<p>使用例：</p>
+<pre><code class="c++">#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+using namespace std;
+int main()
+{
+    cout &lt;&lt; 1234 &lt;&lt; endl;        // 1234 (default is dec)
+    cout &lt;&lt; hex &lt;&lt; 1234 &lt;&lt; endl; // 4d2
+    cout &lt;&lt; 1234 &lt;&lt; &quot;,&quot; &lt;&lt; -1234 &lt;&lt; endl; // 4d2,fffffb2e
+                                          // (hex is sticky, negative number in 2&#39;s complement)
+    cout &lt;&lt; oct &lt;&lt; 1234 &lt;&lt; endl;          // 2322
+    cout &lt;&lt; 1234 &lt;&lt; &quot;,&quot; &lt;&lt; -1234 &lt;&lt; endl; // 2322,37777775456
+    cout &lt;&lt; setbase(10) &lt;&lt; 1234 &lt;&lt; endl;  // 1234 (setbase requires &lt;iomanip&gt; header)
+
+    // showbase - show hex with 0x prefix; oct with 0 prefix
+    cout &lt;&lt; showbase &lt;&lt; 123 &lt;&lt; &quot;,&quot; &lt;&lt; hex &lt;&lt; 123 &lt;&lt; &quot;,&quot; &lt;&lt; oct &lt;&lt; 123 &lt;&lt; endl;  // 123,0x7b,0173
+    cout &lt;&lt; noshowbase &lt;&lt; dec;
+
+    // showpos - show dec&#39;s plus (+) sign
+    cout &lt;&lt; showpos &lt;&lt; 123 &lt;&lt; endl;  // +123
+
+    // uppercase - display in uppercase (e.g., hex digits)
+    cout &lt;&lt; uppercase &lt;&lt; hex &lt;&lt; 123 &lt;&lt; endl;  // 7B
+
+    return 0;
+}
+</code></pre>
+<p><strong>bool values(boolalpha|noboolalpha)</strong></p>
+<ul>
+<li><strong>boolalpha|noboolalpha</strong>: read&#x2F;write bool value as alphabetic string <code>true</code> or <code>false</code>.</li>
+</ul>
+<p>使用例：</p>
+<pre><code class="c++">// boolalpha - display bool as true/false
+cout &lt;&lt; boolalpha &lt;&lt; false &lt;&lt; &quot;,&quot; &lt;&lt; true &lt;&lt; endl;   // false,true
+cout &lt;&lt; noboolalpha &lt;&lt; false &lt;&lt; &quot;,&quot; &lt;&lt; true &lt;&lt; endl; // 0,1
+</code></pre>
+<p><strong>Other manipulators</strong></p>
+<ul>
+<li>skipws|noskipws: skip leading white spaces for certain input operations.</li>
+<li>unitbuf|nounibuf: flush output after each insertion operation.</li>
+</ul>
+<h1 id="3-File-Input-x2F-Output-Header-lt-fstream-gt"><a href="#3-File-Input-x2F-Output-Header-lt-fstream-gt" class="headerlink" title="3. File Input &#x2F; Output (Header &lt;fstream&gt;)"></a>3. File Input &#x2F; Output (Header <code>&lt;fstream&gt;</code>)</h1><p>头文件 fstream 定义了三个类型来支持文件 IO：</p>
+<ul>
+<li>ifstream 从一个给定文件读取数据，它是 istream 的子类</li>
+<li>ofstream 向一个给定文件写入数据，它是 ostream 的子类</li>
+<li>fstream 读写给定文件，用于双向 IO，它是 iostream 的子类</li>
+</ul>
+<h3 id="1-File-Output"><a href="#1-File-Output" class="headerlink" title="1. File Output"></a>1. File Output</h3><p>一般的步骤是：</p>
+<ol>
+<li>构造一个 ostream 对象</li>
+<li>将其连接到文件（file open）并设置文件操作模式（例如 truncate, append）</li>
+<li>通过 &gt;&gt; 运算符或 write(), put() 函数执行 output 操作</li>
+<li>断开连接（关闭文件刷新输出缓冲区）并释放 ostream 对象</li>
+</ol>
+<pre><code class="c++">#include &lt;fstream&gt;
+.......
+ofstream fout;
+fout.open(filename, mode);
+......
+fout.close();
+ 
+// OR combine declaration and open()
+ofstream fout(filename, mode);
+</code></pre>
+<p>默认情况下，如果文件名不存在，打开输出文件会创建一个新文件。或者截断它（清除其内容），并开始作为空文件写入。</p>
+<pre><code class="c++">void open (const char* filename,
+           ios::openmode mode = ios::in | ios::out);
+   // open() accepts only C-string. For string object, need to use c_str() to get the C-string
+ 
+void close ();    // Closes the file, flush the buffer and disconnect from stream object
+ 
+bool is_open ();  // Returns true if the file is successfully opened
+</code></pre>
+<h3 id="2-File-Input"><a href="#2-File-Input" class="headerlink" title="2. File Input"></a>2. File Input</h3><p>一般的步骤是：</p>
+<ol>
+<li>构建一个 istream 对象</li>
+<li>将其连接到文件（file open）并设置文件操作模式</li>
+<li>通过 &lt;&lt; 运算符或 read(), get(), getline() 函数执行输出操作</li>
+<li>断开连接（关闭文件）并释放 istream 对象</li>
+</ol>
+<pre><code class="c++">#include &lt;fstream&gt;
+.......
+ifstream fin;
+fin.open(filename, mode);
+......
+fin.close();
+ 
+// OR combine declaration and open()
+ifstream fin(filename, mode);
+</code></pre>
+<h3 id="3-File-Modes"><a href="#3-File-Modes" class="headerlink" title="3. File Modes"></a>3. File Modes</h3><p>每一个文件流都有一个关联的文件模式，用来指出如何使用文件。</p>
+<table>
+<thead>
+<tr>
+<th>File Mode</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>in</td>
+<td>以读方式打开</td>
+</tr>
+<tr>
+<td>out</td>
+<td>以写方式打开</td>
+</tr>
+<tr>
+<td>app</td>
+<td>每次写操作前均定位到文件末尾</td>
+</tr>
+<tr>
+<td>ate</td>
+<td>打开文件后立即定位到文件末尾</td>
+</tr>
+<tr>
+<td>trunc</td>
+<td>截断文件</td>
+</tr>
+<tr>
+<td>binary</td>
+<td>以二进制方式进行 IO</td>
+</tr>
+</tbody></table>
+<p>无论用那种方式打开文件，都可以指定文件模式，调用 open 打开文件时可以，用一个文件名初始化流来隐式打开文件时也可以。指定文件模式有如下限制：</p>
+<ul>
+<li>只可以对 ofstream 或 fstream 对象设定 out 模式</li>
+<li>只可以对 ifstream 或 fstream 对象设定 in 模式</li>
+<li>只有当 out 也被设定时才可以设定 trunc 模式</li>
+<li>只要 trunc 没被设定，就可以设定 app 模式，在 app 模式下，即使没有显式指定 out 模式，文件也总是以输出方式被打开</li>
+<li>默认情况下，即使我们没有指定 trunc，以 out 模式打开的文件也会被截断。为了保留以 out 模式打开的文件的内容，我们必须同时指定 app 模式，这样只会将数据追加写到文件末尾；或同时指定 in 模式，即打开文件同时进行读写操作</li>
+<li>ate 和 binary 模式可用于任何类型的文件流对象，且可以与其他任何文件模式组合使用</li>
+</ul>
+<p>每个文件流类型都定义了一个默认的文件模式，当我们未指定文件模式时，就使用此默认模式。与 ifstream 关联的文件默认以 in 模式打开，与 ofstream 关联的文件默认以 out 模式打开，与 fstream 关联的文件默认以 in 和 out 模式打开</p>
+<p>使用例：</p>
+<pre><code class="c++">/* Testing Simple File IO (TestSimpleFileIO.cpp) */
+#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+#include &lt;cstdlib&gt;
+#include &lt;string&gt;
+using namespace std;
+
+int main() 
+{
+    string filename = &quot;test.txt&quot;;
+
+    // Write to File
+    ofstream fout(filename.c_str());  // default mode is ios::out | ios::trunc
+    if (!fout) 
+    {
+        cerr &lt;&lt; &quot;error: open file for output failed!&quot; &lt;&lt; endl;
+        abort();  // in &lt;cstdlib&gt; header
+    }
+    fout &lt;&lt; &quot;apple&quot; &lt;&lt; endl;
+    fout &lt;&lt; &quot;orange&quot; &lt;&lt; endl;
+    fout &lt;&lt; &quot;banana&quot; &lt;&lt; endl;
+    fout.close();
+
+    // Read from file
+    ifstream fin(filename.c_str());  // default mode ios::in
+    if (!fin) 
+    {
+        cerr &lt;&lt; &quot;error: open file for input failed!&quot; &lt;&lt; endl;
+        abort();
+    }
+    char ch;
+    while (fin.get(ch))
+    {  // till end-of-file
+        cout &lt;&lt; ch;
+    }
+    fin.close();
+    return 0;
+}
+</code></pre>
+<h1 id="4-String-Stream"><a href="#4-String-Stream" class="headerlink" title="4. String Stream"></a>4. String Stream</h1><p><code>&lt;sstring&gt;</code> 头文件定义了三个类型来支持程序和 string 对象之间的 IO：</p>
+<ul>
+<li>istringstream 从 string 读取数据，是 istream  的子类</li>
+<li>ostringstream 向 string 写入数据，是 ostream 的子类</li>
+<li>stringstream 既可从 string 读数据，也可向 string 写数据，是 iostream 的子类</li>
+</ul>
+<p><strong>ostringstream</strong></p>
+<pre><code class="c++">explicit ostringstream (ios::openmode mode = ios::out);  // default with empty string
+explicit ostringstream (const string &amp; buf, 
+                        ios::openmode mode = ios::out);  // with initial str
+
+string str () const;           // Get contents
+void str (const string &amp; str); // Set contents
+</code></pre>
+<p>使用例：</p>
+<pre><code class="c++">#include &lt;iostream&gt;
+#include &lt;sstream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+int main() 
+{
+    // construct output string stream (buffer) - need &lt;sstream&gt; header
+    ostringstream sout;
+
+    // Write into string buffer
+    sout &lt;&lt; &quot;apple&quot; &lt;&lt; endl;
+    sout &lt;&lt; &quot;orange&quot; &lt;&lt; endl;
+    sout &lt;&lt; &quot;banana&quot; &lt;&lt; endl;
+    // Get contents
+    cout &lt;&lt; sout.str() &lt;&lt; endl;
+    return 0;
+}
+</code></pre>
+<p><strong>istreamstream</strong></p>
+<pre><code class="c++">explicit istringstream (ios::openmode mode = ios::in);  // default with empty string
+explicit istringstream (const string &amp; buf,
+                        ios::openmode mode = ios::in);  // with initial string
+</code></pre>
+<p>使用例</p>
+<pre><code class="c++">#include &lt;iostream&gt;
+#include &lt;sstream&gt;
+#include &lt;string&gt;
+using namespace std;
+int main() 
+{
+    // construct input string stream (buffer) - need &lt;sstream&gt; header
+    istringstream sin(&quot;123 12.34 hello&quot;);
+
+    // Read from buffer
+    int i;
+    double d;
+    string s;
+    sin &gt;&gt; i &gt;&gt; d &gt;&gt; s;
+    cout &lt;&lt; i &lt;&lt; &quot;,&quot; &lt;&lt; d &lt;&lt; &quot;,&quot; &lt;&lt; s &lt;&lt; endl;
+    return 0;
+}
+</code></pre>
+<p>参考：</p>
+<p><a href="https://www3.ntu.edu.sg/home/ehchua/programming/cpp/cp10_IO.html" target="_blank" rel="noopener">C++ Programming Language Stream IO and File IO</a></p>
+<p><a href="https://cplusplus.com/" target="_blank" rel="noopener">cplusplus.com</a></p>
+<p>《C++ 标准库》第二版</p>
+
+      
+    </div>
+    
+    
+    <div class="article-category">
+      
+      
+      
+        <b>Tags:</b>
+        <a class="article-tag-link" href="/tags/C-Plus-Plus/" rel="tag">C Plus Plus</a>
+      
+    </div>
+    
+    
+  </div>
+</article>
+
+  
+<nav id="article-nav" class="article-nav">
+  
+    <span id="article-nav-newer" class="article-nav-link-wrap newer"></span>
+  
+  
+    <a href="/2022/09/10/Numeric-Limit/" id="article-nav-older" class="article-nav-link-wrap older">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">
+        
+          Numeric Limit
+        
+      </div>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+    </div>
+  </div>
+  
+
+
+
+
+<div id="settings-container">
+  <div id="dark-mode">dark</div>
+  <div id="sans-font">sans</div>
+</div>
+<script type="text/javascript">
+let d=document,r=d.documentElement.style,f=r.setProperty.bind(r),l=localStorage,s=l.getItem('s')||(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches),n=l.getItem('n'),m=d.getElementById("dark-mode"),b=()=>{f('--bg-color','#fafafa');f('--code-bg-color','#f4f4f4');f('--text-color','#212121');f('--secondary-color','#808080');f('--tertiary-color','#b0b0b0');f('--link-color','#b5c8cf');f('--link-hover-color','#618794');f('--link-bg-color','#dae4e7');f('--selection-color','#dae4e7');m.innerHTML="dark"},c=()=>{f('--bg-color','#212121');f('--code-bg-color','#292929');f('--text-color','#fff');f('--secondary-color','#c0c0c0');f('--tertiary-color','#6e6e6e');f('--link-color','#4d6b75');f('--link-hover-color','#96b1bb');f('--link-bg-color','#5d828e');f('--selection-color','#acc1c9');m.innerHTML="light"},o=d.getElementById("sans-font"),e=()=>{f('--body-stack','"Lora", "Georgia", "Times New Roman", serif');o.innerHTML="sans"},g=()=>{f('--body-stack','"Lato", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "Verdana", sans-serif');o.innerHTML="serif"};m.onclick=()=>{if(s==2){s=1;l.setItem('s',s);c()}else{s=2;l.setItem('s',s);b()}};o.onclick=()=>{if(n==2){n=1;l.setItem('n',n);g()}else{n=2;l.setItem('n',n);e()}};if(!s){s=2;l.setItem('s',2)};if(s==1){c()};if(!n){n=2;l.setItem('n',2)};if(n==1){g()};
+</script>
+
+
+
+
+</body>
+</html>

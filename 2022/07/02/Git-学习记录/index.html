@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Git 学习记录 | Zwei&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+    <link rel="icon" href="/avatar-default.png">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+  
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Git 学习记录">
+<meta property="og:url" content="https://zweireverberate.icu/2022/07/02/Git-%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="Zwei&#39;s Blog">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-07-02T10:47:54.000Z">
+<meta property="article:modified_time" content="2022-07-02T10:49:05.115Z">
+<meta property="article:author" content="Zwei">
+<meta property="article:tag" content="Comptuer Study">
+<meta name="twitter:card" content="summary"><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Zwei's Blog" type="application/atom+xml">
+</head>
+
+<body>
+  <div id="wrapper">
+    <header id="header">
+  <h1 id="title">
+    <a href="/">Zwei&#39;s Blog</a>
+  </h1>
+  <nav>
+    
+    
+      
+      <a class="nav-link" href="/">Home</a>
+    
+      
+        <span class="nav-spacer">×</span>
+      
+      <a class="nav-link" href="/archives">Archives</a>
+    
+      
+        <span class="nav-spacer">×</span>
+      
+      <a class="nav-link" href="/about">About</a>
+    
+    
+  </nav>
+</header>
+
+    <div id="content">
+      <article id="post-Git-学习记录" class="article article-type-post" itemprop="blogPost" itemscope>
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 class="article-title" itemprop="headline name">
+      Git 学习记录
+    </h2>
+  
+
+
+        <div class="article-meta">
+          <time class="article-date" datetime="2022-07-02T10:47:54.000Z" itemprop="datePublished">2022-07-02</time>
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        <p><em><a id="more"></a></em></p>
+<h6 id="1-什么是-Git"><a href="#1-什么是-Git" class="headerlink" title="1. 什么是 Git"></a>1. 什么是 Git</h6><p>Git 是一个分布式的版本管理系统，可以在任何时间将文件的状态作为更新记录保存，便于文件的回滚以及前后差异的比较，适用于协同工作。</p>
+<p>Git 的历史记录和文件由数据库存储，分为本地数据库和远程数据库，Github 就是一种远程数据库，用户可以上传公开自己的内容，也可以访问和修改其他人的内容。</p>
+<p>如果要把文件的更改保存到数据库就需要进行提交，执行提交后，数据库就会生成上次提交状态与当前状态的差异记录（Revision）。执行提交时，需要输入必要的提交信息，提交信息的格式一般是：</p>
+<pre><code class="c++">第1行：提交的内容
+第2行：空行
+第3行以后：提交的理由
+</code></pre>
+<p><strong>工作树和索引</strong></p>
+<p>Git 管理之下，实际操作的目录被称为工作树。在数据库和工作树之间有索引，索引是为了向数据库提交作准备的区域。</p>
+<p>Git 在执行提交的时候，不是直接将工作树的状态保存到数据库，而是将设置在中间索引区域的状态保存到数据库。因此，若要提交文件，必须先将文件加入到索引区域中。</p>
+<p>通过中间索引，可以避免工作树中不必要的文件提交，还可以将文件修改内容的一部分加入索引区域并提交。</p>
+<h6 id="2-Git-初探"><a href="#2-Git-初探" class="headerlink" title="2. Git 初探"></a>2. Git 初探</h6><p>安装 Git 之后，需要输入用户名和邮件地址。该设置操作在安装 Git 后进行一次就够了，这些信息将作为提交者信息显示在更新历史中。</p>
+<p>Git 的设定被存在用户本地目录的 .gitconfig 档案里，可以直接编辑配置文件，也可以使用 config 命令。</p>
+<pre><code class="c++">$ git config --global user.name &quot;&lt;用户名&gt;&quot;
+$ git config --global user.email &quot;&lt;电子邮件&gt;&quot;
+</code></pre>
+<p>使用 Git 查看用户名和邮箱地址</p>
+<pre><code class="c++">$ git config user.name
+$ git config user.email
+</code></pre>
+<p><strong>创建版本库</strong></p>
+<pre><code class="c++">$ mkdir tutorial  // 在当前文件目录下新建名为&quot;tutorial&quot;的文件夹
+
+$ cd tutorial  // 定位到 tutorial 下
+    
+$ pwd  // 显示当前目录，检验是否定位成功
+
+$ git init  // 将 tutorial 变成 git 可以管理的仓库，tutorial 下会出现 .git 目录
+</code></pre>
+<p><strong>添加文件到版本库中</strong></p>
+<p>版本控制系统只能跟踪文本文件的改动，如 txt 文件，网页，代码，能够告知每次的改动，但是图片视频等二进制文件无法获悉具体的改动内容，最多只能知道大小的变化。</p>
+<p>在 tutorial 下新建一个 Readme.txt 文件，里面写入任意内容。</p>
+<p>先用 status 命令确认工作树和索引的状态：</p>
+<pre><code class="c++">$ git status // 返回当前目录的状态
+</code></pre>
+<p>返回的结果是：</p>
+<pre><code class="c++">On branch master
+
+No commits yet
+
+Untracked files:
+  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
+        Readme.txt
+
+nothing added to commit but untracked files present (use &quot;git add&quot; to track)
+</code></pre>
+<p>可以看到 Readme.txt 并未在索引当中，所以需要将其加入到索引，以便追踪其变更。</p>
+<p>使用 add 命令 添加文件</p>
+<pre><code class="c++">$ git add Readme.txt // 添加 Readme.txt 到索引
+    
+// $ git add . // 将所有文件添加到索引
+</code></pre>
+<p>再次执行 git status，返回的结果是：</p>
+<pre><code class="c++">On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use &quot;git rm --cached &lt;file&gt;...&quot; to unstage)
+        new file:   Readme.txt
+</code></pre>
+<p>Readme.txt 已经加入到索引了，可以用 commit 执行提交</p>
+<pre><code class="c++">$ git commit -m &quot;first commit&quot;
+</code></pre>
+<p>返回的结果是：</p>
+<pre><code class="c++">[master (root-commit) 26043b7] first commit
+ 1 file changed, 1 insertion(+)
+ create mode 100644 Readme.txt
+</code></pre>
+<p>再使用 status 查看工作树和索引的状态，返回的结果是：</p>
+<pre><code class="c++">On branch master
+nothing to commit, working tree clean
+</code></pre>
+<p>可以看到，没有新的变更需要提交。</p>
+<p>使用 log 命令，可以在版本库的提交记录中看到新的提交：</p>
+<pre><code class="c++">$ git log
+</code></pre>
+<p>返回的结果是：</p>
+<pre><code class="c++">commit 26043b776a45458bc52bf8c04d2acf49d9943bee (HEAD -&gt; master)
+Author: Zwei-Reverberate &lt;Qiu12476593@163.com&gt;
+Date:   Sat Jul 2 13:22:44 2022 +0800
+
+    first commit
+</code></pre>
+<p><strong>更改文件</strong></p>
+<p>如果修改 Readme.txt 的内容，再次使用 status 来查看结果，出现 “Changes not staged for commit” 的提醒。该提醒意为 readme.txt 文件已被修改，但是该修改未被提交。</p>
+<p>如果想知道 Readme.txt 文件到底被修改了什么内容，可以使用 diff 命令：</p>
+<pre><code class="c++">$ git diff Readme.txt
+</code></pre>
+<p>知道了对 readme.txt 文件做了什么修改后，就可以放心地提交到仓库了。提交修改和提交文件是一样的两步。（第一步是 git add, 第二步是 git commit）。</p>
+<h6 id="3-回退"><a href="#3-回退" class="headerlink" title="3. 回退"></a>3. 回退</h6><p>使用 log 查看日志，可以看到两次记录，黄色的长串代表每次提交的版本号。</p>
+<pre><code>$ git log  // 查看日志
+$ git log --pretty=oneline // 显示简洁版日志
+</code></pre>
+<p>现在使用版本回退操作</p>
+<pre><code class="c++">$ git reset --hard HEAD^ //回退到上一个版本
+$ git reset --hard HEAD^^ //回退到上上个版本
+$ git reset --hard HEAD~1 //回退到上一个版本
+$ git reset --hard HEAD~100 //回退前100个版本    
+</code></pre>
+<p>成功回退一个版本后，查看 Readme.txt 的内容发现上次的修改已经消失。</p>
+<p>此时使用 log 查看历史记录，那么第二次的内容就无法看到了，但如果此时想要重新回到第二次的版本就需要使用版本号进行回退。</p>
+<pre><code class="c++">$ git reflog // 获取版本号
+</code></pre>
+<p>查到第二次的版本号是 5ea9ef6，恢复到该版本的内容：</p>
+<pre><code class="c++">$ git reset --hard 5ea9ef6
+</code></pre>
+<p>查看 Readme.txt 发现修改的内容又回来了。</p>
+<p>快速查看 Readme.txt 里的内容：</p>
+<pre><code class="c++">cat Readme.txt
+</code></pre>
+<h6 id="4-再谈工作树和索引"><a href="#4-再谈工作树和索引" class="headerlink" title="4. 再谈工作树和索引"></a>4. 再谈工作树和索引</h6><p>工作树：亦被称为工作区，再硬盘上看到的目录，比如说 tutorial 里的文件（.git 隐藏目录版本库除外）。</p>
+<p>版本库（Repository）：工作区中有一个隐藏目录 .git，不属于工作区。版本库里面存了很多东西，其中最重要的就是 stage （暂存区）（或者叫 index ），还有 Git 自动创建了第一个分支 master，以及指向 master 的一个指针 HEAD。</p>
+<p>前面提到使用 Git 提交文件到版本库有两步：</p>
+<p>第一步：是使用 <code>git add</code> 把文件添加进去，实际上就是把文件添加到暂存区&#x2F;索引。</p>
+<p>第二步：使用 <code>git commit</code> 提交更改，实际上就是把暂存区&#x2F;索引的所有内容提交到当前分支上。</p>
+<h6 id="5-撤销修改和删除文件"><a href="#5-撤销修改和删除文件" class="headerlink" title="5. 撤销修改和删除文件"></a>5. 撤销修改和删除文件</h6><p>在 Readme.txt 中新增加了一行内容，先通过 cat 命令进行查看，或使用 status 查看状态，发现的确新增了。</p>
+<p>此时还未进行提交，发现了新增的内容，想要恢复上一个版本，有两种方法：</p>
+<ul>
+<li>如果知道要更改哪些内容的话，直接手动修改去掉那些需要的文件，然后 <code>add</code> 添加到暂存区&#x2F;索引，最后 <code>commit</code> 掉。</li>
+<li>可以按以前的办法直接恢复到上一个版本，使用 <code>git reset --hard HEAD^</code></li>
+</ul>
+<p>如果不想使用以上两种方法，则可以使用撤销命令。在作撤销之前，可以先用 status 查看当前状态。</p>
+<pre><code class="c++">// 使用 git restore 命令丢弃工作区的修改
+git restore -- Readme.txt
+</code></pre>
+<p>命令 <code>git restore -- readme.txt</code> 意思就是，把 Readme.txt 文件在工作区做的修改全部撤销。但如果已经使用 add 添加到了索引中，这种操作就不行。</p>
+<p>注意：命令 <code>git restore-- readme.txt</code> 中的 <code>--</code> 很重要，如果没有 <code>--</code> 的话，那么命令变成创建分支了。</p>
+<p>在 tutorial 目录下添加一个新的文件 second.txt，然后进行提交。</p>
+<p>可以使用 rm 删除文件或者直接在文件目录下删除文件，但删除操作并未提交。</p>
+<pre><code class="c++">$ rm second.txt
+</code></pre>
+<p>如果想彻底从版本库中删掉此文件的话，先 add 提交到索引，再执行 commit 命令提交。</p>
+<p>在没有 <code>commit</code> 之前，想从版本库中恢复此文件可以使用 <code>git restore -- second.txt</code> </p>
+<pre><code class="c++">git restore -- second.txt
+</code></pre>
+<h6 id="6-创建和合并分支"><a href="#6-创建和合并分支" class="headerlink" title="6. 创建和合并分支"></a>6. 创建和合并分支</h6><p>每次提交，Git 都把它们串成一条时间线，这条时间线就是一个分支。截止到目前，只有一条时间线，在 Git 里，这个分支叫主分支，即 master 分支。HEAD 严格来说不是指向提交，而是指向 master，master 才是指向提交的，所以，HEAD 指向的就是当前分支。</p>
+<p>首先，来创建 dev 分支，然后切换到 dev 分支上</p>
+<pre><code class="c++">$ git checkout -b dev // 创建并切换分支
+</code></pre>
+<pre><code class="c++">$ git branch // 查看当前分支
+</code></pre>
+<p><code>git checkout</code> 命令加上 <code>–b</code> 参数表示创建并切换，相当于如下2条命令：</p>
+<p><code>git branch dev</code></p>
+<p><code>git checkout dev</code></p>
+<p><code>git branch </code> 查看分支，会列出所有的分支，当前分支前面会添加一个星号。</p>
+<p>此时在 readme.txt 中添加内容 theoutofinfinity，并提交到 dev 分支</p>
+<p>此时切换到主分支 master 上，用 <code>cat</code> 查看 readme.txt 内容，发现 theoutofinfinity 并未添加，因为分支不是 dev</p>
+<p>可以把 dev 分支上的内容合并到分支 master 上，可以在 master 分支上，使用命令 <code>git merge dev</code> </p>
+<pre><code class="c++">$ git merge dev  // 在 master 分支上合并 dev 分支内容
+</code></pre>
+<p>该命令用于合并指定分支到当前分支上，合并后，再查看 readme.txt 内容，和 dev 分支最新提交的是完全一样的</p>
+<p>注意到合并命令后的 Fast-forward 信息，说明这次合并是“快进模式”，也就是直接把 master 指向当前提交，所以合并速度非常快</p>
+<p>合并完成后，可以删除 dev 分支</p>
+<pre><code class="c++">$ git branch -d dev // 删除dev分支
+</code></pre>
+<blockquote>
+<p>查看分支：<code>git branch</code></p>
+<p>创建分支：<code>git branch name</code></p>
+<p>切换分支：<code>git checkout name</code></p>
+<p>创建+切换分支：<code>git checkout –b name</code></p>
+<p>合并某分支到当前分支：<code>git merge name</code></p>
+<p>删除分支：<code>git branch –d name</code></p>
+</blockquote>
+<h6 id="8-分支管理和分支冲突"><a href="#8-分支管理和分支冲突" class="headerlink" title="8. 分支管理和分支冲突"></a>8. 分支管理和分支冲突</h6><p>新建分支名为 NweBr，在 readme.txt 添加一行 late in autumn，然后提交</p>
+<p>然后切换到 master 分支上来，也在最后添加一行内容为 Airness</p>
+<p>现在需要在 master 分支上来合并 NewBr，合并结果显示产生冲突</p>
+<p>Git 用 <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; </code> ，<code>=======</code>，<code>&gt;&gt;&gt;&gt;&gt;&gt;</code> 标记出不同分支的内容，其中 <code>&lt;&lt;&lt;&lt;&lt;&lt; HEAD</code> 是指主分支修改的内容，<code>&gt;&gt;&gt;&gt;&gt;&gt; NewBr</code> 是指 NewBr 上修改的内容</p>
+<p>此时可以将 readme.txt 手动修改成和 master 分支上一样的内容，然后通过 <code>git add</code> 和 <code>git commit</code> 进行添加和提交</p>
+<p>如果需要查看分支合并情况的话，使用命令 <code>git log</code> </p>
+<p>通常合并分支时，git 一般使用 <code>Fast forward</code> 模式，在这种模式下，删除分支后，会丢掉分支信息。可以使用带参数 <code>--no-ff</code> 来禁用 <code>Fast forwaed</code> 模式。</p>
+<pre><code class="c++">$ git merge --no-ff -m &quot;merge with no-ff&quot; NewBr // 合并NewBr分支
+</code></pre>
+<p>用此种方式合并分支，被删除的分支信息还保留</p>
+<p>分支策略：master主分支应该是非常稳定的，也就是用来发布新版本，一般情况下不允许在上面干活，干活一般情况下在新建的 dev 分支上干活，干完后，比如上要发布，或者说 dev 分支代码稳定后可以合并到主分支 master 上来。</p>
+<h6 id="9-bug-分支"><a href="#9-bug-分支" class="headerlink" title="9. bug 分支"></a>9. bug 分支</h6><p>在开发中，会经常碰到bug问题，那么有了bug就需要修复，在Git中，分支是很强大的，每个bug都可以通过一个临时分支来修复，修复完成后，合并分支，然后将临时的分支删除掉。</p>
+<p>比如在开发中遇到一个 404 bug 时候，我们可以创建一个 404 分支来修复它，但是，当前分支上的工作还没有提交。并不是不想提交，而是工作进行到一半时候，还无法提交，比如我这个分支 bug 要2天完成，但是 issue-404 bug 需要5个小时内完成。怎么办呢 Git 还提供了一个 stash 功能，可以把当前工作现场 ”隐藏起来”，等以后恢复现场。</p>
+<pre><code class="C++">$ git status // 将当前工作现场隐藏起来
+</code></pre>
+<p>此时如果执行 <code>git status</code> 会发现当前状态是干净的。</p>
+<p>所以现在可以通过创建issue-404分支来修复bug了</p>
+<p>首先要确定在那个分支上修复bug，比如现在是在主分支 master 上来修复的，现在我要在 master 分支上创建一个临时分支。</p>
+<pre><code class="c++">$ git checkout -b issue-404
+</code></pre>
+<p>修复完成后，切换到master分支上，并完成合并，最后删除 issue-404 分支</p>
+<p>现在切换回到原分支继续未完成的工作，执行 <code>git status</code> 却发现工作区是干净的 </p>
+<p>使用命令 <code>git stash list</code> 来查看</p>
+<p>发现工作现场还在，Git 把 status 内容存在某个地方了。需要恢复可以使用两个方法</p>
+<ul>
+<li><code>git stash apply </code> 恢复，恢复后，stash 内容并不删除，需要使用命令 <code>git stash drop</code> 来删除</li>
+<li>一种方式是使用 <code>git stash pop</code>，恢复的同时把stash内容也删除了</li>
+</ul>
+<h6 id="9-多人协作"><a href="#9-多人协作" class="headerlink" title="9. 多人协作"></a>9. 多人协作</h6><p>当从远程库克隆时候，实际上Git自动把本地的master分支和远程的master分支对应起来了，并且远程库的默认名称是 <code>origin</code></p>
+<ul>
+<li>要查看远程库的信息 使用 <code>git remote</code></li>
+<li>要查看远程库的详细信息 使用 <code>git remote –v</code></li>
+</ul>
+<p><strong>推送分支</strong></p>
+<p>推送分支就是把该分支上所有本地提交到远程库中，推送时，要指定本地分支，这样，Git就会把该分支推送到远程库对应的远程分支上：使用命令 <code>git push origin master</code></p>
+<pre><code class="c++">$ git push origin master
+</code></pre>
+<p>如果现在要推送到其他分支，还是那个命令 <code>git push origin dev</code>。一般情况下需要推送的分支如下：</p>
+<ul>
+<li>master分支是主分支，因此要时刻与远程同步</li>
+<li>一些修复 bug 分支不需要推送到远程去，可以先合并到主分支上，然后把主分支master 推送到远程去</li>
+</ul>
+<p><strong>抓取分支</strong></p>
+<ul>
+<li>首先，可以试图用 <code>git push origin branch-name</code> 推送自己的修改</li>
+<li>如果推送失败，则因为远程分支比你的本地更新早，需要先用 <code>git pull</code> 试图合并</li>
+<li>如果合并有冲突，则需要解决冲突，并在本地提交。再用 <code>git push origin branch-name</code> 推送</li>
+</ul>
+<h6 id="10-Git-基本常用命令"><a href="#10-Git-基本常用命令" class="headerlink" title="10. Git 基本常用命令"></a>10. Git 基本常用命令</h6><ul>
+<li>mkdir XX (创建一个空目录 XX指目录名)</li>
+<li>pwd 显示当前目录的路径。</li>
+<li>git init 把当前的目录变成可以管理的git仓库，生成隐藏.git文件。</li>
+<li>git add XX 把xx文件添加到暂存区去。</li>
+<li>git commit –m “XX” 提交文件 –m 后面的是注释。</li>
+<li>git status 查看仓库状态</li>
+<li>git diff XX 查看XX文件修改了那些内容</li>
+<li>git log 查看历史记录</li>
+<li>git reset –hard HEAD^ 或者 git reset –hard HEAD~ 回退到上一个版本<br>(如果想回退到100个版本，使用git reset –hard HEAD~100 )</li>
+<li>cat XX 查看XX文件内容</li>
+<li>git reflog 查看历史记录的版本号id</li>
+<li>git checkout – XX 把XX文件在工作区的修改全部撤销。</li>
+<li>git rm XX 删除XX文件</li>
+<li>git remote add origin ”…“关联一个远程库</li>
+<li>git push –u(第一次要用-u 以后不需要) origin master 把当前master分支推送到远程库</li>
+<li>git clone “…” 从远程库中克隆</li>
+<li>git checkout –b dev 创建dev分支 并切换到dev分支上</li>
+<li>git branch 查看当前所有的分支</li>
+<li>git checkout master 切换回master分支</li>
+<li>git merge dev 在当前的分支上合并dev分支</li>
+<li>git branch –d dev 删除dev分支</li>
+<li>git branch name 创建分支</li>
+<li>git stash 把当前的工作隐藏起来 等以后恢复现场后继续工作</li>
+<li>git stash list 查看所有被隐藏的文件列表</li>
+<li>git stash apply 恢复被隐藏的文件，但是内容不删除</li>
+<li>git stash drop 删除文件</li>
+<li>git stash pop 恢复文件的同时 也删除文件</li>
+<li>git remote 查看远程库的信息</li>
+<li>git remote –v 查看远程库的详细信息</li>
+<li>git push origin master Git会把master分支推送到远程库对应的远程分支上</li>
+</ul>
+
+      
+    </div>
+    
+    
+    <div class="article-category">
+      
+      
+      
+        <b>Tags:</b>
+        <a class="article-tag-link" href="/tags/Comptuer-Study/" rel="tag">Comptuer Study</a>
+      
+    </div>
+    
+    
+  </div>
+</article>
+
+  
+<nav id="article-nav" class="article-nav">
+  
+    <a href="/2022/09/10/Numeric-Limit/" id="article-nav-newer" class="article-nav-link-wrap newer">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Numeric Limit
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/04/01/%E5%9B%BE%E5%BD%A2%E5%AD%A6%E4%B8%AD%E7%9A%84%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2/" id="article-nav-older" class="article-nav-link-wrap older">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">
+        
+          图形学中的坐标变换
+        
+      </div>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+    </div>
+  </div>
+  
+
+
+
+
+<div id="settings-container">
+  <div id="dark-mode">dark</div>
+  <div id="sans-font">sans</div>
+</div>
+<script type="text/javascript">
+let d=document,r=d.documentElement.style,f=r.setProperty.bind(r),l=localStorage,s=l.getItem('s')||(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches),n=l.getItem('n'),m=d.getElementById("dark-mode"),b=()=>{f('--bg-color','#fafafa');f('--code-bg-color','#f4f4f4');f('--text-color','#212121');f('--secondary-color','#808080');f('--tertiary-color','#b0b0b0');f('--link-color','#b5c8cf');f('--link-hover-color','#618794');f('--link-bg-color','#dae4e7');f('--selection-color','#dae4e7');m.innerHTML="dark"},c=()=>{f('--bg-color','#212121');f('--code-bg-color','#292929');f('--text-color','#fff');f('--secondary-color','#c0c0c0');f('--tertiary-color','#6e6e6e');f('--link-color','#4d6b75');f('--link-hover-color','#96b1bb');f('--link-bg-color','#5d828e');f('--selection-color','#acc1c9');m.innerHTML="light"},o=d.getElementById("sans-font"),e=()=>{f('--body-stack','"Lora", "Georgia", "Times New Roman", serif');o.innerHTML="sans"},g=()=>{f('--body-stack','"Lato", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "Verdana", sans-serif');o.innerHTML="serif"};m.onclick=()=>{if(s==2){s=1;l.setItem('s',s);c()}else{s=2;l.setItem('s',s);b()}};o.onclick=()=>{if(n==2){n=1;l.setItem('n',n);g()}else{n=2;l.setItem('n',n);e()}};if(!s){s=2;l.setItem('s',2)};if(s==1){c()};if(!n){n=2;l.setItem('n',2)};if(n==1){g()};
+</script>
+
+
+
+
+</body>
+</html>
