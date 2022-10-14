@@ -6,7 +6,7 @@
   <link href="https://zweireverberate.icu/atom.xml" rel="self"/>
   
   <link href="https://zweireverberate.icu/"/>
-  <updated>2022-09-28T17:20:24.418Z</updated>
+  <updated>2022-10-14T22:54:55.650Z</updated>
   <id>https://zweireverberate.icu/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Real-time Shadows</title>
+    <link href="https://zweireverberate.icu/2022/10/15/Real-time-Shadows/"/>
+    <id>https://zweireverberate.icu/2022/10/15/Real-time-Shadows/</id>
+    <published>2022-10-14T22:53:39.000Z</published>
+    <updated>2022-10-14T22:54:55.650Z</updated>
+    
+    <content type="html"><![CDATA[<p><em><a id="more"></a></em></p><h1 id="1-非常用的阴影计算方法"><a href="#1-非常用的阴影计算方法" class="headerlink" title="1. 非常用的阴影计算方法"></a>1. 非常用的阴影计算方法</h1><h3 id="1-投影阴影"><a href="#1-投影阴影" class="headerlink" title="1. 投影阴影"></a>1. 投影阴影</h3><ul><li><p>优势：高效，易于实现</p></li><li><p>劣势：只适用于平坦表面</p></li><li><p>计算方式</p><p>假定场景中存在一个光源位于 (X<sub>l</sub>, Y<sub>l</sub>, Z<sub>l</sub>), 一个需要渲染的物体，以及一个投影阴影的平面。</p><p>直接使用一个变换矩阵将物体上的点 (X<sub>w</sub>, Y<sub>w</sub>, Z<sub>w</sub>) 变换为相应阴影平面上的点 (X<sub>s</sub>, O, Z<sub>s</sub>) 。</p><p>然后直接将其生成的阴影多边形绘制出来，通常使用暗色和地面纹理的混合作为其纹理。</p></li><li><p>示意：</p><img src="https://www.helloimg.com/images/2022/10/11/ZgnyZD.jpg"></li></ul><h3 id="2-阴影体"><a href="#2-阴影体" class="headerlink" title="2. 阴影体"></a>2. 阴影体</h3><ul><li><p>优势：高度准确，不易产生伪影</p></li><li><p>劣势：计算代价高昂</p></li><li><p>计算方式</p><p>先找到被物体阴影覆盖的阴影体，之后减少视锥体和阴影体相交部分中的多边形的颜色强度。</p><p>几何着色器可以用于计算阴影体，模板缓冲区可以用于判断像素是否在阴影体内。</p></li><li><p>示意：</p><img src="https://www.helloimg.com/images/2022/10/11/ZgHPXE.jpg"></li></ul><h1 id="2-Shadow-Mapping"><a href="#2-Shadow-Mapping" class="headerlink" title="2. Shadow Mapping"></a>2. Shadow Mapping</h1><h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><ul><li>主流的实时阴影计算方式</li><li>相对高效，受到多数硬件支持</li><li>基本思想：光线不可视之处即为阴影</li><li>计算方式：<ul><li>进行两轮 Pass，第一轮从光源位置渲染场景，第二轮从设定的摄像机渲染场景。（Pass 即渲染一遍场景）</li><li>第一轮 Pass：(计算Shadow Map)<ul><li>从光源位置出发，并朝向光线方向渲染</li><li>使用一张 Texture 记录每个像素的光源与最近的对象的距离&#x2F;深度（和 Z-Buffer 类似）。这张 Texture 即为阴影贴图 Shadow Map</li></ul></li><li>第二轮 Pass：<ul><li>正常渲染场景流程不变</li><li>对于每个像素，还要使用相应的变换矩阵将其变换到光源空间坐标 (x, y, z)，并查询第一轮 Pass 生成的 Shadow Map 中(x, y) 对应的存储的深度值 depth</li><li>若 z &gt; depth，说明该像素被遮挡，处于阴影中，就要对其作出相应的处理</li></ul></li></ul></li></ul><h3 id="2-Shadow-Bias"><a href="#2-Shadow-Bias" class="headerlink" title="2. Shadow Bias"></a>2. Shadow Bias</h3><p>如不加处理直接使用 Shadow Map 的话，有可能出现 Show acne（表现为黑白波浪纹覆盖在场景表面，亦称为自阴影）。</p><p>其产生原因在于舍入误差。因为阴影贴图受限于分辨率，在距离光源比较远的情况下，去 Shadow Map 中查找深度信息时计算的纹理坐标与实际坐标不一定能够完全匹配。</p><p>例如，设当前像素变换到光源空间的后的对应坐标为 (x1, y1, z1)，它的一个相邻像素变换后的坐标为 (x2, y2, z2)，而 Shadow Map 受限于分辨率对于 (x1, y1) 和 (x2, y2) 都返回了相同的深度 depth，而恰好 z1 &gt; depth 被判断在阴影之中，而 z2 &lt; depth 被判断不在阴影之中，自阴影问题也因此产生。而正确的情况应该是 (x1, x2) 本该对应的 depth’ &gt; z1 &gt; depth。</p><p>为了解决这个问题，可以队当前表面深度应用一个阴影偏移，相当于将物体向光源方向移动了一下，用上面的例子来说就是实质上减小了 z1 使其能够小于 depth。通常一个很小的偏移就可以补偿各类舍入误差。</p><p>使用 0.005 的偏移：</p><pre><code class="c++">float bias = 0.005;float shadow = currentDepth - bias &gt; closestDepth  ? 1.0 : 0.0;</code></pre><p>更可靠的方法：根据光线方向改变偏移量：</p><pre><code class="c++">float bias = max(0.05 * (1.0 - dot(normal, lightDir)), 0.005);</code></pre><p>使用阴影偏移后可能带来的新的问题：悬浮（Peter Panning）。</p><p>产生原因：bias 设置不当，物体偏移太大，使物体看起来像是浮起来了一样。</p><p>解决方法：在渲染 Depth Map 的时候使用正面剔除 (front face culling)，这样可以使用几何体的背面作深度记录。</p><h1 id="3-Percentage-Closer-Filtering-PCF"><a href="#3-Percentage-Closer-Filtering-PCF" class="headerlink" title="3. Percentage Closer Filtering (PCF)"></a>3. Percentage Closer Filtering (PCF)</h1><h3 id="1-阴影锯齿"><a href="#1-阴影锯齿" class="headerlink" title="1. 阴影锯齿"></a>1. 阴影锯齿</h3><p>Shadow Mapping 所使用的 Texture 有一个固定的分辨率，易产生多个像素对应同一个纹理像素。这样一来多个像素就会从 Shadow Map 的同一个深度值进行采样，这几个像素得到的就是相同的结果，由此产生了锯齿。</p><p>解决的方式可以是增加深度贴图的分辨率，或者尽可能让光的视锥接近场景。</p><h3 id="2-软阴影"><a href="#2-软阴影" class="headerlink" title="2. 软阴影"></a>2. 软阴影</h3><p>使用软阴影也是解决阴影锯齿的方案。</p><p>真实世界出现的阴影大多数都是软阴影，边缘会发生不同程度的模糊。原因是真实世界的光源很少是点光源，而且物体自身的材质会产生一些反射。</p><p>软阴影的特性：</p><ul><li>距离物体越远的阴影越柔和，越近则越锐利</li><li>距离物体越近颜色越暗</li><li>半影（Penumbra）。一些阴影区域的光被遮挡一部分，但并非完全遮挡，是阴影过渡的区域</li></ul><h3 id="3-PCF"><a href="#3-PCF" class="headerlink" title="3. PCF"></a>3. PCF</h3><p>PCF  是多种生成软阴影方法中的其中一种。</p><ul><li><p>算法思想：</p><p>计算阴影时不仅考虑单个的采样点，而是在一定范围内进行多重采样，减少阴影的锐利程度，所以得到的值不是非0即1，而是0到1中间的值。这也符合真实情况中的半影。</p></li><li><p>注意点：</p><ul><li>不是对最后已有锯齿的阴影进行 Filter</li><li>亦不是对 Shadow Map 进行 Filter</li><li>而是找到目标像素对应纹素周围的纹素，得到的是该像素是否处于阴影中0或1的平均，平均下来是一个在0到1之间的值，而非周围像素深度的平均</li></ul></li><li><p>找周围像素这个行为如何实现？</p><p>定义一个采样半径 R，可以以此就近采样，可以选择不同的分布采样函数。</p></li></ul><h1 id="4-Percentage-Closer-Soft-Shadows-PCSS"><a href="#4-Percentage-Closer-Soft-Shadows-PCSS" class="headerlink" title="4. Percentage Closer Soft Shadows (PCSS)"></a>4. Percentage Closer Soft Shadows (PCSS)</h1><p>上文已述及，软阴影应随着与物体距离的增加而越模糊，而 PCF 生成的软阴影并不能产生这样的效果，因为其采样半径 R 是固定的，而 PCSS 则是动态修改采样半径的大小，以得到软硬程度不同的阴影。</p><p>PCSS 通过半影的大小估计每次的采样半径 R。</p><img src="https://www.helloimg.com/images/2022/10/13/Zgwwn6.jpg"><p>其中 W<sub>Light</sub> 是光源面尺寸，d<sub>Blocker</sub> 是遮挡物的深度，d<sub>Receiver</sub> 是被投物(shading point) 的深度。</p><p>而 d<sub>Blocker</sub> 需要单独计算，而不能直接用单个坐标采样 Shadow Map 的深度直接作为  d<sub>Blocker</sub> ，其原因在于这种做法等同于单一直线连向光源面中心，若未碰到遮挡物（即 d<sub>Blocker</sub> &#x3D; d<sub>Receiver</sub>）则半影直接为0，失去了计算的意义。</p><p>解决此问题可以对 Shadow Map 进行一定范围内的采样，若得到的深度小于 d<sub>Receiver</sub> 则认为碰到了遮挡物，并将其算入平均遮挡深度，采样后的平均深度就可以作为 d<sub>Blocker</sub>。</p><p>算法过程：</p><ol><li><p>Blocker search</p><p>在某个区域内计算平均遮挡深度d</p></li><li><p>Penumbra estimation</p><p>通过计算出来的平均遮挡深度来计算半影的大小</p></li><li><p>Percentage Closer Filtering</p><p>根据半影动态确定不同区域的采样范围，然后以此计算 PCF</p></li></ol><p><strong>参考</strong>：</p><ul><li><a href="https://www.amazon.com/Computer-Graphics-Programming-OpenGL-Second-ebook-dp-B08QTZYVR4/dp/B08QTZYVR4/ref=dp_ob_title_bk" target="_blank" rel="noopener">Computer Graphics Programming in OpenGL with C++ </a></li><li><a href="https://learnopengl-cn.github.io/05%20Advanced%20Lighting/03%20Shadows/01%20Shadow%20Mapping/#_3" target="_blank" rel="noopener">Learn OpenGL CN</a></li><li><a href="https://banbao991.github.io/2021/06/18/CG/Algorithm/SM-PCF-PCSS-VSM/" target="_blank" rel="noopener">阴影算法的实现—by Banbao</a></li><li><a href="https://www.bilibili.com/video/BV1YK4y1T7yY/?from=search&seid=13431147034867826515&spm_id_from=333.337.0.0&vd_source=aec47f6b52af3774b903cb0d25607f6c" target="_blank" rel="noopener">GAMES 202-高质量实时渲染</a></li></ul>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;&lt;em&gt;&lt;/em&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="Graphics" scheme="https://zweireverberate.icu/tags/Graphics/"/>
+    
+  </entry>
   
   <entry>
     <title>C++ IO</title>
