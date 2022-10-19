@@ -17,16 +17,18 @@
 <link rel="stylesheet" href="/css/highlight.css">
 
   
-  <meta property="og:type" content="article">
+  <meta name="description" content="坐标变换通常在渲染管线的顶点着色器中进行，而坐标变换并非一蹴而就的，而是一个分阶段的过程。输入顶点着色器的顶点数据中包含了位置，颜色，纹理坐标，法线等诸多信息，其中位置信息是局部坐标 (Local Coordinate)。局部坐标需要先经过模型矩阵 Model 变换到世界坐标 (World Coordinate)，再经过观察矩阵 View  变换到观察坐标 (View Coordinate)，观察">
+<meta property="og:type" content="article">
 <meta property="og:title" content="图形学中的坐标变换">
 <meta property="og:url" content="https://zweireverberate.icu/2022/04/01/%E5%9B%BE%E5%BD%A2%E5%AD%A6%E4%B8%AD%E7%9A%84%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2/index.html">
 <meta property="og:site_name" content="Zwei&#39;s Blog">
+<meta property="og:description" content="坐标变换通常在渲染管线的顶点着色器中进行，而坐标变换并非一蹴而就的，而是一个分阶段的过程。输入顶点着色器的顶点数据中包含了位置，颜色，纹理坐标，法线等诸多信息，其中位置信息是局部坐标 (Local Coordinate)。局部坐标需要先经过模型矩阵 Model 变换到世界坐标 (World Coordinate)，再经过观察矩阵 View  变换到观察坐标 (View Coordinate)，观察">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://www.helloimg.com/images/2022/04/01/RJLk3C.jpg">
 <meta property="og:image" content="https://www.helloimg.com/images/2022/04/01/RJLrlQ.jpg">
 <meta property="og:image" content="https://www.helloimg.com/images/2022/04/01/RJLUrS.jpg">
 <meta property="article:published_time" content="2022-04-01T15:34:45.000Z">
-<meta property="article:modified_time" content="2022-04-01T15:37:15.690Z">
+<meta property="article:modified_time" content="2022-10-19T15:30:56.023Z">
 <meta property="article:author" content="Zwei">
 <meta property="article:tag" content="Graphics">
 <meta name="twitter:card" content="summary">
@@ -82,9 +84,9 @@
     <div class="article-entry" itemprop="articleBody">
       
       
-        <p><em><a id="more"></a></em></p>
-<p>坐标变换通常在渲染管线的顶点着色器中进行，而坐标变换并非一蹴而就的，而是一个分阶段的过程。输入顶点着色器的顶点数据中包含了位置，颜色，纹理坐标，法线等诸多信息，其中位置信息是局部坐标 (Local Coordinate)。局部坐标需要先经过模型矩阵 Model 变换到世界坐标 (World Coordinate)，再经过观察矩阵 View  变换到观察坐标 (View Coordinate)，观察坐标需要经过投影矩阵 Projection 变换到裁剪坐标 (Clip Coordinate)，裁剪坐标经过透视除法 (Perspective Division) [也称为齐次除法] 得到标准设备空间坐标 (Normalized Device Coordinates, NDC)，NDC 坐标经过视口变换 (Viewport Transformation) 才能变换到屏幕坐标让屏幕能够显示。</p>
+        <p>坐标变换通常在渲染管线的顶点着色器中进行，而坐标变换并非一蹴而就的，而是一个分阶段的过程。输入顶点着色器的顶点数据中包含了位置，颜色，纹理坐标，法线等诸多信息，其中位置信息是局部坐标 (Local Coordinate)。局部坐标需要先经过模型矩阵 Model 变换到世界坐标 (World Coordinate)，再经过观察矩阵 View  变换到观察坐标 (View Coordinate)，观察坐标需要经过投影矩阵 Projection 变换到裁剪坐标 (Clip Coordinate)，裁剪坐标经过透视除法 (Perspective Division) [也称为齐次除法] 得到标准设备空间坐标 (Normalized Device Coordinates, NDC)，NDC 坐标经过视口变换 (Viewport Transformation) 才能变换到屏幕坐标让屏幕能够显示。</p>
 <p>在上述过程中，顶点着色器完成了哪些步骤呢？关于这一点似乎有几种不同的说法，较为普遍的做法是在顶点着色器中仅完成 MVP 变换，让顶点着色器输出裁剪坐标，透视除法和视口变换在后续的流程中完成，我自己在编码实践中也是采取的这种做法，但一定要保证到光栅化阶段时，输入的是屏幕坐标。</p>
+<p><em><a id="more"></a></em></p>
 <h6 id="1-模型变换"><a href="#1-模型变换" class="headerlink" title="1. 模型变换"></a>1. 模型变换</h6><p>我们将最开始得到的顶点数据中的位置信息视作局部空间中的位置，即各顶点相对于物体原点的位置，每个独立的物体都有自己独立的一个局部坐标系。<br>模型变换的任务就是将局部空间中的各个顶点位置变换到一个统一的世界坐标系下，这个世界坐标系仅有一个原点。为了方便讨论，我们不妨认为我们使用的是一个常用的右手坐标系：x 轴的正方向指向右边，y 轴的正方向指向上方，z 轴的正方向指向屏幕外。<br>值得注意的是，我们有时候需要需要在顶点着色器中计算顶点的光照信息，这种着色方式称为高洛德着色 (Gouraud Shading)。此方式在顶点着色器中就计算好了顶点的光照信息，在光栅化阶段只需要不断进行插值就可以得到所有片元的光照信息，不过这种着色方式比较不自然，在性能允许的情况下一般不使用。<br>当我们进行光照信息的处理时，一般是在世界坐标系下进行的，这时候对于法线的变换特别要注意。如果只存在平移变换我们无需对法线进行变换，如果只存在平移变换和旋转变换，我们只需要给法线乘上旋转矩阵，但如果有非均匀缩放变换的话，我们则需要使用矩阵的逆的转置来变换法线。</p>
 <p>​    </p>
 <h6 id="2-观察变换"><a href="#2-观察变换" class="headerlink" title="2. 观察变换"></a>2. 观察变换</h6><p>观察坐标系由一个虚拟摄像机定义，虚拟摄像机的位置即是观察坐标系的原点，观察方向沿着观察坐标系 z 轴的负方向。<br>要定义一个虚拟摄像机，需要它在世界空间中的位置，观察的方向，一个指向它右侧的向量和一个指向它上方的向量，当然这三个向量都应是标准化后的单位向量。这三个向量实际上定义了观察坐标系相互垂直的三个坐标轴。<br>摄像机在世界空间中的位置由我们自由给定，然后我们还需要给定一个摄像机的目标点，用摄像机的位置减去目标点的位置得到的向量标准化就可以得到我们观察坐标系的 z 轴的正方向，同时也是与观察方向相反的方向。为方便后文的表述，将其记为 Camera Direction。<br>下一步我们确定一个右向量，即观察坐标系 x 轴的正方向。这里我们可以使用施密特正交化中的一个技巧，先定义一个世界坐标系下的上向量 WorldUp，我们用 WorldUp 叉乘 Camera Direction ，再将得到的结果标准化就得到了我们需要的 Right。<br>最后我们求上向量，即观察坐标系 z 轴的正方向，我们直接用 Camera Direction 与 Right 叉乘即可，因为二者都是单位向量，所以得到的结果 Up 也是单位向量，无需再进行标准化。<br>到此为止，我们的虚拟摄像机和观察坐标系就完全确定了，接着只需要使用观察矩阵 (亦称 LookAt 矩阵) 将物体从世界坐标系转换到观察坐标系中即可。</p>

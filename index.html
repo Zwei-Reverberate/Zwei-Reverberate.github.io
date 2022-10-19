@@ -78,7 +78,9 @@
     <div class="article-entry" itemprop="articleBody">
       
       
-        <p><em></em></p>
+        <p>Course from: </p>
+<p><a href="https://dev.epicgames.com/community/learning/courses/EGR/unreal-engine-an-in-depth-look-at-real-time-rendering/edk/an-in-depth-look-at-real-time-rendering" target="_blank" rel="noopener">An In-Depth Look at Real-Time Rendering</a></p>
+<p><em></em></p>
       
     </div>
     
@@ -156,7 +158,21 @@
     <div class="article-entry" itemprop="articleBody">
       
       
-        <p><em></em></p>
+        <h1 id="1-C-Input-x2F-Output-Library"><a href="#1-C-Input-x2F-Output-Library" class="headerlink" title="1. C++ Input &#x2F; Output Library"></a>1. C++ Input &#x2F; Output Library</h1><p>C++ 借由标准库来处理输入输出。</p>
+<p>特点：</p>
+<ul>
+<li><p>类型安全</p>
+<blockquote>
+<p>IO operations are defined for each of the type. If IO operations are not defined for a particular type, compiler will generate an error.</p>
+</blockquote>
+</li>
+<li><p>基于 streams of bytes 且设备无关</p>
+<blockquote>
+<p>The same set of operations can be appiled to different types of IO devices</p>
+</blockquote>
+</li>
+</ul>
+<p><em></em></p>
       
     </div>
     
@@ -195,7 +211,14 @@
     <div class="article-entry" itemprop="articleBody">
       
       
-        <p><em></em></p>
+        <h3 id="1-std-numeric-limits"><a href="#1-std-numeric-limits" class="headerlink" title="1. std::numeric_limits"></a>1. std::numeric_limits</h3><p>C++ 标准库用 template numeric_limits 提供各种数值类型的极值。如需使用需要包含 &lt; limits&gt; 头文件。</p>
+<p>实际上，numeric_limits 并不仅仅提供最大最小值：</p>
+<blockquote>
+<p><em>The <code>numeric_limits</code> class template provides a standardized way to query various properties of arithmetic types.</em> </p>
+</blockquote>
+<p>而是提供了一种标准化的方式来查询数值类型的各种属性（摘自<a href="https://en.cppreference.com/w/cpp/types/numeric_limits" target="_blank" rel="noopener">cppreference</a>），而最大最小值只是诸多属性中的一种。</p>
+<p>相比于传统 C 语言所使用的预处理常量（如 INT_MIN, INT_MAX, FLT_MAX…），新的极值概念有更好的类型安全性，因此提倡使用这种写法。</p>
+<p><em></em></p>
       
     </div>
     
@@ -273,7 +296,9 @@
     <div class="article-entry" itemprop="articleBody">
       
       
-        <p><em></em></p>
+        <p>坐标变换通常在渲染管线的顶点着色器中进行，而坐标变换并非一蹴而就的，而是一个分阶段的过程。输入顶点着色器的顶点数据中包含了位置，颜色，纹理坐标，法线等诸多信息，其中位置信息是局部坐标 (Local Coordinate)。局部坐标需要先经过模型矩阵 Model 变换到世界坐标 (World Coordinate)，再经过观察矩阵 View  变换到观察坐标 (View Coordinate)，观察坐标需要经过投影矩阵 Projection 变换到裁剪坐标 (Clip Coordinate)，裁剪坐标经过透视除法 (Perspective Division) [也称为齐次除法] 得到标准设备空间坐标 (Normalized Device Coordinates, NDC)，NDC 坐标经过视口变换 (Viewport Transformation) 才能变换到屏幕坐标让屏幕能够显示。</p>
+<p>在上述过程中，顶点着色器完成了哪些步骤呢？关于这一点似乎有几种不同的说法，较为普遍的做法是在顶点着色器中仅完成 MVP 变换，让顶点着色器输出裁剪坐标，透视除法和视口变换在后续的流程中完成，我自己在编码实践中也是采取的这种做法，但一定要保证到光栅化阶段时，输入的是屏幕坐标。</p>
+<p><em></em></p>
       
     </div>
     

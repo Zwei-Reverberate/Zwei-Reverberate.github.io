@@ -17,14 +17,16 @@
 <link rel="stylesheet" href="/css/highlight.css">
 
   
-  <meta property="og:type" content="article">
+  <meta name="description" content="1. C++ Input &#x2F; Output LibraryC++ 借由标准库来处理输入输出。 特点：  类型安全  IO operations are defined for each of the type. If IO operations are not defined for a particular type, compiler will generate an error.">
+<meta property="og:type" content="article">
 <meta property="og:title" content="C++ IO">
 <meta property="og:url" content="https://zweireverberate.icu/2022/09/29/C-IO/index.html">
 <meta property="og:site_name" content="Zwei&#39;s Blog">
+<meta property="og:description" content="1. C++ Input &#x2F; Output LibraryC++ 借由标准库来处理输入输出。 特点：  类型安全  IO operations are defined for each of the type. If IO operations are not defined for a particular type, compiler will generate an error.">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://www.helloimg.com/images/2022/09/16/Z6tWkq.png">
 <meta property="article:published_time" content="2022-09-28T17:17:37.000Z">
-<meta property="article:modified_time" content="2022-09-28T17:20:24.418Z">
+<meta property="article:modified_time" content="2022-10-19T15:29:45.274Z">
 <meta property="article:author" content="Zwei">
 <meta property="article:tag" content="C Plus Plus">
 <meta name="twitter:card" content="summary">
@@ -80,8 +82,7 @@
     <div class="article-entry" itemprop="articleBody">
       
       
-        <p><em><a id="more"></a></em></p>
-<h1 id="1-C-Input-x2F-Output-Library"><a href="#1-C-Input-x2F-Output-Library" class="headerlink" title="1. C++ Input &#x2F; Output Library"></a>1. C++ Input &#x2F; Output Library</h1><p>C++ 借由标准库来处理输入输出。</p>
+        <h1 id="1-C-Input-x2F-Output-Library"><a href="#1-C-Input-x2F-Output-Library" class="headerlink" title="1. C++ Input &#x2F; Output Library"></a>1. C++ Input &#x2F; Output Library</h1><p>C++ 借由标准库来处理输入输出。</p>
 <p>特点：</p>
 <ul>
 <li><p>类型安全</p>
@@ -95,6 +96,7 @@
 </blockquote>
 </li>
 </ul>
+<p><em><a id="more"></a></em></p>
 <h1 id="2-Stream"><a href="#2-Stream" class="headerlink" title="2. Stream"></a>2. Stream</h1><p>C++ IO 基于 stream。</p>
 <p>Stream 是流入和流出程序的字节序列。在输入操作中，data bytes 从输入源 (如键盘，文件，网络或其他程序) 流入程序，在输出操作中，data bytes 从程序流向输出接收器 (如控制台，文件，网络或其他程序)。</p>
 <p>Stream 充当程序和实际 IO 设备之间的中介，这样程序员就可以专注于处理 IO，而不必处理实际设备。</p>
