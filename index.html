@@ -78,7 +78,8 @@
     <div class="article-entry" itemprop="articleBody">
       
       
-        <h1 id="1-预备知识"><a href="#1-预备知识" class="headerlink" title="1. 预备知识"></a>1. 预备知识</h1><h3 id="1-Main-函式"><a href="#1-Main-函式" class="headerlink" title="1. Main 函式"></a>1. Main 函式</h3><p>所有的 C++ 程序都必须包含一个 <code>main</code> 函式，否则编译器会报错。（动态链接库和静态库没有 <code>mian</code> 函式）。</p>
+        <p>本篇笔记源自 <a href="https://book.douban.com/subject/26386925/" target="_blank" rel="noopener">C++ 并发编程实战</a></p>
+<h1 id="1-预备知识"><a href="#1-预备知识" class="headerlink" title="1. 预备知识"></a>1. 预备知识</h1><h3 id="1-Main-函式"><a href="#1-Main-函式" class="headerlink" title="1. Main 函式"></a>1. Main 函式</h3><p>所有的 C++ 程序都必须包含一个 <code>main</code> 函式，否则编译器会报错。（动态链接库和静态库没有 <code>mian</code> 函式）。</p>
 <p><code>main</code> 函式是源代码开始执行的地方，但在进入 <code>mian</code> 函式子之前，所有没有显式初始化的静态类成员都被设置为0了。在 Microsoft C++ 中全局的静态对象也在进入 <code>main</code> 之前被初始化。</p>
 <p><code>main</code> 所受的限定：</p>
 <ul>

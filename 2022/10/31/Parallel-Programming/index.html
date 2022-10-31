@@ -17,16 +17,16 @@
 <link rel="stylesheet" href="/css/highlight.css">
 
   
-  <meta name="description" content="1. 预备知识1. Main 函式所有的 C++ 程序都必须包含一个 main 函式，否则编译器会报错。（动态链接库和静态库没有 mian 函式）。 main 函式是源代码开始执行的地方，但在进入 mian 函式子之前，所有没有显式初始化的静态类成员都被设置为0了。在 Microsoft C++ 中全局的静态对象也在进入 main 之前被初始化。 main 所受的限定：  不能被重载 不能被声明为">
+  <meta name="description" content="本篇笔记源自 C++ 并发编程实战 1. 预备知识1. Main 函式所有的 C++ 程序都必须包含一个 main 函式，否则编译器会报错。（动态链接库和静态库没有 mian 函式）。 main 函式是源代码开始执行的地方，但在进入 mian 函式子之前，所有没有显式初始化的静态类成员都被设置为0了。在 Microsoft C++ 中全局的静态对象也在进入 main 之前被初始化。 main 所受">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Parallel Programming">
 <meta property="og:url" content="https://zweireverberate.icu/2022/10/31/Parallel-Programming/index.html">
 <meta property="og:site_name" content="Zwei&#39;s Blog">
-<meta property="og:description" content="1. 预备知识1. Main 函式所有的 C++ 程序都必须包含一个 main 函式，否则编译器会报错。（动态链接库和静态库没有 mian 函式）。 main 函式是源代码开始执行的地方，但在进入 mian 函式子之前，所有没有显式初始化的静态类成员都被设置为0了。在 Microsoft C++ 中全局的静态对象也在进入 main 之前被初始化。 main 所受的限定：  不能被重载 不能被声明为">
+<meta property="og:description" content="本篇笔记源自 C++ 并发编程实战 1. 预备知识1. Main 函式所有的 C++ 程序都必须包含一个 main 函式，否则编译器会报错。（动态链接库和静态库没有 mian 函式）。 main 函式是源代码开始执行的地方，但在进入 mian 函式子之前，所有没有显式初始化的静态类成员都被设置为0了。在 Microsoft C++ 中全局的静态对象也在进入 main 之前被初始化。 main 所受">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://p.qlogo.cn/hy_personal/3e28f14aa05168422c76434ce564692e027357f06cf95350cf25d855f861431d/0.png">
 <meta property="article:published_time" content="2022-10-31T09:47:12.000Z">
-<meta property="article:modified_time" content="2022-10-31T09:48:54.367Z">
+<meta property="article:modified_time" content="2022-10-31T10:06:12.012Z">
 <meta property="article:author" content="Zwei">
 <meta property="article:tag" content="C Plus Plus">
 <meta name="twitter:card" content="summary">
@@ -82,7 +82,8 @@
     <div class="article-entry" itemprop="articleBody">
       
       
-        <h1 id="1-预备知识"><a href="#1-预备知识" class="headerlink" title="1. 预备知识"></a>1. 预备知识</h1><h3 id="1-Main-函式"><a href="#1-Main-函式" class="headerlink" title="1. Main 函式"></a>1. Main 函式</h3><p>所有的 C++ 程序都必须包含一个 <code>main</code> 函式，否则编译器会报错。（动态链接库和静态库没有 <code>mian</code> 函式）。</p>
+        <p>本篇笔记源自 <a href="https://book.douban.com/subject/26386925/" target="_blank" rel="noopener">C++ 并发编程实战</a></p>
+<h1 id="1-预备知识"><a href="#1-预备知识" class="headerlink" title="1. 预备知识"></a>1. 预备知识</h1><h3 id="1-Main-函式"><a href="#1-Main-函式" class="headerlink" title="1. Main 函式"></a>1. Main 函式</h3><p>所有的 C++ 程序都必须包含一个 <code>main</code> 函式，否则编译器会报错。（动态链接库和静态库没有 <code>mian</code> 函式）。</p>
 <p><code>main</code> 函式是源代码开始执行的地方，但在进入 <code>mian</code> 函式子之前，所有没有显式初始化的静态类成员都被设置为0了。在 Microsoft C++ 中全局的静态对象也在进入 <code>main</code> 之前被初始化。</p>
 <p><code>main</code> 所受的限定：</p>
 <ul>
