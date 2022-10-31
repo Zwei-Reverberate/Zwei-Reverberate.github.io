@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>位运算 | Zwei&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+    <link rel="icon" href="/avatar-default.png">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+  
+  <meta name="description" content="计算机中的所有数据都以二进制的方式存储，位运算直接对整数在内存中的二进制位进行操作，执行效率很高。（一般不对浮点数作位运算和移位运算，因为它的 bits 有特殊含义） 1. 位操作符要在逻辑上使用位操作符，先将整数转换成二进制表示    符号 描述 规则    &amp; 与 两位都为1时为1   | 或 两位都为0时为0   ^ 异或 两位相同为0，相异为1   ~ 取反 各位0变1，1变0">
+<meta property="og:type" content="article">
+<meta property="og:title" content="位运算">
+<meta property="og:url" content="https://zweireverberate.icu/2022/10/31/%E4%BD%8D%E8%BF%90%E7%AE%97/index.html">
+<meta property="og:site_name" content="Zwei&#39;s Blog">
+<meta property="og:description" content="计算机中的所有数据都以二进制的方式存储，位运算直接对整数在内存中的二进制位进行操作，执行效率很高。（一般不对浮点数作位运算和移位运算，因为它的 bits 有特殊含义） 1. 位操作符要在逻辑上使用位操作符，先将整数转换成二进制表示    符号 描述 规则    &amp; 与 两位都为1时为1   | 或 两位都为0时为0   ^ 异或 两位相同为0，相异为1   ~ 取反 各位0变1，1变0">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-10-31T05:24:55.000Z">
+<meta property="article:modified_time" content="2022-10-31T05:29:04.844Z">
+<meta property="article:author" content="Zwei">
+<meta property="article:tag" content="C Plus Plus">
+<meta name="twitter:card" content="summary"><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Zwei's Blog" type="application/atom+xml">
+</head>
+
+<body>
+  <div id="wrapper">
+    <header id="header">
+  <h1 id="title">
+    <a href="/">Zwei&#39;s Blog</a>
+  </h1>
+  <nav>
+    
+    
+      
+      <a class="nav-link" href="/">Home</a>
+    
+      
+        <span class="nav-spacer">×</span>
+      
+      <a class="nav-link" href="/archives">Archives</a>
+    
+      
+        <span class="nav-spacer">×</span>
+      
+      <a class="nav-link" href="/about">About</a>
+    
+    
+  </nav>
+</header>
+
+    <div id="content">
+      <article id="post-位运算" class="article article-type-post" itemprop="blogPost" itemscope>
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 class="article-title" itemprop="headline name">
+      位运算
+    </h2>
+  
+
+
+        <div class="article-meta">
+          <time class="article-date" datetime="2022-10-31T05:24:55.000Z" itemprop="datePublished">2022-10-31</time>
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        <p>计算机中的所有数据都以二进制的方式存储，位运算直接对<strong>整数</strong>在内存中的二进制位进行操作，执行效率很高。（一般不对浮点数作位运算和移位运算，因为它的 bits 有特殊含义）</p>
+<h3 id="1-位操作符"><a href="#1-位操作符" class="headerlink" title="1. 位操作符"></a>1. 位操作符</h3><p>要在逻辑上使用位操作符，先将整数转换成二进制表示</p>
+<table>
+<thead>
+<tr>
+<th align="center">符号</th>
+<th align="center">描述</th>
+<th align="center">规则</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>&amp;</code></td>
+<td align="center">与</td>
+<td align="center">两位都为1时为1</td>
+</tr>
+<tr>
+<td align="center">|</td>
+<td align="center">或</td>
+<td align="center">两位都为0时为0</td>
+</tr>
+<tr>
+<td align="center"><code>^</code></td>
+<td align="center">异或</td>
+<td align="center">两位相同为0，相异为1</td>
+</tr>
+<tr>
+<td align="center"><code>~</code></td>
+<td align="center">取反</td>
+<td align="center">各位0变1，1变0</td>
+</tr>
+<tr>
+<td align="center"><code>&lt;&lt;</code></td>
+<td align="center">左移</td>
+<td align="center">向左进行移位操作，高位丢弃，低位补 0</td>
+</tr>
+<tr>
+<td align="center"><code>&gt;&gt;</code></td>
+<td align="center">右移</td>
+<td align="center">向右进行移位操作，对无符号数，高位补 0。对于有符号数，高位补符号位（算术右移）</td>
+</tr>
+</tbody></table>
+<p>(*注：有的编译器对有符号数的右移是补0，即逻辑右移)</p>
+<p><em><a id="more"></a></em></p>
+<p>测试代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将一个数转换为二进制表示，并以 string 类型返回</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">to_binary_string</span><span class="params">(<span class="keyword">const</span> T&amp; num)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">// 默认8位表示</span></span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">int</span> n = <span class="number">8</span>;</span><br><span class="line">	<span class="built_in">string</span> binary = <span class="built_in">std</span>::<span class="built_in">bitset</span>&lt;n&gt;(num).to_string();</span><br><span class="line">	<span class="keyword">return</span> binary;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"../TestProject/Utility.h"</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> a = <span class="number">24</span>;</span><br><span class="line">	<span class="keyword">int</span> b = <span class="number">47</span>;</span><br><span class="line">	<span class="keyword">int</span> c = <span class="number">-27</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//cout &lt;&lt; to_binary_string(a) &lt;&lt; endl;</span></span><br><span class="line">	<span class="comment">//cout &lt;&lt; to_binary_string(b) &lt;&lt; endl;</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; to_binary_string(c) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//cout &lt;&lt; to_binary_string(a &amp; b) &lt;&lt; endl;</span></span><br><span class="line">	<span class="comment">//cout &lt;&lt; to_binary_string(a | b) &lt;&lt; endl;</span></span><br><span class="line">	<span class="comment">//cout &lt;&lt; to_binary_string(a ^ b) &lt;&lt; endl;</span></span><br><span class="line">	<span class="comment">//cout &lt;&lt; to_binary_string(~a) &lt;&lt; endl;</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//cout &lt;&lt; to_binary_string(a &lt;&lt; 2) &lt;&lt; endl;</span></span><br><span class="line">	<span class="comment">//cout &lt;&lt; to_binary_string(a &gt;&gt; 2) &lt;&lt; endl;</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; to_binary_string(c &lt;&lt; <span class="number">2</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; to_binary_string(c &gt;&gt; <span class="number">2</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    </span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-常见用途"><a href="#2-常见用途" class="headerlink" title="2. 常见用途"></a>2. 常见用途</h3><h5 id="1-与运算"><a href="#1-与运算" class="headerlink" title="1. 与运算"></a>1. 与运算</h5><ol>
+<li><p>清零</p>
+<p>若想将一个单元清零，只需要和0相&amp;，结果为0</p>
+</li>
+<li><p>取一个数的指定位</p>
+<p>比如取数 X&#x3D;1010 1110 的低4位，只需要另找一个数Y，令Y的低4位为1，其余位为0，即Y&#x3D;0000 1111，然后将X与Y进行按位与运算（X&amp;Y&#x3D;0000 1110）即可得到X的指定位</p>
+</li>
+<li><p>判断奇偶</p>
+<p>只要根据最未位是0还是1来决定，为0就是偶数，为1就是奇数。因此可以用if ((a &amp; 1) &#x3D;&#x3D; 0)代替if (a % 2 &#x3D;&#x3D; 0)来判断a是不是偶数</p>
+</li>
+</ol>
+<h5 id="2-异或运算"><a href="#2-异或运算" class="headerlink" title="2. 异或运算"></a>2. 异或运算</h5><blockquote>
+<p>异或的性质：</p>
+<ul>
+<li>交换律</li>
+<li>结合律：<code>(a^b)^c == a^(b^c)</code></li>
+<li>对于任何数x，都有 <code>x^x=0，x^0=x</code></li>
+</ul>
+</blockquote>
+<ol>
+<li><p>翻转指定位</p>
+<p>比如将数 X&#x3D;1010 1110 的低4位进行翻转，只需要另找一个数Y，令Y的低4位为1，其余位为0，即Y&#x3D;0000 1111，然后将X与Y进行异或运算（X^Y&#x3D;1010 0001）即可得到</p>
+</li>
+<li><p>与0相异或值不变</p>
+</li>
+<li><p>交换两个数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span> &amp;a, <span class="keyword">int</span> &amp;b)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  a ^= b;</span><br><span class="line">  b ^= a;</span><br><span class="line">  a ^= b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h5 id="3-取反运算"><a href="#3-取反运算" class="headerlink" title="3. 取反运算"></a>3. 取反运算</h5><ol>
+<li><p>交换符号</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">reveral</span><span class="params">(<span class="keyword">int</span> a)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> ~a + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>整数取反加一，正好变成其对应的负数（补码表示）；负数取反加一，正好变成其原码，即正数</p>
+</li>
+<li><p>求绝对值</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">abs</span><span class="params">(<span class="keyword">int</span> a)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i &gt;&gt; <span class="number">31</span>; <span class="comment">// 正数右移31位得到0，负数右移31位得到-1</span></span><br><span class="line">    <span class="keyword">return</span> ((a^i) - i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>若 a &gt; 0，那么 i &#x3D; 0，(a ^ i) - i &#x3D; 0；</p>
+<p>若 a &lt; 0，那么 i &#x3D; -1，而 -1 的二进制表示是 11111111，((a ^ -1)  - i) 相当于取反加一</p>
+</li>
+</ol>
+<h5 id="4-移位运算"><a href="#4-移位运算" class="headerlink" title="4. 移位运算"></a>4. 移位运算</h5><p>对于无符号数或正数来说，&lt;&lt; n 相当于将数字乘以2 ^ n，&gt;&gt; n 相当于将数字除以2 ^ n。</p>
+
+      
+    </div>
+    
+    
+    <div class="article-category">
+      
+      
+      
+        <b>Tags:</b>
+        <a class="article-tag-link" href="/tags/C-Plus-Plus/" rel="tag">C Plus Plus</a>
+      
+    </div>
+    
+    
+  </div>
+</article>
+
+  
+<nav id="article-nav" class="article-nav">
+  
+    <span id="article-nav-newer" class="article-nav-link-wrap newer"></span>
+  
+  
+    <a href="/2022/10/28/Ray-Tracing/" id="article-nav-older" class="article-nav-link-wrap older">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">
+        
+          Ray Tracing
+        
+      </div>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+    </div>
+  </div>
+  
+
+
+
+
+<div id="settings-container">
+  <div id="dark-mode">dark</div>
+  <div id="sans-font">sans</div>
+</div>
+<script type="text/javascript">
+let d=document,r=d.documentElement.style,f=r.setProperty.bind(r),l=localStorage,s=l.getItem('s')||(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches),n=l.getItem('n'),m=d.getElementById("dark-mode"),b=()=>{f('--bg-color','#fafafa');f('--code-bg-color','#f4f4f4');f('--text-color','#212121');f('--secondary-color','#808080');f('--tertiary-color','#b0b0b0');f('--link-color','#b5c8cf');f('--link-hover-color','#618794');f('--link-bg-color','#dae4e7');f('--selection-color','#dae4e7');m.innerHTML="dark"},c=()=>{f('--bg-color','#212121');f('--code-bg-color','#292929');f('--text-color','#fff');f('--secondary-color','#c0c0c0');f('--tertiary-color','#6e6e6e');f('--link-color','#4d6b75');f('--link-hover-color','#96b1bb');f('--link-bg-color','#5d828e');f('--selection-color','#acc1c9');m.innerHTML="light"},o=d.getElementById("sans-font"),e=()=>{f('--body-stack','"Lora", "Georgia", "Times New Roman", serif');o.innerHTML="sans"},g=()=>{f('--body-stack','"Lato", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "Verdana", sans-serif');o.innerHTML="serif"};m.onclick=()=>{if(s==2){s=1;l.setItem('s',s);c()}else{s=2;l.setItem('s',s);b()}};o.onclick=()=>{if(n==2){n=1;l.setItem('n',n);g()}else{n=2;l.setItem('n',n);e()}};if(!s){s=2;l.setItem('s',2)};if(s==1){c()};if(!n){n=2;l.setItem('n',2)};if(n==1){g()};
+</script>
+
+
+
+
+</body>
+</html>
