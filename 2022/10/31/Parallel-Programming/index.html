@@ -24,13 +24,13 @@
 <meta property="og:site_name" content="Zwei&#39;s Blog">
 <meta property="og:description" content="本篇笔记源自 C++ 并发编程实战 1. 预备知识1. Main 函式所有的 C++ 程序都必须包含一个 main 函式，否则编译器会报错。（动态链接库和静态库没有 mian 函式）。 main 函式是源代码开始执行的地方，但在进入 mian 函式子之前，所有没有显式初始化的静态类成员都被设置为0了。在 Microsoft C++ 中全局的静态对象也在进入 main 之前被初始化。 main 所受">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://p.qlogo.cn/hy_personal/3e28f14aa05168422c76434ce564692e027357f06cf95350cf25d855f861431d/0.png">
+<meta property="og:image" content="https://www.helloimg.com/images/2022/11/06/ZfF416.jpg">
 <meta property="article:published_time" content="2022-10-31T09:47:12.000Z">
-<meta property="article:modified_time" content="2022-10-31T10:06:12.012Z">
+<meta property="article:modified_time" content="2022-11-06T04:59:28.145Z">
 <meta property="article:author" content="Zwei">
 <meta property="article:tag" content="C Plus Plus">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://p.qlogo.cn/hy_personal/3e28f14aa05168422c76434ce564692e027357f06cf95350cf25d855f861431d/0.png"><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Zwei's Blog" type="application/atom+xml">
+<meta name="twitter:image" content="https://www.helloimg.com/images/2022/11/06/ZfF416.jpg"><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Zwei's Blog" type="application/atom+xml">
 </head>
 
 <body>
@@ -109,7 +109,7 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"The count of parameter: "</span> &lt;&lt; argc &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; argc; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"The order of parameter: "</span> &lt;&lt; i &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"The value of parameter: "</span> &lt;&lt; argv[i] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (argv[argc] == <span class="literal">nullptr</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"argv[argc] = nullptr"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>在命名行中执行这个程序，得到的结果如下：</p>
-<img src="https://p.qlogo.cn/hy_personal/3e28f14aa05168422c76434ce564692e027357f06cf95350cf25d855f861431d/0.png">
+<img src="https://www.helloimg.com/images/2022/11/06/ZfF416.jpg">
 
 <p><code>main</code> 函式还允许第三个参数，同样是一个字符指针数组，用来存放环境变量。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[], <span class="keyword">char</span>* envp[])</span></span>;</span><br></pre></td></tr></table></figure>
