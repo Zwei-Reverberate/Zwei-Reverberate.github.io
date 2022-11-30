@@ -55,6 +55,47 @@
     <div id="content">
       
   
+    <article id="post-An-In-Depth-Look-at-Real-Time-Rendering" class="article article-type-post" itemprop="blogPost" itemscope>
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 class="article-title" itemprop="name">
+      <a href="/2022/10/18/An-In-Depth-Look-at-Real-Time-Rendering/">An In-Depth Look at Real-Time Rendering</a>
+      
+    </h2>
+  
+
+
+        <div class="article-meta">
+          <time class="article-date" datetime="2022-10-18T09:32:27.000Z" itemprop="datePublished">2022-10-18</time>
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        <p>Course from: </p>
+<p><a href="https://dev.epicgames.com/community/learning/courses/EGR/unreal-engine-an-in-depth-look-at-real-time-rendering/edk/an-in-depth-look-at-real-time-rendering" target="_blank" rel="noopener">An In-Depth Look at Real-Time Rendering</a></p>
+<p><em></em></p>
+      
+    </div>
+    
+      <div class="article-more-link">
+        <a href="/2022/10/18/An-In-Depth-Look-at-Real-Time-Rendering/#more">read more</a>
+      </div>
+    
+    
+    
+  </div>
+</article>
+
+
+
+  
     <article id="post-Real-time-Shadows" class="article article-type-post" itemprop="blogPost" itemscope>
   <div class="article-inner">
     
@@ -232,52 +273,11 @@
 
 
   
-    <article id="post-图形学中的坐标变换" class="article article-type-post" itemprop="blogPost" itemscope>
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 class="article-title" itemprop="name">
-      <a href="/2022/04/01/%E5%9B%BE%E5%BD%A2%E5%AD%A6%E4%B8%AD%E7%9A%84%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2/">图形学中的坐标变换</a>
-      
-    </h2>
-  
-
-
-        <div class="article-meta">
-          <time class="article-date" datetime="2022-04-01T15:34:45.000Z" itemprop="datePublished">2022-04-01</time>
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        <p>坐标变换通常在渲染管线的顶点着色器中进行，而坐标变换并非一蹴而就的，而是一个分阶段的过程。输入顶点着色器的顶点数据中包含了位置，颜色，纹理坐标，法线等诸多信息，其中位置信息是局部坐标 (Local Coordinate)。局部坐标需要先经过模型矩阵 Model 变换到世界坐标 (World Coordinate)，再经过观察矩阵 View  变换到观察坐标 (View Coordinate)，观察坐标需要经过投影矩阵 Projection 变换到裁剪坐标 (Clip Coordinate)，裁剪坐标经过透视除法 (Perspective Division) [也称为齐次除法] 得到标准设备空间坐标 (Normalized Device Coordinates, NDC)，NDC 坐标经过视口变换 (Viewport Transformation) 才能变换到屏幕坐标让屏幕能够显示。</p>
-<p>在上述过程中，顶点着色器完成了哪些步骤呢？关于这一点似乎有几种不同的说法，较为普遍的做法是在顶点着色器中仅完成 MVP 变换，让顶点着色器输出裁剪坐标，透视除法和视口变换在后续的流程中完成，我自己在编码实践中也是采取的这种做法，但一定要保证到光栅化阶段时，输入的是屏幕坐标。</p>
-<p><em></em></p>
-      
-    </div>
-    
-      <div class="article-more-link">
-        <a href="/2022/04/01/%E5%9B%BE%E5%BD%A2%E5%AD%A6%E4%B8%AD%E7%9A%84%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2/#more">read more</a>
-      </div>
-    
-    
-    
-  </div>
-</article>
-
-
-
-  
 
 
   <nav id="page-nav" class="page-nav">
     
-    <a class="extend prev" rel="prev" href="/">« Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/">« Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next »</a>
   </nav>
 
 

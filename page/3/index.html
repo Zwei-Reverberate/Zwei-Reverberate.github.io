@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2022/11 | Zwei&#39;s Blog</title>
+  <title>Zwei&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   
@@ -19,7 +19,7 @@
   
   <meta property="og:type" content="website">
 <meta property="og:title" content="Zwei&#39;s Blog">
-<meta property="og:url" content="https://zweireverberate.icu/archives/2022/11/index.html">
+<meta property="og:url" content="https://zweireverberate.icu/page/3/index.html">
 <meta property="og:site_name" content="Zwei&#39;s Blog">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="Zwei">
@@ -54,69 +54,54 @@
 
     <div id="content">
       
-  <section class="archives-wrap" style="margin-bottom: 0.5em;">
-    <input class="hidden-input" type="checkbox" onClick="tgl(this)" id="toggle-all">
-    <label class="month" for="toggle-all">Toggle all</label>
-  </section>
   
+    <article id="post-图形学中的坐标变换" class="article article-type-post" itemprop="blogPost" itemscope>
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
-  
-    
-    
-    
-      
-      
-      
-      <section class="archives-wrap">
-        <input class="hidden-input" type="checkbox" name="expand" id="expand1">
-        <label class="month" for="expand1">November 2022</label>
-        <div class="archives hidden">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <time class="archive-article-date" datetime="2022-11-30T11:30:13.000Z" itemprop="datePublished">2022-11-30</time>
-
-      
-  
-    <h2 class="archive-article-title" itemprop="name">
-      <a href="/2022/11/30/%E5%B8%B8%E7%94%A8%E7%9A%84-Windows-%E6%8E%A7%E5%88%B6%E5%8F%B0%E5%91%BD%E4%BB%A4/">常用的 Windows 控制台命令</a>
+    <h2 class="article-title" itemprop="name">
+      <a href="/2022/04/01/%E5%9B%BE%E5%BD%A2%E5%AD%A6%E4%B8%AD%E7%9A%84%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2/">图形学中的坐标变换</a>
       
     </h2>
   
 
 
-    </header>
+        <div class="article-meta">
+          <time class="article-date" datetime="2022-04-01T15:34:45.000Z" itemprop="datePublished">2022-04-01</time>
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        <p>坐标变换通常在渲染管线的顶点着色器中进行，而坐标变换并非一蹴而就的，而是一个分阶段的过程。输入顶点着色器的顶点数据中包含了位置，颜色，纹理坐标，法线等诸多信息，其中位置信息是局部坐标 (Local Coordinate)。局部坐标需要先经过模型矩阵 Model 变换到世界坐标 (World Coordinate)，再经过观察矩阵 View  变换到观察坐标 (View Coordinate)，观察坐标需要经过投影矩阵 Projection 变换到裁剪坐标 (Clip Coordinate)，裁剪坐标经过透视除法 (Perspective Division) [也称为齐次除法] 得到标准设备空间坐标 (Normalized Device Coordinates, NDC)，NDC 坐标经过视口变换 (Viewport Transformation) 才能变换到屏幕坐标让屏幕能够显示。</p>
+<p>在上述过程中，顶点着色器完成了哪些步骤呢？关于这一点似乎有几种不同的说法，较为普遍的做法是在顶点着色器中仅完成 MVP 变换，让顶点着色器输出裁剪坐标，透视除法和视口变换在后续的流程中完成，我自己在编码实践中也是采取的这种做法，但一定要保证到光栅化阶段时，输入的是屏幕坐标。</p>
+<p><em></em></p>
+      
+    </div>
+    
+      <div class="article-more-link">
+        <a href="/2022/04/01/%E5%9B%BE%E5%BD%A2%E5%AD%A6%E4%B8%AD%E7%9A%84%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2/#more">read more</a>
+      </div>
+    
+    
+    
   </div>
 </article>
 
+
+
   
+
+
+  <nav id="page-nav" class="page-nav">
     
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <time class="archive-article-date" datetime="2022-10-31T21:02:40.000Z" itemprop="datePublished">2022-11-01</time>
-
-      
-  
-    <h2 class="archive-article-title" itemprop="name">
-      <a href="/2022/11/01/C-Smart-Pointer/">C++ Smart Pointer</a>
-      
-    </h2>
-  
-
-
-    </header>
-  </div>
-</article>
-
-  
-  
-    </div></section>
-  
-
+    <a class="extend prev" rel="prev" href="/page/2/">« Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
 
 
 
@@ -124,10 +109,6 @@
   </div>
   
 
-
-<script type="text/javascript">
-let tgl=(s)=>{x=document.getElementsByName("expand");for(let i=0;i<x.length;i++)x[i].checked=s.checked;}
-</script>
 
 
 
