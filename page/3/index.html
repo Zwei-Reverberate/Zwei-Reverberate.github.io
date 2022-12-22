@@ -55,6 +55,52 @@
     <div id="content">
       
   
+    <article id="post-Numeric-Limit" class="article article-type-post" itemprop="blogPost" itemscope>
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 class="article-title" itemprop="name">
+      <a href="/2022/09/10/Numeric-Limit/">Numeric Limit</a>
+      
+    </h2>
+  
+
+
+        <div class="article-meta">
+          <time class="article-date" datetime="2022-09-10T06:34:53.000Z" itemprop="datePublished">2022-09-10</time>
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        <h3 id="1-std-numeric-limits"><a href="#1-std-numeric-limits" class="headerlink" title="1. std::numeric_limits"></a>1. std::numeric_limits</h3><p>C++ 标准库用 template numeric_limits 提供各种数值类型的极值。如需使用需要包含 &lt; limits&gt; 头文件。</p>
+<p>实际上，numeric_limits 并不仅仅提供最大最小值：</p>
+<blockquote>
+<p><em>The <code>numeric_limits</code> class template provides a standardized way to query various properties of arithmetic types.</em> </p>
+</blockquote>
+<p>而是提供了一种标准化的方式来查询数值类型的各种属性（摘自<a href="https://en.cppreference.com/w/cpp/types/numeric_limits" target="_blank" rel="noopener">cppreference</a>），而最大最小值只是诸多属性中的一种。</p>
+<p>相比于传统 C 语言所使用的预处理常量（如 INT_MIN, INT_MAX, FLT_MAX…），新的极值概念有更好的类型安全性，因此提倡使用这种写法。</p>
+<p><em></em></p>
+      
+    </div>
+    
+      <div class="article-more-link">
+        <a href="/2022/09/10/Numeric-Limit/#more">read more</a>
+      </div>
+    
+    
+    
+  </div>
+</article>
+
+
+
+  
     <article id="post-Git-学习记录" class="article article-type-post" itemprop="blogPost" itemscope>
   <div class="article-inner">
     
