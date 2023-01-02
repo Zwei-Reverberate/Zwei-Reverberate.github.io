@@ -146,12 +146,8 @@
 
 <p>Stream classes 被设计成模板类：</p>
 <p>这是为了支持不同的字符集 (char and wchar_t in C++98&#x2F;03; and char16_t, char32_t introduced in C++11)，这样就可以根据实际的字符类型进行实例化。大多数 stream 模板类接受两个参数，如：</p>
-<pre><code class="c++">template &lt;class charT, class traits = char_traits&lt;charT&gt; &gt;
-class basic_istream;
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">charT</span>, <span class="title">class</span> <span class="title">traits</span> = <span class="title">char_traits</span>&lt;charT&gt; &gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">basic_istream</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">charT</span>, <span class="title">class</span> <span class="title">traits</span> = <span class="title">char_traits</span>&lt;charT&gt; &gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">basic_ostream</span>;</span></span><br></pre></td></tr></table></figure>
 
-template &lt;class charT, class traits = char_traits&lt;charT&gt; &gt;
-class basic_ostream;
-</code></pre>
 <p>其中：</p>
 <ul>
 <li>charT 代表字符类型，如 wchar_t</li>
@@ -159,23 +155,11 @@ class basic_ostream;
 </ul>
 <p>模板实例化和类型重命名：</p>
 <p>模板类 <code>basic_xxx</code> 可以用一个具体的字符进行实例化，比如 char 和 wchar_t。标准库还用 typedef 来重命名这些类：</p>
-<pre><code class="c++">typedef basic_ios&lt;char&gt;           ios;
-typedef basic_ios&lt;wchar_t&gt;        wios;
-typedef basic_istream&lt;char&gt;       istream;
-typedef basic_istream&lt;wchar_t&gt;    wistream;
-typedef basic_ostream&lt;char&gt;       ostream;
-typedef basic_ostream&lt;wchar_t&gt;    wostream;
-typedef basic_iostream&lt;char&gt;      iostream;
-typedef basic_iostream&lt;wchar_t&gt;   wiostream;
-typedef basic_streambuf&lt;char&gt;     streambuf;
-typedef basic_streambuf&lt;wchar_t&gt;  wstreambuf;
-</code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> basic_ios&lt;<span class="keyword">char</span>&gt;           ios;</span><br><span class="line"><span class="keyword">typedef</span> basic_ios&lt;<span class="keyword">wchar_t</span>&gt;        wios;</span><br><span class="line"><span class="keyword">typedef</span> basic_istream&lt;<span class="keyword">char</span>&gt;       istream;</span><br><span class="line"><span class="keyword">typedef</span> basic_istream&lt;<span class="keyword">wchar_t</span>&gt;    wistream;</span><br><span class="line"><span class="keyword">typedef</span> basic_ostream&lt;<span class="keyword">char</span>&gt;       ostream;</span><br><span class="line"><span class="keyword">typedef</span> basic_ostream&lt;<span class="keyword">wchar_t</span>&gt;    wostream;</span><br><span class="line"><span class="keyword">typedef</span> basic_iostream&lt;<span class="keyword">char</span>&gt;      iostream;</span><br><span class="line"><span class="keyword">typedef</span> basic_iostream&lt;<span class="keyword">wchar_t</span>&gt;   wiostream;</span><br><span class="line"><span class="keyword">typedef</span> basic_streambuf&lt;<span class="keyword">char</span>&gt;     streambuf;</span><br><span class="line"><span class="keyword">typedef</span> basic_streambuf&lt;<span class="keyword">wchar_t</span>&gt;  wstreambuf;</span><br></pre></td></tr></table></figure>
+
 <h3 id="2-Stream-对象无拷贝或赋值"><a href="#2-Stream-对象无拷贝或赋值" class="headerlink" title="2. Stream 对象无拷贝或赋值"></a>2. Stream 对象无拷贝或赋值</h3><p>无法对 Stream 对象拷贝和赋值：</p>
-<pre><code class="c++">ofstream out1, out2;
-out1 = out2; // 错误：无法对 stream 对象赋值
-ofstream print(ofstream); // 错误：不能初始化 ofstream 参数
-out2 = print(out2); // 错误：不能拷贝 stream 参数
-</code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ofstream out1, out2;</span><br><span class="line">out1 = out2; <span class="comment">// 错误：无法对 stream 对象赋值</span></span><br><span class="line"><span class="function">ofstream <span class="title">print</span><span class="params">(ofstream)</span></span>; <span class="comment">// 错误：不能初始化 ofstream 参数</span></span><br><span class="line">out2 = <span class="built_in">print</span>(out2); <span class="comment">// 错误：不能拷贝 stream 参数</span></span><br></pre></td></tr></table></figure>
+
 <p>由于无法拷贝 stream 对象，因此我门也不能将形参或返回类型设置为 stream 类型。进行 IO 操作的函数通常以引用的方式传递和返回 stream。读写一个 stream 对象会改变其状态，因此传递和返回的引用不能是 const 的。</p>
 <h3 id="3-Stream-Buffer"><a href="#3-Stream-Buffer" class="headerlink" title="3.  Stream Buffer"></a>3.  Stream Buffer</h3><p>stream 并不直接执行读写操作，而是委托给 stream buffer 完成。</p>
 <p>处理 stream 缓冲区的一般性接口十分简单：</p>
@@ -183,28 +167,12 @@ out2 = print(out2); // 错误：不能拷贝 stream 参数
 <li>rdbuf() 取得一个 pointer 指向某个 stream 的缓冲区</li>
 <li>stream 的构造函数和 rdbuf() 允许在构造时期设立一个 stream 缓冲区，或在 stream 存在期间改变 stream 缓冲区。不论哪种情况，都必须传递一个 pointer 指向 stream 缓冲区，那个 pointer 正是 rdbuf() 所返回</li>
 </ul>
-<pre><code class="c++">#include &lt;iostream&gt;
-#include &lt;fstream&gt;
-int main()
-{
-    // stream for hexadecimal standard output
-    std::ostream hexout(std::cout.rdbuf());
-    hexout.setf(std::ios::hex, std::ios::basefield);
-    hexout.setf(std::ios::showbase);
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">// stream for hexadecimal standard output</span></span><br><span class="line">	<span class="function"><span class="built_in">std</span>::ostream <span class="title">hexout</span><span class="params">(<span class="built_in">std</span>::<span class="built_in">cout</span>.rdbuf())</span></span>;</span><br><span class="line">	hexout.setf(<span class="built_in">std</span>::ios::hex, <span class="built_in">std</span>::ios::basefield);</span><br><span class="line">	hexout.setf(<span class="built_in">std</span>::ios::showbase);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// switch between decimal and hexadecimal output</span></span><br><span class="line">	hexout &lt;&lt; <span class="string">"hexout: "</span> &lt;&lt; <span class="number">177</span> &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"cout: "</span> &lt;&lt; <span class="number">177</span> &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">	hexout &lt;&lt; <span class="string">"hexout: "</span> &lt;&lt; <span class="number">-49</span> &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"cout: "</span> &lt;&lt; <span class="number">-49</span> &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">	hexout &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    // switch between decimal and hexadecimal output
-    hexout &lt;&lt; &quot;hexout: &quot; &lt;&lt; 177 &lt;&lt; &quot; &quot;;
-    std::cout &lt;&lt; &quot;cout: &quot; &lt;&lt; 177 &lt;&lt; &quot; &quot;;
-    hexout &lt;&lt; &quot;hexout: &quot; &lt;&lt; -49 &lt;&lt; &quot; &quot;;
-    std::cout &lt;&lt; &quot;cout: &quot; &lt;&lt; -49 &lt;&lt; &quot; &quot;;
-    hexout &lt;&lt; std::endl;
-    return 0;
-}
-</code></pre>
 <p>在上面的程式中，声明的 ostream 对象 hexout 和标准 ostream 对象共享同一个缓冲区。因为在构建 hexout 时将 cout.rdbuf() 赋予了它，从而实现了 stream 的紧耦合。</p>
 <p>每一个输出流都管理一个缓冲区，用来保存程序读写的数据。例如，如果执行下面的代码：</p>
-<pre><code class="c++">os &lt;&lt; &quot;Please enter a value: &quot;;
-</code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">os &lt;&lt; <span class="string">"Please enter a value: "</span>;</span><br></pre></td></tr></table></figure>
+
 <p>文本串可能立即打印出来，但也有可能被操作系统保存在缓冲区中，随后再打印。有了缓冲机制，操作系统就可以将程序的多个输出操作组合成单一的系统级写操作。由于设备的写操作可能很耗时，所以允许多个输出操作合并可以带来性能上的提升。</p>
 <p>导致缓冲刷新（即，数据真正写到输出设备或文件）的原因有很多：</p>
 <ul>
@@ -223,15 +191,12 @@ int main()
 </li>
 </ul>
 <p>刷新输出缓冲区：</p>
-<pre><code class="c++">std::cout &lt;&lt; &quot;hi!&quot; &lt;&lt; std::endl; // 输出 hi 和一个换行，然后刷新缓冲区
-std::cout &lt;&lt; &quot;hi!&quot; &lt;&lt; std::flush; // 输出 hi，然后刷新缓冲区，不附加任何额外字符
-std::cout &lt;&lt; &quot;hi!&quot; &lt;&lt; std::ends; // 输出 hi 和一个空字符，然后刷新缓冲区
-</code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"hi!"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>; <span class="comment">// 输出 hi 和一个换行，然后刷新缓冲区</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"hi!"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">flush</span>; <span class="comment">// 输出 hi，然后刷新缓冲区，不附加任何额外字符</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"hi!"</span> &lt;&lt; <span class="built_in">std</span>::ends; <span class="comment">// 输出 hi 和一个空字符，然后刷新缓冲区</span></span><br></pre></td></tr></table></figure>
+
 <p>unitbuf 操纵符</p>
 <p>如果想在每次输出操作后都刷新缓冲区，可以使用 unitbuf 操纵符。它告诉流在接下来的每次操作之后都进行一次 flush 操作。而 nounitbuf 操纵符则重置流，使其恢复使用正常的系统管理的缓冲区刷新机制。</p>
-<pre><code class="c++">std::cout &lt;&lt; unitbuf; // 所有输出操作后都会立即刷新缓冲区
-std::cout &lt;&lt; nounitbuf; // 回到正常的缓冲方式
-</code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; unitbuf; <span class="comment">// 所有输出操作后都会立即刷新缓冲区</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; nounitbuf; <span class="comment">// 回到正常的缓冲方式</span></span><br></pre></td></tr></table></figure>
+
 <h3 id="4-标准的-stream-操作符-lt-lt-和-gt-gt"><a href="#4-标准的-stream-操作符-lt-lt-和-gt-gt" class="headerlink" title="4. 标准的 stream 操作符 &lt;&lt; 和 &gt;&gt;"></a>4. 标准的 stream 操作符 &lt;&lt; 和 &gt;&gt;</h3><p>C++ 的操作符 &lt;&lt; 和 &gt;&gt; 分别用于整数中位的左移和右移，然而 basic_istream&lt;&gt; 和 basic_ostream&lt;&gt; 重载了它们，使之称为标准的 stream 操作符。</p>
 <ul>
 <li><p>Output 操作符 &lt;&lt; </p>
@@ -339,38 +304,7 @@ std::cout &lt;&lt; nounitbuf; // 回到正常的缓冲方式
 </ul>
 </li>
 <li><p>使用例</p>
-<pre><code class="c++">// error state flags
-#include &lt;iostream&gt;     // std::cout, std::ios
-#include &lt;sstream&gt;      // std::stringstream
-
-void print_state(const std::ios&amp; stream) 
-{
-    std::cout &lt;&lt; &quot; good()=&quot; &lt;&lt; stream.good();
-    std::cout &lt;&lt; &quot; eof()=&quot; &lt;&lt; stream.eof();
-    std::cout &lt;&lt; &quot; fail()=&quot; &lt;&lt; stream.fail();
-    std::cout &lt;&lt; &quot; bad()=&quot; &lt;&lt; stream.bad();
-}
-
-int main() 
-{
-    std::stringstream stream;
-
-    stream.clear(stream.goodbit);
-    std::cout &lt;&lt; &quot;goodbit:&quot;; print_state(stream); std::cout &lt;&lt; &#39;\n&#39;;
-
-    stream.clear(stream.eofbit);
-    std::cout &lt;&lt; &quot; eofbit:&quot;; print_state(stream); std::cout &lt;&lt; &#39;\n&#39;;
-
-    stream.clear(stream.failbit);
-    std::cout &lt;&lt; &quot;failbit:&quot;; print_state(stream); std::cout &lt;&lt; &#39;\n&#39;;
-
-    stream.clear(stream.badbit);
-    std::cout &lt;&lt; &quot; badbit:&quot;; print_state(stream); std::cout &lt;&lt; &#39;\n&#39;;
-
-    return 0;
-}
-</code></pre>
-</li>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// error state flags</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;     // std::cout, std::ios</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sstream&gt;      // std::stringstream</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print_state</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::ios&amp; stream)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">" good()="</span> &lt;&lt; stream.good();</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">" eof()="</span> &lt;&lt; stream.eof();</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">" fail()="</span> &lt;&lt; stream.fail();</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">" bad()="</span> &lt;&lt; stream.bad();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">stringstream</span> stream;</span><br><span class="line"></span><br><span class="line">	stream.<span class="built_in">clear</span>(stream.goodbit);</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"goodbit:"</span>; print_state(stream); <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line"></span><br><span class="line">	stream.<span class="built_in">clear</span>(stream.eofbit);</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">" eofbit:"</span>; print_state(stream); <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line"></span><br><span class="line">	stream.<span class="built_in">clear</span>(stream.failbit);</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"failbit:"</span>; print_state(stream); <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line"></span><br><span class="line">	stream.<span class="built_in">clear</span>(stream.badbit);</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">" badbit:"</span>; print_state(stream); <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
 <h3 id="7-Unformatted-Input-and-Output-Functions"><a href="#7-Unformatted-Input-and-Output-Functions" class="headerlink" title="7.  Unformatted Input and Output Functions"></a>7.  Unformatted Input and Output Functions</h3><p>如上文所言，stream 操作符 &lt;&lt; 和 &gt;&gt; 用于读&#x2F;写格式化数据。</p>
 <p>而对于无格式 (unformatted) 数据的读写，是由另外的成员函数负责。</p>
@@ -412,22 +346,10 @@ int main()
 <li><p>默认情况下，显示的值的字段宽度刚好足以容纳文本，没有额外的前导或尾随空格</p>
 </li>
 <li><p>对于整数来说，默认情况下将显示所有位数：</p>
-<pre><code class="c++">std::cout &lt;&lt; &quot;|&quot; &lt;&lt; 1 &lt;&lt; &quot;|&quot; &lt;&lt; std::endl;         // |1|
-std::cout &lt;&lt; &quot;|&quot; &lt;&lt; -1 &lt;&lt; &quot;|&quot; &lt;&lt; std::endl;         // |-1|
-std::cout &lt;&lt; &quot;|&quot; &lt;&lt; 123456789 &lt;&lt; &quot;|&quot; &lt;&lt; std::endl;  // |123456789|
-std::cout &lt;&lt; &quot;|&quot; &lt;&lt; -123456789 &lt;&lt; &quot;|&quot; &lt;&lt; std::endl;  // |-123456789|
-</code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"|"</span> &lt;&lt; <span class="number">1</span> &lt;&lt; <span class="string">"|"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;         <span class="comment">// |1|</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"|"</span> &lt;&lt; <span class="number">-1</span> &lt;&lt; <span class="string">"|"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;         <span class="comment">// |-1|</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"|"</span> &lt;&lt; <span class="number">123456789</span> &lt;&lt; <span class="string">"|"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;  <span class="comment">// |123456789|</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"|"</span> &lt;&lt; <span class="number">-123456789</span> &lt;&lt; <span class="string">"|"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;  <span class="comment">// |-123456789|</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>For floating-point numbers, the default <em>precison</em> is 6 digits, except that the trailing zeros will not be shown. This default precision (of 6 digits) include all digits before and after the decimal point, but exclude the leading zeros. Scientific notation (E-notation) will be used if the exponent is 6 or more or -5 or less. In scientific notation, the default precision is also 6 digits; the exponent is displayed in 3 digits with plus&#x2F;minus sign (e.g., +006, -005). For example: </p>
-<pre><code class="c++">std::cout &lt;&lt; &quot;|&quot; &lt;&lt; 1.20000 &lt;&lt; &quot;|&quot; &lt;&lt; std::endl;       // |1.2| (trailing zeros not displayed)
-std::cout &lt;&lt; &quot;|&quot; &lt;&lt; 1.23456 &lt;&lt; &quot;|&quot; &lt;&lt; std::endl;       // |1.23456| (default precision is 6 digits)
-std::cout &lt;&lt; &quot;|&quot; &lt;&lt; -1.23456 &lt;&lt; &quot;|&quot; &lt;&lt; std::endl;      // |-1.23456|
-std::cout &lt;&lt; &quot;|&quot; &lt;&lt; 1.234567 &lt;&lt; &quot;|&quot; &lt;&lt; std::endl;      // |1.23457|
-std::cout &lt;&lt; &quot;|&quot; &lt;&lt; 123456.7 &lt;&lt; &quot;|&quot; &lt;&lt; std::endl;      // |123457|
-std::cout &lt;&lt; &quot;|&quot; &lt;&lt; 1234567.89 &lt;&lt; &quot;|&quot; &lt;&lt; std::endl;    // |1.23457e+006| (scientific-notation for e&gt;=6)
-std::cout &lt;&lt; &quot;|&quot; &lt;&lt; 0.0001234567 &lt;&lt; &quot;|&quot; &lt;&lt; std::endl;  // |0.000123457|  (leading zeros not counted towards precision)
-std::cout &lt;&lt; &quot;|&quot; &lt;&lt; 0.00001234567 &lt;&lt; &quot;|&quot; &lt;&lt; std::endl; // |1.23457e-005| (scientific-notation for e&lt;=-5)
-</code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"|"</span> &lt;&lt; <span class="number">1.20000</span> &lt;&lt; <span class="string">"|"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;       <span class="comment">// |1.2| (trailing zeros not displayed)</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"|"</span> &lt;&lt; <span class="number">1.23456</span> &lt;&lt; <span class="string">"|"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;       <span class="comment">// |1.23456| (default precision is 6 digits)</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"|"</span> &lt;&lt; <span class="number">-1.23456</span> &lt;&lt; <span class="string">"|"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;      <span class="comment">// |-1.23456|</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"|"</span> &lt;&lt; <span class="number">1.234567</span> &lt;&lt; <span class="string">"|"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;      <span class="comment">// |1.23457|</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"|"</span> &lt;&lt; <span class="number">123456.7</span> &lt;&lt; <span class="string">"|"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;      <span class="comment">// |123457|</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"|"</span> &lt;&lt; <span class="number">1234567.89</span> &lt;&lt; <span class="string">"|"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;    <span class="comment">// |1.23457e+006| (scientific-notation for e&gt;=6)</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"|"</span> &lt;&lt; <span class="number">0.0001234567</span> &lt;&lt; <span class="string">"|"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;  <span class="comment">// |0.000123457|  (leading zeros not counted towards precision)</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"|"</span> &lt;&lt; <span class="number">0.00001234567</span> &lt;&lt; <span class="string">"|"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>; <span class="comment">// |1.23457e-005| (scientific-notation for e&lt;=-5)</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>bool values are displayed as 0 or 1 by default, instead of true or false.</p>
 </li>
@@ -442,28 +364,8 @@ std::cout &lt;&lt; &quot;|&quot; &lt;&lt; 0.00001234567 &lt;&lt; &quot;|&quot; &
 </ul>
 <p>默认的 field-width 是 0，即刚好有足够的空间来显示该值。C++ 从不截断数据，如果 field-width 太小，会自动拓展 field。setw() 操作是非粘性的，即只适用于下一次的 IO 操作，操作完成后复位回0。</p>
 <p>使用例：</p>
-<pre><code class="c++">#include &lt;iostream&gt;
-#include &lt;iomanip&gt;
-using namespace std;
-int main()
-{
-    // Test setw() - need &lt;iomanip&gt;
-    cout &lt;&lt; &quot;|&quot; &lt;&lt; setw(5) &lt;&lt; 123 &lt;&lt; &quot;|&quot; &lt;&lt; 123 &lt;&lt; endl;  // |  123|123
-             // setw() is non-sticky. &quot;|&quot; and 123 displayed with default width
-    cout &lt;&lt; &quot;|&quot; &lt;&lt; setw(5) &lt;&lt; -123 &lt;&lt; &quot;|&quot; &lt;&lt; 123 &lt;&lt; endl;        // | -123|123
-             // minus sign is included in field width
-    cout &lt;&lt; &quot;|&quot; &lt;&lt; setw(5) &lt;&lt; 1234567 &lt;&lt; &quot;|&quot; &lt;&lt; endl;     // |1234567|
-             // no truncation of data
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iomanip&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// Test setw() - need &lt;iomanip&gt;</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"|"</span> &lt;&lt; setw(<span class="number">5</span>) &lt;&lt; <span class="number">123</span> &lt;&lt; <span class="string">"|"</span> &lt;&lt; <span class="number">123</span> &lt;&lt; <span class="built_in">endl</span>;  <span class="comment">// |  123|123</span></span><br><span class="line">             <span class="comment">// setw() is non-sticky. "|" and 123 displayed with default width</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"|"</span> &lt;&lt; setw(<span class="number">5</span>) &lt;&lt; <span class="number">-123</span> &lt;&lt; <span class="string">"|"</span> &lt;&lt; <span class="number">123</span> &lt;&lt; <span class="built_in">endl</span>;        <span class="comment">// | -123|123</span></span><br><span class="line">             <span class="comment">// minus sign is included in field width</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"|"</span> &lt;&lt; setw(<span class="number">5</span>) &lt;&lt; <span class="number">1234567</span> &lt;&lt; <span class="string">"|"</span> &lt;&lt; <span class="built_in">endl</span>;     <span class="comment">// |1234567|</span></span><br><span class="line">             <span class="comment">// no truncation of data</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Test setfill() and alignment (left|right|internal)</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; setfill(<span class="string">'_'</span>);   <span class="comment">// Set the fill character (sticky)</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; setw(<span class="number">6</span>) &lt;&lt; <span class="number">123</span> &lt;&lt; setw(<span class="number">4</span>) &lt;&lt; <span class="number">12</span> &lt;&lt; <span class="built_in">endl</span>;      <span class="comment">// ___123__12</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; left;           <span class="comment">// left align (sticky)</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; setw(<span class="number">6</span>) &lt;&lt; <span class="number">123</span> &lt;&lt; setw(<span class="number">4</span>) &lt;&lt; <span class="number">12</span> &lt;&lt; <span class="built_in">endl</span>;      <span class="comment">// 123___12__</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    // Test setfill() and alignment (left|right|internal)
-    cout &lt;&lt; setfill(&#39;_&#39;);   // Set the fill character (sticky)
-    cout &lt;&lt; setw(6) &lt;&lt; 123 &lt;&lt; setw(4) &lt;&lt; 12 &lt;&lt; endl;      // ___123__12
-    cout &lt;&lt; left;           // left align (sticky)
-    cout &lt;&lt; setw(6) &lt;&lt; 123 &lt;&lt; setw(4) &lt;&lt; 12 &lt;&lt; endl;      // 123___12__
-
-    return 0;
-}
-</code></pre>
 <p>internal 使符号左对齐，但数字右对齐。</p>
 <p><strong>Float–point Format (fixed|scientific) and Precision(setprecision)</strong></p>
 <p>ios_base superclass 维护 floating-point precision 和 display format 的数据成员，并提供成员函数（例如 precision()）来操作它们。</p>
@@ -474,44 +376,10 @@ int main()
 </ul>
 <p>浮点数可以以三种模式显示：default | fixed | scientific。</p>
 <p>使用例：</p>
-<pre><code class="c++">#include &lt;iostream&gt;
-#include &lt;iomanip&gt;
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iomanip&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// default floating-point format</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"|"</span> &lt;&lt; <span class="number">123.456789</span> &lt;&lt; <span class="string">"|"</span> &lt;&lt; <span class="built_in">endl</span>;    <span class="comment">// |123.457| (fixed-point format)</span></span><br><span class="line">             <span class="comment">// default precision is 6, i.e., 6 digits before and after the decimal point</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"|"</span> &lt;&lt; <span class="number">1234567.89</span> &lt;&lt; <span class="string">"|"</span> &lt;&lt; <span class="built_in">endl</span>;    <span class="comment">// |1.23457e+006| (scientific-notation for e&gt;=6)</span></span><br><span class="line">             <span class="comment">// default precision is 6, i.e., 6 digits before and after the decimal point</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// showpoint - show trailing zeros in default mode</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; showpoint &lt;&lt; <span class="number">123.</span> &lt;&lt; <span class="string">","</span> &lt;&lt; <span class="number">123.4</span> &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// 123.000,123.400</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; noshowpoint &lt;&lt; <span class="number">123.</span> &lt;&lt; <span class="built_in">endl</span>;               <span class="comment">// 123</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// fixed-point formatting</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; fixed;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"|"</span> &lt;&lt; <span class="number">1234567.89</span> &lt;&lt; <span class="string">"|"</span> &lt;&lt; <span class="built_in">endl</span>;    <span class="comment">// |1234567.890000|</span></span><br><span class="line">             <span class="comment">// default precision is 6, i.e., 6 digits after the decimal point</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// scientific formatting</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; scientific;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"|"</span> &lt;&lt; <span class="number">1234567.89</span> &lt;&lt; <span class="string">"|"</span> &lt;&lt; <span class="built_in">endl</span>;    <span class="comment">// |1.234568e+006|</span></span><br><span class="line">             <span class="comment">// default precision is 6, i.e., 6 digits after the decimal point</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Test precision</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; fixed &lt;&lt; setprecision(<span class="number">2</span>);   <span class="comment">// sticky</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"|"</span> &lt;&lt; <span class="number">123.456789</span> &lt;&lt; <span class="string">"|"</span> &lt;&lt; <span class="built_in">endl</span>;  <span class="comment">// |123.46|</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"|"</span> &lt;&lt; <span class="number">123.</span> &lt;&lt; <span class="string">"|"</span> &lt;&lt; <span class="built_in">endl</span>;        <span class="comment">// |123.00|</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; setprecision(<span class="number">0</span>);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"|"</span> &lt;&lt; <span class="number">123.456789</span> &lt;&lt; <span class="string">"|"</span> &lt;&lt; <span class="built_in">endl</span>;  <span class="comment">// |123|</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-using namespace std;
 
-int main()
-{
-    // default floating-point format
-    cout &lt;&lt; &quot;|&quot; &lt;&lt; 123.456789 &lt;&lt; &quot;|&quot; &lt;&lt; endl;    // |123.457| (fixed-point format)
-             // default precision is 6, i.e., 6 digits before and after the decimal point
-    cout &lt;&lt; &quot;|&quot; &lt;&lt; 1234567.89 &lt;&lt; &quot;|&quot; &lt;&lt; endl;    // |1.23457e+006| (scientific-notation for e&gt;=6)
-             // default precision is 6, i.e., 6 digits before and after the decimal point
 
-    // showpoint - show trailing zeros in default mode
-    cout &lt;&lt; showpoint &lt;&lt; 123. &lt;&lt; &quot;,&quot; &lt;&lt; 123.4 &lt;&lt; endl; // 123.000,123.400
-    cout &lt;&lt; noshowpoint &lt;&lt; 123. &lt;&lt; endl;               // 123
-
-    // fixed-point formatting
-    cout &lt;&lt; fixed;
-    cout &lt;&lt; &quot;|&quot; &lt;&lt; 1234567.89 &lt;&lt; &quot;|&quot; &lt;&lt; endl;    // |1234567.890000|
-             // default precision is 6, i.e., 6 digits after the decimal point
-
-    // scientific formatting
-    cout &lt;&lt; scientific;
-    cout &lt;&lt; &quot;|&quot; &lt;&lt; 1234567.89 &lt;&lt; &quot;|&quot; &lt;&lt; endl;    // |1.234568e+006|
-             // default precision is 6, i.e., 6 digits after the decimal point
-
-    // Test precision
-    cout &lt;&lt; fixed &lt;&lt; setprecision(2);   // sticky
-    cout &lt;&lt; &quot;|&quot; &lt;&lt; 123.456789 &lt;&lt; &quot;|&quot; &lt;&lt; endl;  // |123.46|
-    cout &lt;&lt; &quot;|&quot; &lt;&lt; 123. &lt;&lt; &quot;|&quot; &lt;&lt; endl;        // |123.00|
-
-    cout &lt;&lt; setprecision(0);
-    cout &lt;&lt; &quot;|&quot; &lt;&lt; 123.456789 &lt;&lt; &quot;|&quot; &lt;&lt; endl;  // |123|
-
-    return 0;
-}
-</code></pre>
 <p><strong>Integral Number Base (dec|oct|hex, setbase)</strong></p>
 <p>C++ 支持十进制，十六进制和八进制的 number base。可以使用以下 manipulators (defined in ios_base class, included in &lt; iostream&gt; header) 来操纵 integral number base。</p>
 <ul>
@@ -521,41 +389,17 @@ int main()
 <li><code>uppercase|nouppercase</code>: write uppercase in certain insertion operations, e.g., hex digits. It does not convert characters or strings to uppercase!</li>
 </ul>
 <p>使用例：</p>
-<pre><code class="c++">#include &lt;iostream&gt;
-#include &lt;iomanip&gt;
-using namespace std;
-int main()
-{
-    cout &lt;&lt; 1234 &lt;&lt; endl;        // 1234 (default is dec)
-    cout &lt;&lt; hex &lt;&lt; 1234 &lt;&lt; endl; // 4d2
-    cout &lt;&lt; 1234 &lt;&lt; &quot;,&quot; &lt;&lt; -1234 &lt;&lt; endl; // 4d2,fffffb2e
-                                          // (hex is sticky, negative number in 2&#39;s complement)
-    cout &lt;&lt; oct &lt;&lt; 1234 &lt;&lt; endl;          // 2322
-    cout &lt;&lt; 1234 &lt;&lt; &quot;,&quot; &lt;&lt; -1234 &lt;&lt; endl; // 2322,37777775456
-    cout &lt;&lt; setbase(10) &lt;&lt; 1234 &lt;&lt; endl;  // 1234 (setbase requires &lt;iomanip&gt; header)
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iomanip&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="number">1234</span> &lt;&lt; <span class="built_in">endl</span>;        <span class="comment">// 1234 (default is dec)</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; hex &lt;&lt; <span class="number">1234</span> &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// 4d2</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="number">1234</span> &lt;&lt; <span class="string">","</span> &lt;&lt; <span class="number">-1234</span> &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// 4d2,fffffb2e</span></span><br><span class="line">                                          <span class="comment">// (hex is sticky, negative number in 2's complement)</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; oct &lt;&lt; <span class="number">1234</span> &lt;&lt; <span class="built_in">endl</span>;          <span class="comment">// 2322</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="number">1234</span> &lt;&lt; <span class="string">","</span> &lt;&lt; <span class="number">-1234</span> &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// 2322,37777775456</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; setbase(<span class="number">10</span>) &lt;&lt; <span class="number">1234</span> &lt;&lt; <span class="built_in">endl</span>;  <span class="comment">// 1234 (setbase requires &lt;iomanip&gt; header)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// showbase - show hex with 0x prefix; oct with 0 prefix</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; showbase &lt;&lt; <span class="number">123</span> &lt;&lt; <span class="string">","</span> &lt;&lt; hex &lt;&lt; <span class="number">123</span> &lt;&lt; <span class="string">","</span> &lt;&lt; oct &lt;&lt; <span class="number">123</span> &lt;&lt; <span class="built_in">endl</span>;  <span class="comment">// 123,0x7b,0173</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; noshowbase &lt;&lt; dec;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// showpos - show dec's plus (+) sign</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; showpos &lt;&lt; <span class="number">123</span> &lt;&lt; <span class="built_in">endl</span>;  <span class="comment">// +123</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// uppercase - display in uppercase (e.g., hex digits)</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; uppercase &lt;&lt; hex &lt;&lt; <span class="number">123</span> &lt;&lt; <span class="built_in">endl</span>;  <span class="comment">// 7B</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    // showbase - show hex with 0x prefix; oct with 0 prefix
-    cout &lt;&lt; showbase &lt;&lt; 123 &lt;&lt; &quot;,&quot; &lt;&lt; hex &lt;&lt; 123 &lt;&lt; &quot;,&quot; &lt;&lt; oct &lt;&lt; 123 &lt;&lt; endl;  // 123,0x7b,0173
-    cout &lt;&lt; noshowbase &lt;&lt; dec;
 
-    // showpos - show dec&#39;s plus (+) sign
-    cout &lt;&lt; showpos &lt;&lt; 123 &lt;&lt; endl;  // +123
 
-    // uppercase - display in uppercase (e.g., hex digits)
-    cout &lt;&lt; uppercase &lt;&lt; hex &lt;&lt; 123 &lt;&lt; endl;  // 7B
-
-    return 0;
-}
-</code></pre>
 <p><strong>bool values(boolalpha|noboolalpha)</strong></p>
 <ul>
 <li><strong>boolalpha|noboolalpha</strong>: read&#x2F;write bool value as alphabetic string <code>true</code> or <code>false</code>.</li>
 </ul>
 <p>使用例：</p>
-<pre><code class="c++">// boolalpha - display bool as true/false
-cout &lt;&lt; boolalpha &lt;&lt; false &lt;&lt; &quot;,&quot; &lt;&lt; true &lt;&lt; endl;   // false,true
-cout &lt;&lt; noboolalpha &lt;&lt; false &lt;&lt; &quot;,&quot; &lt;&lt; true &lt;&lt; endl; // 0,1
-</code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// boolalpha - display bool as true/false</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; boolalpha &lt;&lt; <span class="literal">false</span> &lt;&lt; <span class="string">","</span> &lt;&lt; <span class="literal">true</span> &lt;&lt; <span class="built_in">endl</span>;   <span class="comment">// false,true</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; noboolalpha &lt;&lt; <span class="literal">false</span> &lt;&lt; <span class="string">","</span> &lt;&lt; <span class="literal">true</span> &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// 0,1</span></span><br></pre></td></tr></table></figure>
+
 <p><strong>Other manipulators</strong></p>
 <ul>
 <li>skipws|noskipws: skip leading white spaces for certain input operations.</li>
@@ -574,25 +418,11 @@ cout &lt;&lt; noboolalpha &lt;&lt; false &lt;&lt; &quot;,&quot; &lt;&lt; true &l
 <li>通过 &gt;&gt; 运算符或 write(), put() 函数执行 output 操作</li>
 <li>断开连接（关闭文件刷新输出缓冲区）并释放 ostream 对象</li>
 </ol>
-<pre><code class="c++">#include &lt;fstream&gt;
-.......
-ofstream fout;
-fout.open(filename, mode);
-......
-fout.close();
- 
-// OR combine declaration and open()
-ofstream fout(filename, mode);
-</code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line">.......</span><br><span class="line">ofstream fout;</span><br><span class="line">fout.<span class="built_in">open</span>(filename, mode);</span><br><span class="line">......</span><br><span class="line">fout.<span class="built_in">close</span>();</span><br><span class="line"> </span><br><span class="line"><span class="comment">// OR combine declaration and open()</span></span><br><span class="line"><span class="function">ofstream <span class="title">fout</span><span class="params">(filename, mode)</span></span>;</span><br></pre></td></tr></table></figure>
+
 <p>默认情况下，如果文件名不存在，打开输出文件会创建一个新文件。或者截断它（清除其内容），并开始作为空文件写入。</p>
-<pre><code class="c++">void open (const char* filename,
-           ios::openmode mode = ios::in | ios::out);
-   // open() accepts only C-string. For string object, need to use c_str() to get the C-string
- 
-void close ();    // Closes the file, flush the buffer and disconnect from stream object
- 
-bool is_open ();  // Returns true if the file is successfully opened
-</code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">open</span> <span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* filename,</span></span></span><br><span class="line"><span class="function"><span class="params">           ios::openmode mode = ios::in | ios::out)</span></span>;</span><br><span class="line">   <span class="comment">// open() accepts only C-string. For string object, need to use c_str() to get the C-string</span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">close</span> <span class="params">()</span></span>;    <span class="comment">// Closes the file, flush the buffer and disconnect from stream object</span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">is_open</span> <span class="params">()</span></span>;  <span class="comment">// Returns true if the file is successfully opened</span></span><br></pre></td></tr></table></figure>
+
 <h3 id="2-File-Input"><a href="#2-File-Input" class="headerlink" title="2. File Input"></a>2. File Input</h3><p>一般的步骤是：</p>
 <ol>
 <li>构建一个 istream 对象</li>
@@ -600,16 +430,8 @@ bool is_open ();  // Returns true if the file is successfully opened
 <li>通过 &lt;&lt; 运算符或 read(), get(), getline() 函数执行输出操作</li>
 <li>断开连接（关闭文件）并释放 istream 对象</li>
 </ol>
-<pre><code class="c++">#include &lt;fstream&gt;
-.......
-ifstream fin;
-fin.open(filename, mode);
-......
-fin.close();
- 
-// OR combine declaration and open()
-ifstream fin(filename, mode);
-</code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line">.......</span><br><span class="line">ifstream fin;</span><br><span class="line">fin.<span class="built_in">open</span>(filename, mode);</span><br><span class="line">......</span><br><span class="line">fin.<span class="built_in">close</span>();</span><br><span class="line"> </span><br><span class="line"><span class="comment">// OR combine declaration and open()</span></span><br><span class="line"><span class="function">ifstream <span class="title">fin</span><span class="params">(filename, mode)</span></span>;</span><br></pre></td></tr></table></figure>
+
 <h3 id="3-File-Modes"><a href="#3-File-Modes" class="headerlink" title="3. File Modes"></a>3. File Modes</h3><p>每一个文件流都有一个关联的文件模式，用来指出如何使用文件。</p>
 <table>
 <thead>
@@ -654,45 +476,10 @@ ifstream fin(filename, mode);
 </ul>
 <p>每个文件流类型都定义了一个默认的文件模式，当我们未指定文件模式时，就使用此默认模式。与 ifstream 关联的文件默认以 in 模式打开，与 ofstream 关联的文件默认以 out 模式打开，与 fstream 关联的文件默认以 in 和 out 模式打开</p>
 <p>使用例：</p>
-<pre><code class="c++">/* Testing Simple File IO (TestSimpleFileIO.cpp) */
-#include &lt;iostream&gt;
-#include &lt;fstream&gt;
-#include &lt;cstdlib&gt;
-#include &lt;string&gt;
-using namespace std;
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Testing Simple File IO (TestSimpleFileIO.cpp) */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">string</span> filename = <span class="string">"test.txt"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Write to File</span></span><br><span class="line">    <span class="function">ofstream <span class="title">fout</span><span class="params">(filename.c_str())</span></span>;  <span class="comment">// default mode is ios::out | ios::trunc</span></span><br><span class="line">    <span class="keyword">if</span> (!fout) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cerr</span> &lt;&lt; <span class="string">"error: open file for output failed!"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">abort</span>();  <span class="comment">// in &lt;cstdlib&gt; header</span></span><br><span class="line">    &#125;</span><br><span class="line">    fout &lt;&lt; <span class="string">"apple"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    fout &lt;&lt; <span class="string">"orange"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    fout &lt;&lt; <span class="string">"banana"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    fout.<span class="built_in">close</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Read from file</span></span><br><span class="line">    <span class="function">ifstream <span class="title">fin</span><span class="params">(filename.c_str())</span></span>;  <span class="comment">// default mode ios::in</span></span><br><span class="line">    <span class="keyword">if</span> (!fin) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cerr</span> &lt;&lt; <span class="string">"error: open file for input failed!"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">abort</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">char</span> ch;</span><br><span class="line">    <span class="keyword">while</span> (fin.<span class="built_in">get</span>(ch))</span><br><span class="line">    &#123;  <span class="comment">// till end-of-file</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; ch;</span><br><span class="line">    &#125;</span><br><span class="line">    fin.<span class="built_in">close</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-int main() 
-{
-    string filename = &quot;test.txt&quot;;
 
-    // Write to File
-    ofstream fout(filename.c_str());  // default mode is ios::out | ios::trunc
-    if (!fout) 
-    {
-        cerr &lt;&lt; &quot;error: open file for output failed!&quot; &lt;&lt; endl;
-        abort();  // in &lt;cstdlib&gt; header
-    }
-    fout &lt;&lt; &quot;apple&quot; &lt;&lt; endl;
-    fout &lt;&lt; &quot;orange&quot; &lt;&lt; endl;
-    fout &lt;&lt; &quot;banana&quot; &lt;&lt; endl;
-    fout.close();
 
-    // Read from file
-    ifstream fin(filename.c_str());  // default mode ios::in
-    if (!fin) 
-    {
-        cerr &lt;&lt; &quot;error: open file for input failed!&quot; &lt;&lt; endl;
-        abort();
-    }
-    char ch;
-    while (fin.get(ch))
-    {  // till end-of-file
-        cout &lt;&lt; ch;
-    }
-    fin.close();
-    return 0;
-}
-</code></pre>
 <h1 id="4-String-Stream"><a href="#4-String-Stream" class="headerlink" title="4. String Stream"></a>4. String Stream</h1><p><code>&lt;sstring&gt;</code> 头文件定义了三个类型来支持程序和 string 对象之间的 IO：</p>
 <ul>
 <li>istringstream 从 string 读取数据，是 istream  的子类</li>
@@ -700,57 +487,19 @@ int main()
 <li>stringstream 既可从 string 读数据，也可向 string 写数据，是 iostream 的子类</li>
 </ul>
 <p><strong>ostringstream</strong></p>
-<pre><code class="c++">explicit ostringstream (ios::openmode mode = ios::out);  // default with empty string
-explicit ostringstream (const string &amp; buf, 
-                        ios::openmode mode = ios::out);  // with initial str
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">explicit</span> <span class="title">ostringstream</span> <span class="params">(ios::openmode mode = ios::out)</span></span>;  <span class="comment">// default with empty string</span></span><br><span class="line"><span class="function"><span class="keyword">explicit</span> <span class="title">ostringstream</span> <span class="params">(<span class="keyword">const</span> <span class="built_in">string</span> &amp; buf, </span></span></span><br><span class="line"><span class="function"><span class="params">                        ios::openmode mode = ios::out)</span></span>;  <span class="comment">// with initial str</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">str</span> <span class="params">()</span> <span class="keyword">const</span></span>;           <span class="comment">// Get contents</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">str</span> <span class="params">(<span class="keyword">const</span> <span class="built_in">string</span> &amp; str)</span></span>; <span class="comment">// Set contents</span></span><br></pre></td></tr></table></figure>
 
-string str () const;           // Get contents
-void str (const string &amp; str); // Set contents
-</code></pre>
 <p>使用例：</p>
-<pre><code class="c++">#include &lt;iostream&gt;
-#include &lt;sstream&gt;
-#include &lt;string&gt;
-using namespace std;
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// construct output string stream (buffer) - need &lt;sstream&gt; header</span></span><br><span class="line">    <span class="built_in">ostringstream</span> sout;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Write into string buffer</span></span><br><span class="line">    sout &lt;&lt; <span class="string">"apple"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    sout &lt;&lt; <span class="string">"orange"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    sout &lt;&lt; <span class="string">"banana"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="comment">// Get contents</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; sout.str() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-int main() 
-{
-    // construct output string stream (buffer) - need &lt;sstream&gt; header
-    ostringstream sout;
-
-    // Write into string buffer
-    sout &lt;&lt; &quot;apple&quot; &lt;&lt; endl;
-    sout &lt;&lt; &quot;orange&quot; &lt;&lt; endl;
-    sout &lt;&lt; &quot;banana&quot; &lt;&lt; endl;
-    // Get contents
-    cout &lt;&lt; sout.str() &lt;&lt; endl;
-    return 0;
-}
-</code></pre>
 <p><strong>istreamstream</strong></p>
-<pre><code class="c++">explicit istringstream (ios::openmode mode = ios::in);  // default with empty string
-explicit istringstream (const string &amp; buf,
-                        ios::openmode mode = ios::in);  // with initial string
-</code></pre>
-<p>使用例</p>
-<pre><code class="c++">#include &lt;iostream&gt;
-#include &lt;sstream&gt;
-#include &lt;string&gt;
-using namespace std;
-int main() 
-{
-    // construct input string stream (buffer) - need &lt;sstream&gt; header
-    istringstream sin(&quot;123 12.34 hello&quot;);
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">explicit</span> <span class="title">istringstream</span> <span class="params">(ios::openmode mode = ios::in)</span></span>;  <span class="comment">// default with empty string</span></span><br><span class="line"><span class="function"><span class="keyword">explicit</span> <span class="title">istringstream</span> <span class="params">(<span class="keyword">const</span> <span class="built_in">string</span> &amp; buf,</span></span></span><br><span class="line"><span class="function"><span class="params">                        ios::openmode mode = ios::in)</span></span>;  <span class="comment">// with initial string</span></span><br></pre></td></tr></table></figure>
 
-    // Read from buffer
-    int i;
-    double d;
-    string s;
-    sin &gt;&gt; i &gt;&gt; d &gt;&gt; s;
-    cout &lt;&lt; i &lt;&lt; &quot;,&quot; &lt;&lt; d &lt;&lt; &quot;,&quot; &lt;&lt; s &lt;&lt; endl;
-    return 0;
-}
-</code></pre>
+<p>使用例</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// construct input string stream (buffer) - need &lt;sstream&gt; header</span></span><br><span class="line">    <span class="function"><span class="built_in">istringstream</span> <span class="title">sin</span><span class="params">(<span class="string">"123 12.34 hello"</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Read from buffer</span></span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">double</span> d;</span><br><span class="line">    <span class="built_in">string</span> s;</span><br><span class="line">    <span class="built_in">sin</span> &gt;&gt; i &gt;&gt; d &gt;&gt; s;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="string">","</span> &lt;&lt; d &lt;&lt; <span class="string">","</span> &lt;&lt; s &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
 <p>参考：</p>
 <p><a href="https://www3.ntu.edu.sg/home/ehchua/programming/cpp/cp10_IO.html" target="_blank" rel="noopener">C++ Programming Language Stream IO and File IO</a></p>
 <p><a href="https://cplusplus.com/" target="_blank" rel="noopener">cplusplus.com</a></p>

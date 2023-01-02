@@ -133,12 +133,13 @@
 <p>例如，设当前像素变换到光源空间的后的对应坐标为 (x1, y1, z1)，它的一个相邻像素变换后的坐标为 (x2, y2, z2)，而 Shadow Map 受限于分辨率对于 (x1, y1) 和 (x2, y2) 都返回了相同的深度 depth，而恰好 z1 &gt; depth 被判断在阴影之中，而 z2 &lt; depth 被判断不在阴影之中，自阴影问题也因此产生。而正确的情况应该是 (x1, x2) 本该对应的 depth’ &gt; z1 &gt; depth。</p>
 <p>为了解决这个问题，可以队当前表面深度应用一个阴影偏移，相当于将物体向光源方向移动了一下，用上面的例子来说就是实质上减小了 z1 使其能够小于 depth。通常一个很小的偏移就可以补偿各类舍入误差。</p>
 <p>使用 0.005 的偏移：</p>
-<pre><code class="c++">float bias = 0.005;
-float shadow = currentDepth - bias &gt; closestDepth  ? 1.0 : 0.0;
-</code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">float</span> bias = <span class="number">0.005</span>;</span><br><span class="line"><span class="keyword">float</span> shadow = currentDepth - bias &gt; closestDepth  ? <span class="number">1.0</span> : <span class="number">0.0</span>;</span><br></pre></td></tr></table></figure>
+
 <p>更可靠的方法：根据光线方向改变偏移量：</p>
-<pre><code class="c++">float bias = max(0.05 * (1.0 - dot(normal, lightDir)), 0.005);
-</code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">float</span> bias = <span class="built_in">max</span>(<span class="number">0.05</span> * (<span class="number">1.0</span> - dot(normal, lightDir)), <span class="number">0.005</span>);</span><br></pre></td></tr></table></figure>
+
+
+
 <p>使用阴影偏移后可能带来的新的问题：悬浮（Peter Panning）。</p>
 <p>产生原因：bias 设置不当，物体偏移太大，使物体看起来像是浮起来了一样。</p>
 <p>解决方法：在渲染 Depth Map 的时候使用正面剔除 (front face culling)，这样可以使用几何体的背面作深度记录。</p>

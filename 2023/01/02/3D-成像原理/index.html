@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>3D 成像原理 | Zwei&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+    <link rel="icon" href="/avatar-default.png">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+  
+  <meta name="description" content="虚拟相机是图形学实践无法回避的一个话题。 曾经有一个问题困扰过我：在 Ray Tracing 中，我们从虚拟相机发射了一条光线，光线与屏幕相交然后和进入场景之中，击中场景中的物体，再从击中点要么寻求和光源是否有直接连线，要么从击中点发出新的光线，然后以此为依据队屏幕像素进行着色。 这是一个非常合理的过程，屏幕和物体都处在合理的顺序上。但不要忘了虚拟相机和屏幕之间是有一部分间距的，要是物体位于这个间">
+<meta property="og:type" content="article">
+<meta property="og:title" content="3D 成像原理">
+<meta property="og:url" content="https://zweireverberate.icu/2023/01/02/3D-%E6%88%90%E5%83%8F%E5%8E%9F%E7%90%86/index.html">
+<meta property="og:site_name" content="Zwei&#39;s Blog">
+<meta property="og:description" content="虚拟相机是图形学实践无法回避的一个话题。 曾经有一个问题困扰过我：在 Ray Tracing 中，我们从虚拟相机发射了一条光线，光线与屏幕相交然后和进入场景之中，击中场景中的物体，再从击中点要么寻求和光源是否有直接连线，要么从击中点发出新的光线，然后以此为依据队屏幕像素进行着色。 这是一个非常合理的过程，屏幕和物体都处在合理的顺序上。但不要忘了虚拟相机和屏幕之间是有一部分间距的，要是物体位于这个间">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/Zwei-Reverberate/Blog-Images/master/3D%20%E6%88%90%E5%83%8F%E5%8E%9F%E7%90%86/1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Zwei-Reverberate/Blog-Images/master/3D%20%E6%88%90%E5%83%8F%E5%8E%9F%E7%90%86/2..png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Zwei-Reverberate/Blog-Images/master/3D%20%E6%88%90%E5%83%8F%E5%8E%9F%E7%90%86/3.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Zwei-Reverberate/Blog-Images/master/3D%20%E6%88%90%E5%83%8F%E5%8E%9F%E7%90%86/4.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Zwei-Reverberate/Blog-Images/master/3D%20%E6%88%90%E5%83%8F%E5%8E%9F%E7%90%86/5.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Zwei-Reverberate/Blog-Images/master/3D%20%E6%88%90%E5%83%8F%E5%8E%9F%E7%90%86/6.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Zwei-Reverberate/Blog-Images/master/3D%20%E6%88%90%E5%83%8F%E5%8E%9F%E7%90%86/7.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Zwei-Reverberate/Blog-Images/master/3D%20%E6%88%90%E5%83%8F%E5%8E%9F%E7%90%86/8.png">
+<meta property="article:published_time" content="2023-01-02T13:52:41.000Z">
+<meta property="article:modified_time" content="2023-01-02T13:54:37.492Z">
+<meta property="article:author" content="Zwei">
+<meta property="article:tag" content="Computer Graphics">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Zwei-Reverberate/Blog-Images/master/3D%20%E6%88%90%E5%83%8F%E5%8E%9F%E7%90%86/1.png"><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Zwei's Blog" type="application/atom+xml">
+</head>
+
+<body>
+  <div id="wrapper">
+    <header id="header">
+  <h1 id="title">
+    <a href="/">Zwei&#39;s Blog</a>
+  </h1>
+  <nav>
+    
+    
+      
+      <a class="nav-link" href="/">Home</a>
+    
+      
+        <span class="nav-spacer">×</span>
+      
+      <a class="nav-link" href="/archives">Archives</a>
+    
+      
+        <span class="nav-spacer">×</span>
+      
+      <a class="nav-link" href="/about">About</a>
+    
+    
+  </nav>
+</header>
+
+    <div id="content">
+      <article id="post-3D-成像原理" class="article article-type-post" itemprop="blogPost" itemscope>
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 class="article-title" itemprop="headline name">
+      3D 成像原理
+    </h2>
+  
+
+
+        <div class="article-meta">
+          <time class="article-date" datetime="2023-01-02T13:52:41.000Z" itemprop="datePublished">2023-01-02</time>
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        <p>虚拟相机是图形学实践无法回避的一个话题。</p>
+<p>曾经有一个问题困扰过我：在 Ray Tracing 中，我们从虚拟相机发射了一条光线，光线与屏幕相交然后和进入场景之中，击中场景中的物体，再从击中点要么寻求和光源是否有直接连线，要么从击中点发出新的光线，然后以此为依据队屏幕像素进行着色。</p>
+<p>这是一个非常合理的过程，屏幕和物体都处在合理的顺序上。但不要忘了虚拟相机和屏幕之间是有一部分间距的，要是物体位于这个间距之间呢？那我们刚刚的理论似乎说不通了，但事实是，这种情况仍然能够成像。这是为什么呢？让我们一起探讨一下成像原理吧。</p>
+<p><em><a id="more"></a></em></p>
+<h1 id="1-相机成像"><a href="#1-相机成像" class="headerlink" title="1. 相机成像"></a>1. 相机成像</h1><p>摄影的原理主要包括两个部分：</p>
+<ul>
+<li>将图像存储在胶片或者文件中</li>
+<li>在相机中生成图像</li>
+</ul>
+<p>我们主要关心后者。现实世界中最简单的相机类型是针孔相机，图形学中的虚拟相机常常模拟的也是针孔相机的特性。当然也有更加复杂逼真的相机模型，但这并不在本文的讨论之列。</p>
+<p>针孔相机对应的物理现象是小孔成像，其背后的光学依据是光沿直线传播。</p>
+<h3 id="1-小孔成像"><a href="#1-小孔成像" class="headerlink" title="1. 小孔成像"></a>1. 小孔成像</h3><p>所谓小孔成像，即在物体和成像平面之间放置一个带孔平面，那么成像平面上就会形成物体的倒像，如图：</p>
+<img src="https://raw.githubusercontent.com/Zwei-Reverberate/Blog-Images/master/3D%20%E6%88%90%E5%83%8F%E5%8E%9F%E7%90%86/1.png">
+
+<h3 id="2-针孔相机"><a href="#2-针孔相机" class="headerlink" title="2. 针孔相机"></a>2. 针孔相机</h3><h5 id="1-光圈"><a href="#1-光圈" class="headerlink" title="1. 光圈"></a>1. 光圈</h5><p>在针孔相机中，这个小孔被称作是光圈。所有进入相机的光线都会汇聚到这一点，并在另一侧发散。</p>
+<p>光圈的大小控制成像的清晰度：光圈越小，成像越清晰。光圈越大，成像越模糊。</p>
+<p>如下图所示，光圈足够小时，物体上 A 点在成像平面上对应 A’，而当光圈较大时，A 点就会对应多个点（实际上是 A’A’’ 整个区域）。所以造成了成像的模糊。</p>
+<img src="https://raw.githubusercontent.com/Zwei-Reverberate/Blog-Images/master/3D%20%E6%88%90%E5%83%8F%E5%8E%9F%E7%90%86/2..png">
+
+<p>光圈的大小也和物体的大小相关，当物体很大时，较大的光圈也可以生成可以接受的图像。因为对于较大的物体，我们并不苛求它的每个细节都尽善尽美。不过光圈越小，分辨率越高。</p>
+<p>不过光圈也并不是越小越好，光圈越小，通过的光线也就越少，成像的亮度会降低，光圈太小还可能造成队成像不利的衍射反应。</p>
+<h5 id="2-曝光时间"><a href="#2-曝光时间" class="headerlink" title="2. 曝光时间"></a>2. 曝光时间</h5><p>正如上文所说，光圈越小，固定时间内通过的光线也就越少。为了到达成像所需的光量，就需要一定的曝光时间。我们希望曝光时间越短越好，所以需要在清晰度和曝光时间中折衷取舍。</p>
+<h3 id="3-透镜相机"><a href="#3-透镜相机" class="headerlink" title="3. 透镜相机"></a>3. 透镜相机</h3><p>透镜相机解决的就是曝光时间过长的问题。</p>
+<p>其工作原理可以简单描述为在光圈处放置一个凸透镜，凸透镜可以收集进入相机的光线，然后再将其汇聚到成像平面上的一点。其成像规则遵循凸透镜成像的规则：</p>
+<blockquote>
+<p>焦距：透镜的光心到光聚集之焦点的距离</p>
+</blockquote>
+<ul>
+<li>当物距大于2倍焦距时，则像距在1倍焦距和2倍焦距之间，成倒立、缩小的实像</li>
+<li>当物距等于2倍焦距时，则像距也在2倍焦距，成倒立、等大的实像</li>
+<li>当物距小于2倍焦距时，大于1倍焦距时，则像距大于2倍焦距，成倒立、放大的实像</li>
+<li>当物距等于1倍焦距时，则不成像，光线平行射出</li>
+<li>当物距小于1倍焦距时，则成正立、放大的虚像，此时像距大于物距，像比物大，物像同侧</li>
+</ul>
+<p>现实中的相机构造并非如此简单，它一般是多个凸透镜和凹透镜的组合，而且可以实现变焦，不过整体发挥的效用跟单独的凸透镜相似。</p>
+<h3 id="4-景深"><a href="#4-景深" class="headerlink" title="4. 景深"></a>4. 景深</h3><p>景深指的是相机对焦点前后相对清晰的的成像范围，在景深之内的成像比较清楚，在这个范围之前或者之后的成像则比较模糊。如图所示：</p>
+<img src="https://raw.githubusercontent.com/Zwei-Reverberate/Blog-Images/master/3D%20%E6%88%90%E5%83%8F%E5%8E%9F%E7%90%86/3.png">
+
+<p>景深通常是由物距、镜头焦距和镜头的光圈值共同决定的。景深的精确计算请参阅<a href="https://zh.wikipedia.org/wiki/%E6%99%AF%E6%B7%B1" target="_blank" rel="noopener">景深</a>。</p>
+<p>然而，因为针孔相机并不使用透镜，所以它具有它一般没有景深这个概念，即物体的清晰度和它距离相机的距离无关。我们可以使用针孔相机拍出完全清晰的图像。</p>
+<p>同理，如果我们在图形学计算中模拟针孔相机也是具有无限景深的，场景中所有的对象都非常清晰。不过我们可以通过其他手段来模拟景深。</p>
+<h3 id="5-视场角"><a href="#5-视场角" class="headerlink" title="5. 视场角"></a>5. 视场角</h3><p>后文我们讨论的相机类型如果没有特意指出的话都默认为针孔相机，因为我们在图形学实践中经常模拟针孔相机的一些性质，但并不完全等同于真正的针孔相机。</p>
+<p>前文我们已经定义过了透镜相机的焦距（Focal Length），而针孔相机的焦距有所不同。针孔相机的焦距是从成像平面到光圈的距离。</p>
+<p>关于焦距，我们可以发现以下性质：当成像平面越接近光圈时，成像越小，如下图所示：</p>
+<img src="https://raw.githubusercontent.com/Zwei-Reverberate/Blog-Images/master/3D%20%E6%88%90%E5%83%8F%E5%8E%9F%E7%90%86/4.png">
+
+<p>成像平面 P’ 对应的焦距是 f1，成像平面 P 对应的焦距是 f2，前者的成像区域 l’ 小于后者 l。</p>
+<p>与此同时，在成像平面 P’ 所能看到的场景范围要比 P 更大，因为同一物体占据了屏幕更小的范围，意味着能够容纳更多的物体。</p>
+<p>以我个人的经验来看，这一特性在实践中经常用到，特别是在描述相机性质的时候，图形学中将其称之为视场角（Field of View，FOV）。</p>
+<p>总结一下就是，焦距越小，视场角越大，可见的场景范围越大。</p>
+<p>视场角在在 3D 空间中分为两种，水平视场角和垂直视场角，如图所示：</p>
+<img src="https://raw.githubusercontent.com/Zwei-Reverberate/Blog-Images/master/3D%20%E6%88%90%E5%83%8F%E5%8E%9F%E7%90%86/5.png">
+
+<p>我们在具体看一下视场角和焦距之间的关系：</p>
+<img src="https://raw.githubusercontent.com/Zwei-Reverberate/Blog-Images/master/3D%20%E6%88%90%E5%83%8F%E5%8E%9F%E7%90%86/6.png">
+
+<p>假设我们使得 canvas size 始终等于胶片尺寸（事实上大多数情况下也正是这样）。那么焦距，胶片尺寸，视场角这三者就是相互关联的。</p>
+<h1 id="2-虚拟相机"><a href="#2-虚拟相机" class="headerlink" title="2. 虚拟相机"></a>2. 虚拟相机</h1><h3 id="1-虚拟相机的特性"><a href="#1-虚拟相机的特性" class="headerlink" title="1. 虚拟相机的特性"></a>1. 虚拟相机的特性</h3><p>我们在图形学中经常使用的虚拟相机和上文述及的针孔相机有所不同。主要表现在以下几个方面：</p>
+<ol>
+<li>如果使用光栅化技术进行渲染，那么虚拟相机会有一个近裁剪平面和远裁剪平面。只有两个裁剪平面之间的对象是可见的。</li>
+<li>虚拟相机的成像平面位于相机光圈之前，而不是之后，所以成像也不是倒像，而是正像</li>
+</ol>
+<p>现实中的相机受制于物理规则，成像平面不能位于光圈之前，而虚拟相机则不受这种限制。</p>
+<p>而如果成像平面位于光圈之前，那么光圈的位置（也就是投影中心）就是视点的位置，也就是 Ray Tracing 中发射出射线的位置。</p>
+<h3 id="2-裁剪平面"><a href="#2-裁剪平面" class="headerlink" title="2. 裁剪平面"></a>2. 裁剪平面</h3><blockquote>
+<p>裁剪平面是光栅化所必须的，却不是 Ray Tracing 所必须的，通常在 Ray Tracing 中并不使用裁剪平面。</p>
+</blockquote>
+<p>裁剪平面分为近裁剪平面和远裁剪平面。二者位于虚拟相机之前，并平行于成像平面。比近裁剪平面更近或者比远裁剪平面更远的区域对相机来说是不可见的。</p>
+<h3 id="3-虚拟相机的坐标系"><a href="#3-虚拟相机的坐标系" class="headerlink" title="3. 虚拟相机的坐标系"></a>3. 虚拟相机的坐标系</h3><p>我们想建立关于虚拟相机的坐标系。想象一下，这个坐标系以相机位置，也就是光圈位置为原点，我们如何推导出其 x, y, z 轴？</p>
+<p>和观察矩阵的推导类似，我们还需要一个 target 目标点和一个 up 向量。我们假设虚拟相机的坐标系是一个右手坐标系。推导过程如下：</p>
+<img src="https://raw.githubusercontent.com/Zwei-Reverberate/Blog-Images/master/3D%20%E6%88%90%E5%83%8F%E5%8E%9F%E7%90%86/7.png">
+
+<p>在上面的右手坐标系中，成像平面可以位于 -w 轴上的任意位置。</p>
+<p>在光栅化中，因为我们使用了远裁剪平面和近裁剪平面，所以成像平面的大小和它距离视点的距离有关，距离视点越近时，成像平面越小，因为成像平面始终和两个裁剪平面平行。</p>
+<img src="https://raw.githubusercontent.com/Zwei-Reverberate/Blog-Images/master/3D%20%E6%88%90%E5%83%8F%E5%8E%9F%E7%90%86/8.png">
+
+<p>而在 Ray Tracing 中，成像平面也可以位于 -w 轴上的任意位置。</p>
+<p>当视点和成像平面之间的距离为1时可以简化运算。</p>
+<h3 id="4-观察坐标和世界坐标的相互转化"><a href="#4-观察坐标和世界坐标的相互转化" class="headerlink" title="4. 观察坐标和世界坐标的相互转化"></a>4. 观察坐标和世界坐标的相互转化</h3><p>是从观察坐标转换为世界坐标还是从世界坐标转化为观察坐标，取决于我们使用的渲染方式：</p>
+<ul>
+<li>如果是光栅化过程，是将物体的顶点坐标从世界坐标转换为观察坐标<ul>
+<li>光栅化是以对象为中心的</li>
+<li>我们需要将对象的坐标经历一系列的转换过程：局部坐标—世界坐标—观察坐标—裁剪坐标—NDC 坐标—屏幕坐标</li>
+<li>图像是由投影到图像上的”点“（并不是点，只是比喻）集合而成的</li>
+</ul>
+</li>
+<li>而如果是 Ray Tracing，则是从观察坐标转换为世界坐标。因为我们的光线是以虚拟相机坐标系构建的<ul>
+<li>Ray Tracing 的运作方式与光栅化相反，是以图像为中心的</li>
+<li>不是沿着光线的自然路径从对象到相机，而是沿着相反的方向由相机到对象</li>
+</ul>
+</li>
+</ul>
+<h1 id="3-最开始的问题"><a href="#3-最开始的问题" class="headerlink" title="3. 最开始的问题"></a>3. 最开始的问题</h1><p>我们已经讨论完了 3D 成像的一些最基本的原理，尽管我们省略了很多细节。</p>
+<p>让我们重新回到最开始的问题。</p>
+<p>在 Ray Tracing 中，我们从一个像素的位置开始，我们所做的主要工作就是将其转换为成像平面上的一个点 P，连接视点 C 和 P 就能够确认光线的方向，视点 C 就是光线的起点。</p>
+<p>我们拿到的是像素坐标，设这个坐标为 P，需要对其进行归一化，转换到 NDC 空间中。然而虽然我们的坐标得到了标准化，但是缺失第三个维度也就是 z 值，我们需要手动指定 z 值，正如上文所言，z 值表示成像平面距离视点的距离，只是在虚拟相机的 -w 方向的值均可。也就是说，这个值是根据虚拟相机得到的，所以 P 的坐标现在正处于相机坐标系中。我们就假设其为 1.0 好了，我们不关心 x, y 两个分量的值，所以现在 P 的坐标就是 (x, y, 1.0)。</p>
+<p>你这时就要问了，为什么是 1.0 而不是 -1.0 呢？问得好，这个 1.0  代表的是视点到成像平面之间的距离。那这岂不是意味着我们的<br>而OpenGL的裁剪空间（以及NDC），是一个<strong>左手系</strong></p>
+<p>好，我们终于指定</p>
+
+      
+    </div>
+    
+    
+    <div class="article-category">
+      
+      
+      
+        <b>Tags:</b>
+        <a class="article-tag-link" href="/tags/Computer-Graphics/" rel="tag">Computer Graphics</a>
+      
+    </div>
+    
+    
+  </div>
+</article>
+
+  
+<nav id="article-nav" class="article-nav">
+  
+    <span id="article-nav-newer" class="article-nav-link-wrap newer"></span>
+  
+  
+    <a href="/2022/12/22/%E5%8A%A8%E8%AF%8D%E5%8F%98%E5%BD%A2/" id="article-nav-older" class="article-nav-link-wrap older">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">
+        
+          动词变形
+        
+      </div>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+    </div>
+  </div>
+  
+
+
+
+
+<div id="settings-container">
+  <div id="dark-mode">dark</div>
+  <div id="sans-font">sans</div>
+</div>
+<script type="text/javascript">
+let d=document,r=d.documentElement.style,f=r.setProperty.bind(r),l=localStorage,s=l.getItem('s')||(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches),n=l.getItem('n'),m=d.getElementById("dark-mode"),b=()=>{f('--bg-color','#fafafa');f('--code-bg-color','#f4f4f4');f('--text-color','#212121');f('--secondary-color','#808080');f('--tertiary-color','#b0b0b0');f('--link-color','#b5c8cf');f('--link-hover-color','#618794');f('--link-bg-color','#dae4e7');f('--selection-color','#dae4e7');m.innerHTML="dark"},c=()=>{f('--bg-color','#212121');f('--code-bg-color','#292929');f('--text-color','#fff');f('--secondary-color','#c0c0c0');f('--tertiary-color','#6e6e6e');f('--link-color','#4d6b75');f('--link-hover-color','#96b1bb');f('--link-bg-color','#5d828e');f('--selection-color','#acc1c9');m.innerHTML="light"},o=d.getElementById("sans-font"),e=()=>{f('--body-stack','"Lora", "Georgia", "Times New Roman", serif');o.innerHTML="sans"},g=()=>{f('--body-stack','"Lato", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "Verdana", sans-serif');o.innerHTML="serif"};m.onclick=()=>{if(s==2){s=1;l.setItem('s',s);c()}else{s=2;l.setItem('s',s);b()}};o.onclick=()=>{if(n==2){n=1;l.setItem('n',n);g()}else{n=2;l.setItem('n',n);e()}};if(!s){s=2;l.setItem('s',2)};if(s==1){c()};if(!n){n=2;l.setItem('n',2)};if(n==1){g()};
+</script>
+
+
+
+
+</body>
+</html>

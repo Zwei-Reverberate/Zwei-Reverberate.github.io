@@ -55,6 +55,48 @@
     <div id="content">
       
   
+    <article id="post-3D-成像原理" class="article article-type-post" itemprop="blogPost" itemscope>
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 class="article-title" itemprop="name">
+      <a href="/2023/01/02/3D-%E6%88%90%E5%83%8F%E5%8E%9F%E7%90%86/">3D 成像原理</a>
+      
+    </h2>
+  
+
+
+        <div class="article-meta">
+          <time class="article-date" datetime="2023-01-02T13:52:41.000Z" itemprop="datePublished">2023-01-02</time>
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        <p>虚拟相机是图形学实践无法回避的一个话题。</p>
+<p>曾经有一个问题困扰过我：在 Ray Tracing 中，我们从虚拟相机发射了一条光线，光线与屏幕相交然后和进入场景之中，击中场景中的物体，再从击中点要么寻求和光源是否有直接连线，要么从击中点发出新的光线，然后以此为依据队屏幕像素进行着色。</p>
+<p>这是一个非常合理的过程，屏幕和物体都处在合理的顺序上。但不要忘了虚拟相机和屏幕之间是有一部分间距的，要是物体位于这个间距之间呢？那我们刚刚的理论似乎说不通了，但事实是，这种情况仍然能够成像。这是为什么呢？让我们一起探讨一下成像原理吧。</p>
+<p><em></em></p>
+      
+    </div>
+    
+      <div class="article-more-link">
+        <a href="/2023/01/02/3D-%E6%88%90%E5%83%8F%E5%8E%9F%E7%90%86/#more">read more</a>
+      </div>
+    
+    
+    
+  </div>
+</article>
+
+
+
+  
     <article id="post-动词变形" class="article article-type-post" itemprop="blogPost" itemscope>
   <div class="article-inner">
     
@@ -216,56 +258,6 @@
     
       <div class="article-more-link">
         <a href="/2022/11/01/C-Smart-Pointer/#more">read more</a>
-      </div>
-    
-    
-    
-  </div>
-</article>
-
-
-
-  
-    <article id="post-Parallel-Programming" class="article article-type-post" itemprop="blogPost" itemscope>
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 class="article-title" itemprop="name">
-      <a href="/2022/10/31/Parallel-Programming/">Parallel Programming</a>
-      
-    </h2>
-  
-
-
-        <div class="article-meta">
-          <time class="article-date" datetime="2022-10-31T09:47:12.000Z" itemprop="datePublished">2022-10-31</time>
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        <p>本篇笔记源自 <a href="https://book.douban.com/subject/26386925/" target="_blank" rel="noopener">C++ 并发编程实战</a></p>
-<h1 id="1-预备知识"><a href="#1-预备知识" class="headerlink" title="1. 预备知识"></a>1. 预备知识</h1><h3 id="1-Main-函式"><a href="#1-Main-函式" class="headerlink" title="1. Main 函式"></a>1. Main 函式</h3><p>所有的 C++ 程序都必须包含一个 <code>main</code> 函式，否则编译器会报错。（动态链接库和静态库没有 <code>mian</code> 函式）。</p>
-<p><code>main</code> 函式是源代码开始执行的地方，但在进入 <code>mian</code> 函式子之前，所有没有显式初始化的静态类成员都被设置为0了。在 Microsoft C++ 中全局的静态对象也在进入 <code>main</code> 之前被初始化。</p>
-<p><code>main</code> 所受的限定：</p>
-<ul>
-<li>不能被重载</li>
-<li>不能被声明为内联函数</li>
-<li>不能被声明为静态函数</li>
-<li>无法获取其地址</li>
-<li>不能从其他地方被调用</li>
-</ul>
-<p><em></em></p>
-      
-    </div>
-    
-      <div class="article-more-link">
-        <a href="/2022/10/31/Parallel-Programming/#more">read more</a>
       </div>
     
     
