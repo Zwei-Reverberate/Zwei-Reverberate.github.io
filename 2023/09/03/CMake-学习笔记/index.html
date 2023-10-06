@@ -25,7 +25,7 @@
 <meta property="og:description" content="1. CMake 简介1. 工程构建构建 (Build) 是程序开发的步骤之一。对于一个项目来说，其中可能包含不同的组件和模块，引用了各种第三方库，如果手动进行编译连接效率是比较低下的。 所以我们一般会使用工程构建的方式全自动完成项目的编译，链接和打包。 一些常见的 C++ 构建工具：GUN Make，CMake，MSBuild，Scons，Waf 等。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-09-03T09:39:04.000Z">
-<meta property="article:modified_time" content="2023-09-30T18:18:01.767Z">
+<meta property="article:modified_time" content="2023-10-06T08:48:26.869Z">
 <meta property="article:author" content="Zwei">
 <meta property="article:tag" content="Enginnering">
 <meta name="twitter:card" content="summary"><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Zwei's Blog" type="application/atom+xml">
@@ -191,6 +191,28 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">project(main)</span><br><span class="line">add_executable(main main.cpp)</span><br><span class="line"># 链接库</span><br><span class="line">target_link_libraries(main mathfun)</span><br><span class="line">target_include_directories(main PUBLIC $&#123;CMAKE_SOURCE_DIR&#125;/src/mathfun)</span><br></pre></td></tr></table></figure>
 
 <p>此时可以成功编译。</p>
+<hr>
+<p><strong>处理子模块的头文件</strong></p>
+<p>我们在编写 main 文件夹下的 CMakeList.txt 时，我们不仅链接了 mathfun 这个库，而且还需要指定其头文件目录，这种处理方式较为繁琐。</p>
+<p>而另一种更为方便的方式是在添加某一个库时，就让该库拥有其自身的头文件目录，这样我们在其他模块链接该库时，就自动包含了其头文件目录。</p>
+<p>所以，mathfun 文件夹下的 CMakeLists.txt 可改为：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">project(mathfun)</span><br><span class="line"># 生成静态库</span><br><span class="line">add_library(mathfun STATIC mathfun.cpp)</span><br><span class="line"># 指定当前目录为头文件目录</span><br><span class="line">target_include_directories(mathfun PUBLIC .)</span><br></pre></td></tr></table></figure>
+
+<p>然后 main 文件夹下的 CMakeLists.txt 只需要链接 mathfun 这个库就可以了：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">project(main)</span><br><span class="line">add_executable(main main.cpp)</span><br><span class="line"># 链接库</span><br><span class="line">target_link_libraries(main mathfun)</span><br></pre></td></tr></table></figure>
+
+<p>如果不希望在链接 mathfun 这个库时自动包含其头文件路径，只需要将 PUBLIC 改为 PRIVATE 即可：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">target_include_directories</span>(mathfun PRIVATE .)</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-链接动态库"><a href="#4-链接动态库" class="headerlink" title="4. 链接动态库"></a>4. 链接动态库</h2><p>我们如果想将 mathfun 生成为动态库，那么只需要更改 mathfun 文件夹下 CMakeLists.txt 的 add_library，将 STATIC 改为 SHARED：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成动态库</span></span><br><span class="line"><span class="keyword">add_library</span>(mathfun SHARED mathfun.cpp)</span><br></pre></td></tr></table></figure>
+
+<p>但是这种修改会在 Windows 环境中产生很大的问题。</p>
+<p>第一个问题是我们在 build 会报错，无法链接到对应的 lib 文件。这是因为我们虽然生成了 dll 文件，但是没有生成 lib 文件。我们需要在对应的类前进行导出：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> MATHFUN_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MATHFUN_H</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> __<span class="title">declspec</span>(<span class="title">dllexport</span>) <span class="title">MathFun</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">static</span> <span class="keyword">double</span> <span class="title">calSqrt</span><span class="params">(<span class="keyword">double</span> val)</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// !MATHFUN_H</span></span></span><br></pre></td></tr></table></figure>
+
+<p>我们使用 __declspec(dllexport) 对 mathfun 进行导出，这样我们可以成功编译通过。当然导出有很多其他的写法，这里只是示例。现在我们可以成功编译了，但是在运行可执行文件时还是会出错，会显示找不到对应 .dll 文件。</p>
+<p>这是因为在 Window 下我们需要将 .dll 文件放在何 .exe 文件放在同一目录下（或者在环境变量 %PATH% 下），而我们现在将 .exe 文件放在了 bin 文件下，而 .dll  文件现在生成在 bin 文件夹下，所以 .exe 文件在执行时会找不到，如果我们此时我们将生成的 .dll 文件手动拷贝到 bin 文件夹下，是可以成功执行 .exe 文件的。当然，拷贝这一步我们也可以交给 CMake 替我们自动去执行，不过不是现在。</p>
 
       
     </div>
