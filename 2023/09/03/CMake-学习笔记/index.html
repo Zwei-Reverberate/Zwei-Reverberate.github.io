@@ -25,7 +25,7 @@
 <meta property="og:description" content="1. CMake 简介1. 工程构建构建 (Build) 是程序开发的步骤之一。对于一个项目来说，其中可能包含不同的组件和模块，引用了各种第三方库，如果手动进行编译连接效率是比较低下的。 所以我们一般会使用工程构建的方式全自动完成项目的编译，链接和打包。 一些常见的 C++ 构建工具：GUN Make，CMake，MSBuild，Scons，Waf 等。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-09-03T09:39:04.000Z">
-<meta property="article:modified_time" content="2023-10-06T08:48:26.869Z">
+<meta property="article:modified_time" content="2023-12-17T08:17:31.471Z">
 <meta property="article:author" content="Zwei">
 <meta property="article:tag" content="Enginnering">
 <meta name="twitter:card" content="summary"><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Zwei's Blog" type="application/atom+xml">
@@ -142,6 +142,14 @@
 <td align="center">PROJECT_BINARY_DIR</td>
 <td align="center">工程构建目录</td>
 </tr>
+<tr>
+<td align="center">PROJECT_IS_TOP_LEVEL</td>
+<td align="center">BOOL 类型，表示当前项目是否是根项目</td>
+</tr>
+<tr>
+<td align="center">CMAKE_BINARY_DIR</td>
+<td align="center">根项目输出路径</td>
+</tr>
 </tbody></table>
 <h2 id="4-指定-C-标准"><a href="#4-指定-C-标准" class="headerlink" title="4. 指定 C++ 标准"></a>4. 指定 C++ 标准</h2><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(CMAKE_CXX_STANDARD <span class="number">11</span>)</span><br><span class="line"><span class="keyword">set</span>(CMAKE_CXX_STANDARD_REQUIRED <span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
 
@@ -180,7 +188,18 @@
 <h1 id="3-工程结构"><a href="#3-工程结构" class="headerlink" title="3. 工程结构"></a>3. 工程结构</h1><h2 id="1-通用结构"><a href="#1-通用结构" class="headerlink" title="1. 通用结构"></a>1. 通用结构</h2><p>与其说是通用结构，不如说是一种个人习惯。我通常不会将头文件和源文件放在不同的文件夹，所以我一般的工程结构会是：</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">└─general</span><br><span class="line">    │  CMakeLists.txt</span><br><span class="line">    │</span><br><span class="line">    ├─bin</span><br><span class="line">    ├─lib</span><br><span class="line">    ├─out</span><br><span class="line">    └─src</span><br><span class="line">        ├─main</span><br><span class="line">        │      CMakeLists.txt</span><br><span class="line">        │      main.cpp</span><br><span class="line">        │</span><br><span class="line">        └─mathfun</span><br><span class="line">                CMakeLists.txt</span><br><span class="line">                mathfun.cpp</span><br><span class="line">                mathfun.h</span><br></pre></td></tr></table></figure>
 
-<h2 id="2-链接静态库"><a href="#2-链接静态库" class="headerlink" title="2. 链接静态库"></a>2. 链接静态库</h2><p>建立上图所示的工程目录后，我们希望将 mathfun 链接为静态库。为此，我们需要对我们的所有 CMakeList.txt 文件做出调整，好在源文件无需调整。</p>
+<h2 id="2-库（library）"><a href="#2-库（library）" class="headerlink" title="2. 库（library）"></a>2. 库（library）</h2><p>有时我们会有多个可执行文件，它们之间的某些功能是相同的，于是这些公共的功能就可以做成一个库，以便于共享。</p>
+<p>一个库中的函数既可以被可执行文件调用，也可以被其他库文件调用。</p>
+<p>库文件分为静态库文件和动态库文件：</p>
+<ul>
+<li><p>静态库文件</p>
+<p>相当于直接把代码插入到生成的可执行文件中，是编译时查找，会导致可执行文件体积变大</p>
+</li>
+<li><p>动态库文件</p>
+<p>运行时查找。只在可执行文件中生成“插桩”函数，当可执行文件被加载时会读取指定目录的 .dll 文件，加载到内存中的空闲位置，并且替换相应的“插桩”指向的地址为加载后的地址，这个过程称为重定向。</p>
+</li>
+</ul>
+<h2 id="3-链接静态库"><a href="#3-链接静态库" class="headerlink" title="3. 链接静态库"></a>3. 链接静态库</h2><p>建立上图所示的工程目录后，我们希望将 mathfun 链接为静态库。为此，我们需要对我们的所有 CMakeList.txt 文件做出调整，好在源文件无需调整。</p>
 <p>首先是最顶层的 CMakeList.txt，我们需要添加两个子文件夹：</p>
 <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置CMake最小版本</span></span><br><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.21</span>) </span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置工程名</span></span><br><span class="line"><span class="keyword">project</span> (general)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设定可执行二进制文件的目录</span></span><br><span class="line"><span class="keyword">set</span>(EXECUTABLE_OUTPUT_PATH <span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/bin)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设定存放编译出来的库文件的目录</span></span><br><span class="line"><span class="keyword">set</span>(LIBRARY_OUTPUT_PATH <span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/lib)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加子文件夹</span></span><br><span class="line"><span class="keyword">add_subdirectory</span>(<span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/src/main)</span><br><span class="line"><span class="keyword">add_subdirectory</span>(<span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/src/mathfun)</span><br></pre></td></tr></table></figure>
 
@@ -208,12 +227,143 @@
 <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成动态库</span></span><br><span class="line"><span class="keyword">add_library</span>(mathfun SHARED mathfun.cpp)</span><br></pre></td></tr></table></figure>
 
 <p>但是这种修改会在 Windows 环境中产生很大的问题。</p>
-<p>第一个问题是我们在 build 会报错，无法链接到对应的 lib 文件。这是因为我们虽然生成了 dll 文件，但是没有生成 lib 文件。我们需要在对应的类前进行导出：</p>
+<p>第一个问题是我们在 build 会报错，无法链接到对应的 lib 文件。这是因为我们虽然生成了 dll 文件，但是没有生成 lib 文件。在 Windows 下我们编译需要的始终是 lib 文件，而运行时才会需要 dll 文件。所以我们需要在对应的类前进行导出：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> MATHFUN_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MATHFUN_H</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> __<span class="title">declspec</span>(<span class="title">dllexport</span>) <span class="title">MathFun</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">static</span> <span class="keyword">double</span> <span class="title">calSqrt</span><span class="params">(<span class="keyword">double</span> val)</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// !MATHFUN_H</span></span></span><br></pre></td></tr></table></figure>
 
 <p>我们使用 __declspec(dllexport) 对 mathfun 进行导出，这样我们可以成功编译通过。当然导出有很多其他的写法，这里只是示例。现在我们可以成功编译了，但是在运行可执行文件时还是会出错，会显示找不到对应 .dll 文件。</p>
 <p>这是因为在 Window 下我们需要将 .dll 文件放在何 .exe 文件放在同一目录下（或者在环境变量 %PATH% 下），而我们现在将 .exe 文件放在了 bin 文件下，而 .dll  文件现在生成在 bin 文件夹下，所以 .exe 文件在执行时会找不到，如果我们此时我们将生成的 .dll 文件手动拷贝到 bin 文件夹下，是可以成功执行 .exe 文件的。当然，拷贝这一步我们也可以交给 CMake 替我们自动去执行，不过不是现在。</p>
+<h2 id="5-导入导出"><a href="#5-导入导出" class="headerlink" title="5. 导入导出"></a>5. 导入导出</h2><p>在 Windows 的 MSVC 下，我们处理 dll 时通常需要处理导入导出。处理方式是使用 <a href="https://learn.microsoft.com/zh-cn/cpp/cpp/using-dllimport-and-dllexport-in-cpp-classes?view=msvc-170" target="_blank" rel="noopener">dllimport 和 dllexport</a>。</p>
+<p>一个更加标准的写法是使用宏定义来处理，我们单独添加文件 export.h 来写导入导出的宏定义，此时文件结构为：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">└─general</span><br><span class="line">    │  CMakeLists.txt</span><br><span class="line">    │</span><br><span class="line">    ├─bin</span><br><span class="line">    ├─lib</span><br><span class="line">    ├─out</span><br><span class="line">    └─src</span><br><span class="line">        ├─export</span><br><span class="line">        │      export.h</span><br><span class="line">        │</span><br><span class="line">        ├─main</span><br><span class="line">        │      CMakeLists.txt</span><br><span class="line">        │      main.cpp</span><br><span class="line">        │</span><br><span class="line">        └─mathfun</span><br><span class="line">                CMakeLists.txt</span><br><span class="line">                mathfun.cpp</span><br><span class="line">                mathfun.h</span><br></pre></td></tr></table></figure>
 
+<p>添加的 export.h 文件的内容如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> EXPORT_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EXPORT_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> EXPORT</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CLASS_EXPORT __declspec(dllexport)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CLASS_EXPORT __declspec(dllimport)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// !EXPORT_H</span></span></span><br></pre></td></tr></table></figure>
+
+<p>引入此头文件时，如果已经定义过 EXPORT 这个宏，则 CLASS_EXPORT 为 dllexport。否则则为 dllimport。我们希望在编译 mathfun 这个类时将 CLASS_EXPORT 设定为 dllexport。为此，我们需要修改 mathfun 文件夹下的 CMakeLists.txt：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">project(mathfun)</span><br><span class="line"># 生成静态库</span><br><span class="line">add_library(mathfun SHARED mathfun.cpp)</span><br><span class="line"># 指定当前目录为头文件目录</span><br><span class="line">target_include_directories(mathfun PUBLIC .)</span><br><span class="line"></span><br><span class="line"># 编译期加入宏定义</span><br><span class="line">target_compile_definitions(mathfun PRIVATE EXPORT)</span><br><span class="line">target_include_directories(mathfun PUBLIC $&#123;CMAKE_SOURCE_DIR&#125;/src/<span class="keyword">export</span>)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>编译</strong></p>
+<p>编译 C++ 程序一般会有以下步骤：</p>
+<ul>
+<li>预处理阶段：使用预处理器展开头文件，宏替换，去掉注释等</li>
+<li>编译阶段：使用编译器生成汇编文件</li>
+<li>汇编阶段：使用汇编文件生成二进制文件（机器码）</li>
+<li>链接：调用连接器对程序需要的库进行链接</li>
+</ul>
+<h1 id="4-现代-CMake"><a href="#4-现代-CMake" class="headerlink" title="4. 现代 CMake"></a>4. 现代 CMake</h1><h2 id="1-添加源文件"><a href="#1-添加源文件" class="headerlink" title="1. 添加源文件"></a>1. 添加源文件</h2><p>比如我们想要添加一个可执行文件作为构建目标，以下两种写法都是可以的。</p>
+<ol>
+<li><p>直接添加</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_executable</span>(main main.cpp)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>先创建目标，稍后再添加源文件</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_executable</span>(main)</span><br><span class="line"><span class="keyword">target_sources</span>(main PUBLIC main.cpp)</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>如果我们我们有多个源文件（头文件也可以一起加进去），我们可以逐一添加，例如：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_executable</span>(main)</span><br><span class="line"><span class="keyword">set</span>(sources main.cpp xxx.cpp ...)</span><br><span class="line"><span class="keyword">target_sources</span>(main PUBLIC <span class="variable">$&#123;sources&#125;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>如果源文件的数量过多，可以使用 GLOB 自动查找当前目录下指定扩展名的文件（GLOB_RECURSE 可以查找当前目录包括所有子目录的指定文件），实现批量添加源文件：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_executable</span>(main)</span><br><span class="line"><span class="keyword">file</span>(GLOB sources *.cpp *.h)</span><br><span class="line"><span class="keyword">target_sources</span>(main PUBLIC <span class="variable">$&#123;sources&#125;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>为了添加新文件时，自动更新变量，建议添加 flag CONFIGURE_DEPENDS：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">file</span>(GLOB sources CONFIGURE_DEPENDS *.cpp *.h)</span><br></pre></td></tr></table></figure>
+
+<p>如果我们的源文件在不同的目录下，更推荐使用 aux_source_directory，自动搜集需要的文件后缀名：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_executable</span>(main)</span><br><span class="line"><span class="keyword">aux_source_directory</span>(. sources) <span class="comment"># 当前目录</span></span><br><span class="line"><span class="keyword">aux_source_directory</span>(<span class="keyword">math</span> sources) <span class="comment"># 目录 math 下的源文件</span></span><br><span class="line"><span class="keyword">target_sources</span>(main PUBLIC <span class="variable">$&#123;sources&#125;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>该命令可以根据 main 的语言类型，自动查找对应后缀的源文件。</p>
+<h2 id="2-项目的配置变量"><a href="#2-项目的配置变量" class="headerlink" title="2. 项目的配置变量"></a>2. 项目的配置变量</h2><h3 id="1-CMAKE-BUILD-TYPE"><a href="#1-CMAKE-BUILD-TYPE" class="headerlink" title="1. CMAKE_BUILD_TYPE"></a>1. CMAKE_BUILD_TYPE</h3><p>CMAKE_BUILD_TYPE 是 CMake 中一个特殊的变量，用于控制构建类型，它有以下选项：</p>
+<ul>
+<li>Debug：调试模式，完全不优化，生成调试信息，方便调试程序</li>
+<li>Release：发布模式，优化程度最高，性能最佳，但是编译比 Debug 慢</li>
+<li>MinSizeRel：最小体积发布，生成的文件比 Release 更小，不完全优化，减少二进制的体积</li>
+<li>RelWithDebInfo：带调试信息发布，生成的文件比 Release 更大，因为带有调试符号信息</li>
+<li>默认情况下 CMAKE_BUILD_TYPE 胃空字符串，这时相当于 Debug</li>
+</ul>
+<h3 id="2-project"><a href="#2-project" class="headerlink" title="2. project"></a>2. project</h3><p>project() 命令中有一个名为 LANGUAGES 的字段，指定项目使用了哪些编程语言。</p>
+<p>当然我们也可以不设置，而是在之后调用 enable_language() 命令也是一样的效果。</p>
+<h3 id="3-对象库"><a href="#3-对象库" class="headerlink" title="3. 对象库"></a>3. 对象库</h3><p>对象库类似于静态库，如果专注于跨平台的统一性，在使用 add_library 命令时，指定类型为 OBJECT 也许是更好的选择，它会避免静态库和动态库在不同平台上的特性所带来的一些麻烦：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_library</span>(library_name OBJECT xxx.cpp)</span><br></pre></td></tr></table></figure>
+
+<p>add_library 无参数时，会根据 BUILD_SHARED_LIBS 这个变量的值来决定是静态库还是动态库。ON 代表选择 SHARED, OFF 代表选择 STATIC。如果未指定 BUILD_SHARED_LIBS 这个变量的值，则默认为 STATIC。</p>
+<p>动态库无法链接静态库</p>
+<h2 id="3-属性"><a href="#3-属性" class="headerlink" title="3. 属性"></a>3. 属性</h2><p>使用命令 set_property() 或者 set_target_properties 可以设置目标的一些属性。区别在于后者可以同时设定目标的多个属性。</p>
+<p>我们也可以通过全局变量的方式，让之后创建的所有对象都享有相同的属性（也就是要在 add_executable 之前才有效）。</p>
+<h2 id="4-dll-目录"><a href="#4-dll-目录" class="headerlink" title="4. dll 目录"></a>4. dll 目录</h2><p>前文已述及，这是 Windows 平台特有的问题。</p>
+<p>解决方式可以是：</p>
+<ul>
+<li><p>设置动态库的输出位置为 .exe 文件的同目录</p>
+<p>如果当前动态库依赖了其他动态库，那么其他动态库也应该输出到同一目录下（CMAKE_RUNTIME_OUTPUT_DIRECTORY）</p>
+</li>
+<li><p>使用 add_custom_command 命令将 dll 文件拷贝到与 .exe 文件相同的目录下</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_executable</span>(my_app my_app.cpp)</span><br><span class="line"></span><br><span class="line"><span class="keyword">target_link_libraries</span>(my_app my_lib)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_library</span>(my_lib SHARED my_lib.cpp)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_custom_command</span>(<span class="keyword">TARGET</span> my_app POST_BUILD</span><br><span class="line">  <span class="keyword">COMMAND</span> <span class="variable">$&#123;CMAKE_COMMAND&#125;</span> -E copy</span><br><span class="line">  <span class="variable">$&#123;CMAKE_CURRENT_BINARY_DIR&#125;</span>/my_lib.dll</span><br><span class="line">  <span class="variable">$&#123;CMAKE_CURRENT_BINARY_DIR&#125;</span>/)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="5-跨平台与编译器"><a href="#5-跨平台与编译器" class="headerlink" title="5. 跨平台与编译器"></a>5. 跨平台与编译器</h2><p> 我们可以根据不同的操作系统（或者不同的编译器），在 CMake 中将宏定义成不同的值：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(CMAKE_SYSTEM_NAME <span class="keyword">MATCHES</span> <span class="string">"Windows"</span>)</span><br><span class="line">	<span class="keyword">target_compile_definitions</span>(main PUBLIC MY_NAME = <span class="string">"Ever"</span>)</span><br><span class="line"><span class="keyword">elseif</span>(CMAKE_SYSTEM_NAME <span class="keyword">MATCHES</span> <span class="string">"Linux"</span>)</span><br><span class="line">	<span class="keyword">target_compile_definitions</span>(main PUBLIC MY_NAME = <span class="string">"remember"</span>)</span><br><span class="line"><span class="keyword">elseif</span>(CMAKE_SYSTEM_NAME <span class="keyword">MATCHES</span> <span class="string">"Darwin"</span>)</span><br><span class="line">	<span class="keyword">target_compile_definitions</span>(main PUBLIC MY_NAME = <span class="string">"Never"</span>)</span><br><span class="line"><span class="keyword">endif</span>()</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-变量与作用域"><a href="#6-变量与作用域" class="headerlink" title="6. 变量与作用域"></a>6. 变量与作用域</h2><p>变量传播规则：</p>
+<ul>
+<li><p>父模块里定义的变量，会传播给子模块</p>
+</li>
+<li><p>子模块中的变量不会传播给父模块</p>
+</li>
+<li><p>父模块与子模块定义了同名变量，在子模块中执行子模块的定义，离开子模块后仍保持父模块定义</p>
+</li>
+<li><p>如果子模块想要向父模块中传递变量，可以使用 PARENT_SCOPE 选项，把变量传递给上一层作用域（也就是父模块）:</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(MYVARIBLE <span class="keyword">ON</span> PARENT_SCOPE)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>除了父子模块外，function 也有独立作用域，而 macro 没有独立作用域</p>
+</li>
+</ul>
+<p>环境变量、缓存变量：</p>
+<p>使用 $ENV{XXX} 可以访问环境变量，使用 $CACHE{xxx} 可以访问缓存变量，二者是全局的，不分作用域。</p>
+<p>使用 if(DEFINED XXX) 可判断某变量是否存在</p>
+<h2 id="7-include"><a href="#7-include" class="headerlink" title="7. include"></a>7. include</h2><p>我们可以编写独立的 .cmake 文件，其作用类似于脚本。可以使用 include 命令将其包含进 CMakeLists.txt 文件。其中定义的各种函数和指定和在 CMakeLists.txt 中书写没有区别。</p>
+<p>Include 和 add_subdirectory 的区别：</p>
+<ul>
+<li>include 相当于直接把代码粘贴过去，直接访问调用者的作用域。这里创建的变量和外面的变量共享，直接 set(key val) 则调用者也有 ${key} 这个变量了</li>
+<li>add_subdirectory 中则给予定义者所在路径，优先访问定义者的作用域。需要 set(key val PARENT_SCOPE) 才能修改到外面的变量</li>
+</ul>
+<h1 id="5-第三方库"><a href="#5-第三方库" class="headerlink" title="5. 第三方库"></a>5. 第三方库</h1><p>当我们需要为项目引入第三方库时，CMake 针对不同的需求提供了几种不同的方法：</p>
+<ul>
+<li><p>使用已安装的库</p>
+<p>如果第三方库已经被安装在了系统中，CMake 提供了 find_package 命令用于在系统中查找已经安装的库。这通常涉及到使用 Find(PackageName).cmake 模块，该模块描述了如何查找和配置指定的库。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">find_package</span>(ThirdPartyLibrary REQUIRED)</span><br><span class="line"><span class="keyword">include_directories</span>(<span class="variable">$&#123;ThirdPartyLibrary_INCLUDE_DIRS&#125;</span>)</span><br><span class="line"><span class="keyword">target_link_libraries</span>(YourTarget <span class="variable">$&#123;ThirdPartyLibrary_LIBRARIES&#125;</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用 ExternalProject_Add</p>
+<p>如果项目依赖一个外部库，但不想事先将其安装在系统中，可以使用 ExternalProject_Add 来在构建时下载、编译和构建该库。这样，项目就可以在构建时自动获取和构建依赖。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">include</span>(ExternalProject)</span><br><span class="line">ExternalProject_Add</span><br><span class="line">(</span><br><span class="line">    ThirdPartyLibrary</span><br><span class="line">    GIT_REPOSITORY https://github.com/ThirdPartyLibrary.git</span><br><span class="line">    CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=&lt;install_dir&gt;</span><br><span class="line">)</span><br><span class="line"><span class="keyword">include_directories</span>(<span class="variable">$&#123;CMAKE_CURRENT_BINARY_DIR&#125;</span>/&lt;install_dir&gt;/<span class="keyword">include</span>)</span><br><span class="line"><span class="keyword">target_link_libraries</span>(YourTarget <span class="variable">$&#123;CMAKE_CURRENT_BINARY_DIR&#125;</span>/&lt;install_dir&gt;/lib/libThirdPartyLibrary.a)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>手动配置和构建</p>
+<p>如果项目包含一个源码树中的库，你可以使用 add_subdirectory 来添加并构建这个库。这种方法适用于你有库的源码而不是预编译二进制文件的情况。比如某些作为头文件引入的第三方库。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_subdirectory</span>(ThirdPartyLibrary)</span><br><span class="line"></span><br><span class="line"><span class="keyword">include_directories</span>(<span class="variable">$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;</span>/ThirdPartyLibrary/<span class="keyword">include</span>)</span><br><span class="line"><span class="keyword">target_link_libraries</span>(YourTarget ThirdPartyLibrary)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用 FetchContent</p>
+<p>类似于ExternalProject_Add，但更加直观。需要 CMake 3.11 及其以上版本</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">include</span>(FetchContent)</span><br><span class="line"></span><br><span class="line">FetchContent_Declare</span><br><span class="line">(</span><br><span class="line">    ThirdPartyLibrary</span><br><span class="line">    GIT_REPOSITORY https://github.com/ThirdPartyLibrary.git</span><br><span class="line">)</span><br><span class="line">FetchContent_MakeAvailable(ThirdPartyLibrary)</span><br><span class="line"><span class="keyword">include_directories</span>(<span class="variable">$&#123;third_party_library_SOURCE_DIR&#125;</span>/<span class="keyword">include</span>)</span><br><span class="line"><span class="keyword">target_link_libraries</span>(YourTarget ThirdPartyLibrary)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="1-find-package"><a href="#1-find-package" class="headerlink" title="1. find_package"></a>1. find_package</h2><h3 id="1-用法举例"><a href="#1-用法举例" class="headerlink" title="1. 用法举例"></a>1. 用法举例</h3><ul>
+<li><p>find_package(OpenCV)</p>
+<p>查找名为 OpenCV 的包，找不到不报错，事后可以通过 ${OpenCV_FOUND} 查询是否找到。</p>
+</li>
+<li><p>find_package(OpenCV QUIET)</p>
+<p>查找名为 OpenCV 的包，找不到不报错，不打印任何信息</p>
+</li>
+<li><p>find_package(OpenCV REQUIRED)</p>
+<p>常见用法，查找名为 OpenCV 的包，找不到报错，并终止 CMake 进程，不在继续往下执行</p>
+</li>
+<li><p>find_package(OpenCV REQUIRED COMPONENTS core videoio)</p>
+<p>查找名为 OpenCV 的包，找不到就报错，且必须具有 OpenCV::core 和 OpenCV::videoio 这两个组件，如果没有这两个组件也会报错</p>
+</li>
+<li><p>find_package(OpenCV REQUIRED OPTIONAL_COMPONENTS core videoio)</p>
+<p>查找名为 OpenCV 的包，找不到就报错。但没有对应的组件不会报错，可以通过 ${OpenCV_core_FOUND} 查询是否找到 core 组件</p>
+</li>
+</ul>
+<h3 id="2-命令解释"><a href="#2-命令解释" class="headerlink" title="2. 命令解释"></a>2. 命令解释</h3><ul>
+<li>find_package 实际上是在找对应的 xxxConfig.cmake 的文件，而不是去找具体的库文件和头文件</li>
+<li>xxxConfig.cmake 配置文件中包含了包的具体信息，包括库文件的位置，头文件目录，链接时需要开启的编译选项等等</li>
+</ul>
+<h3 id="3-vcpkg"><a href="#3-vcpkg" class="headerlink" title="3. vcpkg"></a>3. vcpkg</h3>
       
     </div>
     
