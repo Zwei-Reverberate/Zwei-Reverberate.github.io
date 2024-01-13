@@ -25,11 +25,235 @@
 <meta property="og:description" content="1. 鼠标右键菜单添加在当前目录打开控制台适用于 Win10 系统：  新建文本文档，粘贴以下内容并保存： 1234567Windows Registry Editor Version 5.00[HKEY_CLASSES_ROOT\Directory\Background\shell\OpenCMDHere]&quot;ShowBasedOnVelocityId&quot;&#x3D;dword:00639bc8[HKEY_C">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-11-30T11:30:13.000Z">
-<meta property="article:modified_time" content="2022-11-30T11:31:27.864Z">
+<meta property="article:modified_time" content="2024-01-13T06:11:42.668Z">
 <meta property="article:author" content="Zwei">
 <meta property="article:tag" content="Others">
 <meta name="twitter:card" content="summary"><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Zwei's Blog" type="application/atom+xml">
-</head>
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
 
 <body>
   <div id="wrapper">
@@ -92,79 +316,42 @@
 </ul>
 <p><em><a id="more"></a></em></p>
 <h1 id="2-CMD-常用命令"><a href="#2-CMD-常用命令" class="headerlink" title="2. CMD 常用命令"></a>2. CMD 常用命令</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ver <span class="comment">// 现实当前 windows 系统的版本号</span></span><br></pre></td></tr></table></figure>
-
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">winver <span class="comment">// 弹框显示当前 windows 系统信息</span></span><br></pre></td></tr></table></figure>
-
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">whoami <span class="comment">// 显示当前用户的名称</span></span><br></pre></td></tr></table></figure>
-
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hostname <span class="comment">// 显示当前机器名称</span></span><br></pre></td></tr></table></figure>
-
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cls <span class="comment">// 清空控制台显示</span></span><br></pre></td></tr></table></figure>
-
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">exit</span> <span class="comment">// 退出当前控制台窗口</span></span><br></pre></td></tr></table></figure>
-
 <h1 id="3-文件操作相关"><a href="#3-文件操作相关" class="headerlink" title="3. 文件操作相关"></a>3. 文件操作相关</h1><h3 id="1-cd"><a href="#1-cd" class="headerlink" title="1. cd"></a>1. cd</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd <span class="comment">// 显示当前目录</span></span><br></pre></td></tr></table></figure>
-
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd .. <span class="comment">// 返回上一级目录</span></span><br></pre></td></tr></table></figure>
-
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /D [path] <span class="comment">// 进入 path 目录，如果 path 是当前目录的子目录，可以省去 paht 的共同部分</span></span><br></pre></td></tr></table></figure>
-
 <h3 id="2-dir"><a href="#2-dir" class="headerlink" title="2. dir"></a>2. dir</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dir <span class="comment">// 显示当前目录中的子文件夹与文件</span></span><br></pre></td></tr></table></figure>
-
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dir /b <span class="comment">// 只显示当前目录中的子文件夹与文件的名称</span></span><br></pre></td></tr></table></figure>
-
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dir /p <span class="comment">// 分页显示当前目录中的子文件夹与文件</span></span><br></pre></td></tr></table></figure>
-
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dir /ad <span class="comment">// 显示当前目录中的子文件夹</span></span><br></pre></td></tr></table></figure>
-
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dir /a-d <span class="comment">// 显示当前目录中的文件</span></span><br></pre></td></tr></table></figure>
-
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dir [path] <span class="comment">// 显示目录 path 中的内容</span></span><br></pre></td></tr></table></figure>
-
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dir [filename] <span class="comment">// 显示当前目录中某一文件的信息</span></span><br></pre></td></tr></table></figure>
-
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dir /s <span class="comment">// 递归显示当前目录中的内容</span></span><br></pre></td></tr></table></figure>
-
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dir [name]* <span class="comment">// 显示当前目录中以 [name] 开头的文件和文件夹的信息</span></span><br></pre></td></tr></table></figure>
-
 <h3 id="3-md"><a href="#3-md" class="headerlink" title="3. md"></a>3. md</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">md [foldername_1]...[foldername_n] <span class="comment">// 创建文件夹，支持同时创建多个</span></span><br></pre></td></tr></table></figure>
-
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">md [path][foldername] <span class="comment">// 在指定路径下创建文件夹</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="4-type-null-gt"><a href="#4-type-null-gt" class="headerlink" title="4. type null&gt;"></a>4. type null&gt;</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">type null&gt; [filename] <span class="comment">// 当前目录下新建文件</span></span><br></pre></td></tr></table></figure>
-
+<h3 id="4-type-null-gt"><a href="#4-type-null-gt" class="headerlink" title="4. type null>"></a>4. type null&gt;</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">type null&gt; [filename] <span class="comment">// 当前目录下新建文件</span></span><br></pre></td></tr></table></figure>
 <h3 id="5-rd"><a href="#5-rd" class="headerlink" title="5. rd"></a>5. rd</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rd [foldername] <span class="comment">// 删除当前目录下的文件夹</span></span><br></pre></td></tr></table></figure>
-
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rd [path][foldername] <span class="comment">// 删除指定路径下的文件夹</span></span><br></pre></td></tr></table></figure>
-
 <h3 id="6-ren"><a href="#6-ren" class="headerlink" title="6. ren"></a>6. ren</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ren [oldname] [newname] <span class="comment">// 重命名文件 / 文件夹</span></span><br></pre></td></tr></table></figure>
-
 <h3 id="7-move"><a href="#7-move" class="headerlink" title="7. move"></a>7. move</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">move</span> [filename/foldername][path] <span class="comment">// 移动文件/文件夹到指定路径</span></span><br><span class="line">    				  			 <span class="comment">// [filename/foldername] 可以匹配前缀和后缀，如 *.png 表示将所有 .png 文件夹移动</span></span><br><span class="line">    				 		     <span class="comment">// 1* 表示将所有开头的文件/文件夹移动</span></span><br></pre></td></tr></table></figure>
-
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">move</span> /y [filename/foldername][path] <span class="comment">// 强制移动，遇到同名文件直接覆盖不询问</span></span><br></pre></td></tr></table></figure>
-
 <h3 id="8-del"><a href="#8-del" class="headerlink" title="8. del"></a>8. del</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">del [filename] <span class="comment">// 删除指定文件</span></span><br></pre></td></tr></table></figure>
-
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">del [foldername] <span class="comment">// 删除指定文件夹中的文件，不包含文件夹的文件夹</span></span><br></pre></td></tr></table></figure>
-
 <h3 id="9-copy"><a href="#9-copy" class="headerlink" title="9. copy"></a>9. copy</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">copy [filename][newpath] <span class="comment">// 拷贝文件到指定路径</span></span><br></pre></td></tr></table></figure>
-
 <h3 id="10-tree"><a href="#10-tree" class="headerlink" title="10. tree"></a>10. tree</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tree [path] <span class="comment">// 显示目录结构</span></span><br></pre></td></tr></table></figure>
-
 <h3 id="11-type"><a href="#11-type" class="headerlink" title="11. type"></a>11. type</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">type [txtname].txt <span class="comment">// 显示文本文件的内容</span></span><br></pre></td></tr></table></figure>
-
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">more [txtname].txt <span class="comment">// 分屏显示文本文件的内容，[空格] 下一屏，[q] 退出</span></span><br></pre></td></tr></table></figure>
-
 <h3 id="12-start"><a href="#12-start" class="headerlink" title="12. start"></a>12. start</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">start [filename] <span class="comment">// 打开文件/运行程序</span></span><br></pre></td></tr></table></figure>
-
 <h1 id="4-其他"><a href="#4-其他" class="headerlink" title="4. 其他"></a>4. 其他</h1><h3 id="1-time"><a href="#1-time" class="headerlink" title="1. time"></a>1. time</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">time <span class="comment">// 显示当前时间</span></span><br></pre></td></tr></table></figure>
-
 <h3 id="2-date"><a href="#2-date" class="headerlink" title="2. date"></a>2. date</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">date <span class="comment">// 显示当前日期</span></span><br></pre></td></tr></table></figure>
-
 <h3 id="3-color"><a href="#3-color" class="headerlink" title="3. color"></a>3. color</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">color [backgroundcolor][fontcolor] <span class="comment">// 修改当前控制台窗口的颜色</span></span><br></pre></td></tr></table></figure>
-
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">color <span class="comment">// 恢复默认颜色</span></span><br></pre></td></tr></table></figure>
-
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">color --help <span class="comment">// 查看说明</span></span><br></pre></td></tr></table></figure>
       
     </div>
@@ -230,5 +417,20 @@ let d=document,r=d.documentElement.style,f=r.setProperty.bind(r),l=localStorage,
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="//cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </body>
 </html>

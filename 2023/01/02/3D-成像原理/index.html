@@ -33,12 +33,236 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/Zwei-Reverberate/Blog-Images/master/3D%20%E6%88%90%E5%83%8F%E5%8E%9F%E7%90%86/7.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Zwei-Reverberate/Blog-Images/master/3D%20%E6%88%90%E5%83%8F%E5%8E%9F%E7%90%86/8.png">
 <meta property="article:published_time" content="2023-01-02T13:52:41.000Z">
-<meta property="article:modified_time" content="2023-01-17T14:31:03.673Z">
+<meta property="article:modified_time" content="2024-01-13T06:10:14.749Z">
 <meta property="article:author" content="Zwei">
 <meta property="article:tag" content="Computer Graphics">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/Zwei-Reverberate/Blog-Images/master/3D%20%E6%88%90%E5%83%8F%E5%8E%9F%E7%90%86/1.png"><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Zwei's Blog" type="application/atom+xml">
-</head>
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
 
 <body>
   <div id="wrapper">
@@ -93,29 +317,23 @@
 <p>曾经有一个问题困扰过我：在 Ray Tracing 中，我们从虚拟相机发射了一条光线，光线与屏幕相交然后和进入场景之中，击中场景中的物体，再从击中点要么寻求和光源是否有直接连线，要么从击中点发出新的光线，然后以此为依据队屏幕像素进行着色。</p>
 <p>这是一个非常合理的过程，屏幕和物体都处在合理的顺序上。但不要忘了虚拟相机和屏幕之间是有一部分间距的，要是物体位于这个间距之间呢？那我们刚刚的理论似乎说不通了，但事实是，这种情况仍然能够成像。这是为什么呢？让我们一起探讨一下成像原理吧。</p>
 <p><em><a id="more"></a></em></p>
-<h1 id="1-相机成像">1. 相机成像</h1>
-<p>摄影的原理主要包括两个部分：</p>
+<h1 id="1-相机成像"><a href="#1-相机成像" class="headerlink" title="1. 相机成像"></a>1. 相机成像</h1><p>摄影的原理主要包括两个部分：</p>
 <ul>
 <li>将图像存储在胶片或者文件中</li>
 <li>在相机中生成图像</li>
 </ul>
 <p>我们主要关心后者。现实世界中最简单的相机类型是针孔相机，图形学中的虚拟相机常常模拟的也是针孔相机的特性。当然也有更加复杂逼真的相机模型，但这并不在本文的讨论之列。</p>
 <p>针孔相机对应的物理现象是小孔成像，其背后的光学依据是光沿直线传播。</p>
-<h3 id="1-小孔成像">1. 小孔成像</h3>
-<p>所谓小孔成像，即在物体和成像平面之间放置一个带孔平面，那么成像平面上就会形成物体的倒像，如图：</p>
-<img src="https://raw.githubusercontent.com/Zwei-Reverberate/Blog-Images/master/3D%20%E6%88%90%E5%83%8F%E5%8E%9F%E7%90%86/1.png">
-<h3 id="2-针孔相机">2. 针孔相机</h3>
-<h5 id="1-光圈">1. 光圈</h5>
-<p>在针孔相机中，这个小孔被称作是光圈。所有进入相机的光线都会汇聚到这一点，并在另一侧发散。</p>
+<h3 id="1-小孔成像"><a href="#1-小孔成像" class="headerlink" title="1. 小孔成像"></a>1. 小孔成像</h3><p>所谓小孔成像，即在物体和成像平面之间放置一个带孔平面，那么成像平面上就会形成物体的倒像，如图：</p>
+<p><img src="https://raw.githubusercontent.com/Zwei-Reverberate/Blog-Images/master/3D%20%E6%88%90%E5%83%8F%E5%8E%9F%E7%90%86/1.png"></p>
+<h3 id="2-针孔相机"><a href="#2-针孔相机" class="headerlink" title="2. 针孔相机"></a>2. 针孔相机</h3><h5 id="1-光圈"><a href="#1-光圈" class="headerlink" title="1. 光圈"></a>1. 光圈</h5><p>在针孔相机中，这个小孔被称作是光圈。所有进入相机的光线都会汇聚到这一点，并在另一侧发散。</p>
 <p>光圈的大小控制成像的清晰度：光圈越小，成像越清晰。光圈越大，成像越模糊。</p>
 <p>如下图所示，光圈足够小时，物体上 A 点在成像平面上对应 A’，而当光圈较大时，A 点就会对应多个点（实际上是 A’A’’ 整个区域）。所以造成了成像的模糊。</p>
-<img src="https://raw.githubusercontent.com/Zwei-Reverberate/Blog-Images/master/3D%20%E6%88%90%E5%83%8F%E5%8E%9F%E7%90%86/2..png">
+<p><img src="https://raw.githubusercontent.com/Zwei-Reverberate/Blog-Images/master/3D%20%E6%88%90%E5%83%8F%E5%8E%9F%E7%90%86/2..png"></p>
 <p>光圈的大小也和物体的大小相关，当物体很大时，较大的光圈也可以生成可以接受的图像。因为对于较大的物体，我们并不苛求它的每个细节都尽善尽美。不过光圈越小，分辨率越高。</p>
 <p>不过光圈也并不是越小越好，光圈越小，通过的光线也就越少，成像的亮度会降低，光圈太小还可能造成队成像不利的衍射反应。</p>
-<h5 id="2-曝光时间">2. 曝光时间</h5>
-<p>正如上文所说，光圈越小，固定时间内通过的光线也就越少。为了到达成像所需的光量，就需要一定的曝光时间。我们希望曝光时间越短越好，所以需要在清晰度和曝光时间中折衷取舍。</p>
-<h3 id="3-透镜相机">3. 透镜相机</h3>
-<p>透镜相机解决的就是曝光时间过长的问题。</p>
+<h5 id="2-曝光时间"><a href="#2-曝光时间" class="headerlink" title="2. 曝光时间"></a>2. 曝光时间</h5><p>正如上文所说，光圈越小，固定时间内通过的光线也就越少。为了到达成像所需的光量，就需要一定的曝光时间。我们希望曝光时间越短越好，所以需要在清晰度和曝光时间中折衷取舍。</p>
+<h3 id="3-透镜相机"><a href="#3-透镜相机" class="headerlink" title="3. 透镜相机"></a>3. 透镜相机</h3><p>透镜相机解决的就是曝光时间过长的问题。</p>
 <p>其工作原理可以简单描述为在光圈处放置一个凸透镜，凸透镜可以收集进入相机的光线，然后再将其汇聚到成像平面上的一点。其成像规则遵循凸透镜成像的规则：</p>
 <blockquote>
 <p>焦距：透镜的光心到光聚集之焦点的距离</p>
@@ -128,76 +346,66 @@
 <li>当物距小于1倍焦距时，则成正立、放大的虚像，此时像距大于物距，像比物大，物像同侧</li>
 </ul>
 <p>现实中的相机构造并非如此简单，它一般是多个凸透镜和凹透镜的组合，而且可以实现变焦，不过整体发挥的效用跟单独的凸透镜相似。</p>
-<h3 id="4-景深">4. 景深</h3>
-<p>景深指的是相机对焦点前后相对清晰的的成像范围，在景深之内的成像比较清楚，在这个范围之前或者之后的成像则比较模糊。如图所示：</p>
-<img src="https://raw.githubusercontent.com/Zwei-Reverberate/Blog-Images/master/3D%20%E6%88%90%E5%83%8F%E5%8E%9F%E7%90%86/3.png">
+<h3 id="4-景深"><a href="#4-景深" class="headerlink" title="4. 景深"></a>4. 景深</h3><p>景深指的是相机对焦点前后相对清晰的的成像范围，在景深之内的成像比较清楚，在这个范围之前或者之后的成像则比较模糊。如图所示：</p>
+<p><img src="https://raw.githubusercontent.com/Zwei-Reverberate/Blog-Images/master/3D%20%E6%88%90%E5%83%8F%E5%8E%9F%E7%90%86/3.png"></p>
 <p>景深通常是由物距、镜头焦距和镜头的光圈值共同决定的。景深的精确计算请参阅<a href="https://zh.wikipedia.org/wiki/%E6%99%AF%E6%B7%B1" target="_blank" rel="noopener">景深</a>。</p>
 <p>然而，因为针孔相机并不使用透镜，所以它具有它一般没有景深这个概念，即物体的清晰度和它距离相机的距离无关。我们可以使用针孔相机拍出完全清晰的图像。</p>
 <p>同理，如果我们在图形学计算中模拟针孔相机也是具有无限景深的，场景中所有的对象都非常清晰。不过我们可以通过其他手段来模拟景深。</p>
-<h3 id="5-视场角">5. 视场角</h3>
-<p>后文我们讨论的相机类型如果没有特意指出的话都默认为针孔相机，因为我们在图形学实践中经常模拟针孔相机的一些性质，但并不完全等同于真正的针孔相机。</p>
+<h3 id="5-视场角"><a href="#5-视场角" class="headerlink" title="5. 视场角"></a>5. 视场角</h3><p>后文我们讨论的相机类型如果没有特意指出的话都默认为针孔相机，因为我们在图形学实践中经常模拟针孔相机的一些性质，但并不完全等同于真正的针孔相机。</p>
 <p>前文我们已经定义过了透镜相机的焦距（Focal Length），而针孔相机的焦距有所不同。针孔相机的焦距是从成像平面到光圈的距离。</p>
 <p>关于焦距，我们可以发现以下性质：当成像平面越接近光圈时，成像越小，如下图所示：</p>
-<img src="https://raw.githubusercontent.com/Zwei-Reverberate/Blog-Images/master/3D%20%E6%88%90%E5%83%8F%E5%8E%9F%E7%90%86/4.png">
+<p><img src="https://raw.githubusercontent.com/Zwei-Reverberate/Blog-Images/master/3D%20%E6%88%90%E5%83%8F%E5%8E%9F%E7%90%86/4.png"></p>
 <p>成像平面 P’ 对应的焦距是 f1，成像平面 P 对应的焦距是 f2，前者的成像区域 l’ 小于后者 l。</p>
 <p>与此同时，在成像平面 P’ 所能看到的场景范围要比 P 更大，因为同一物体占据了屏幕更小的范围，意味着能够容纳更多的物体。</p>
 <p>以我个人的经验来看，这一特性在实践中经常用到，特别是在描述相机性质的时候，图形学中将其称之为视场角（Field of View，FOV）。</p>
 <p>总结一下就是，焦距越小，视场角越大，可见的场景范围越大。</p>
 <p>视场角在在 3D 空间中分为两种，水平视场角和垂直视场角，如图所示：</p>
-<img src="https://raw.githubusercontent.com/Zwei-Reverberate/Blog-Images/master/3D%20%E6%88%90%E5%83%8F%E5%8E%9F%E7%90%86/5.png">
+<p><img src="https://raw.githubusercontent.com/Zwei-Reverberate/Blog-Images/master/3D%20%E6%88%90%E5%83%8F%E5%8E%9F%E7%90%86/5.png"></p>
 <p>我们在具体看一下视场角和焦距之间的关系：</p>
-<img src="https://raw.githubusercontent.com/Zwei-Reverberate/Blog-Images/master/3D%20%E6%88%90%E5%83%8F%E5%8E%9F%E7%90%86/6.png">
+<p><img src="https://raw.githubusercontent.com/Zwei-Reverberate/Blog-Images/master/3D%20%E6%88%90%E5%83%8F%E5%8E%9F%E7%90%86/6.png"></p>
 <p>假设我们使得 canvas size 始终等于胶片尺寸（事实上大多数情况下也正是这样）。那么焦距，胶片尺寸，视场角这三者就是相互关联的。</p>
-<h1 id="2-虚拟相机">2. 虚拟相机</h1>
-<h3 id="1-虚拟相机的特性">1. 虚拟相机的特性</h3>
-<p>我们在图形学中经常使用的虚拟相机和上文述及的针孔相机有所不同。主要表现在以下几个方面：</p>
+<h1 id="2-虚拟相机"><a href="#2-虚拟相机" class="headerlink" title="2. 虚拟相机"></a>2. 虚拟相机</h1><h3 id="1-虚拟相机的特性"><a href="#1-虚拟相机的特性" class="headerlink" title="1. 虚拟相机的特性"></a>1. 虚拟相机的特性</h3><p>我们在图形学中经常使用的虚拟相机和上文述及的针孔相机有所不同。主要表现在以下几个方面：</p>
 <ol>
 <li>如果使用光栅化技术进行渲染，那么虚拟相机会有一个近裁剪平面和远裁剪平面。只有两个裁剪平面之间的对象是可见的。</li>
 <li>虚拟相机的成像平面位于相机光圈之前，而不是之后，所以成像也不是倒像，而是正像</li>
 </ol>
 <p>现实中的相机受制于物理规则，成像平面不能位于光圈之前，而虚拟相机则不受这种限制。</p>
 <p>而如果成像平面位于光圈之前，那么光圈的位置（也就是投影中心）就是视点的位置，也就是 Ray Tracing 中发射出射线的位置。</p>
-<h3 id="2-裁剪平面">2. 裁剪平面</h3>
-<blockquote>
+<h3 id="2-裁剪平面"><a href="#2-裁剪平面" class="headerlink" title="2. 裁剪平面"></a>2. 裁剪平面</h3><blockquote>
 <p>裁剪平面是光栅化所必须的，却不是 Ray Tracing 所必须的，通常在 Ray Tracing 中并不使用裁剪平面。</p>
 </blockquote>
 <p>裁剪平面分为近裁剪平面和远裁剪平面。二者位于虚拟相机之前，并平行于成像平面。比近裁剪平面更近或者比远裁剪平面更远的区域对相机来说是不可见的。</p>
-<h3 id="3-虚拟相机的坐标系">3. 虚拟相机的坐标系</h3>
-<p>我们想建立关于虚拟相机的坐标系。想象一下，这个坐标系以相机位置，也就是光圈位置为原点，我们如何推导出其 x, y, z 轴？</p>
+<h3 id="3-虚拟相机的坐标系"><a href="#3-虚拟相机的坐标系" class="headerlink" title="3. 虚拟相机的坐标系"></a>3. 虚拟相机的坐标系</h3><p>我们想建立关于虚拟相机的坐标系。想象一下，这个坐标系以相机位置，也就是光圈位置为原点，我们如何推导出其 x, y, z 轴？</p>
 <p>和观察矩阵的推导类似，我们还需要一个 target 目标点和一个 up 向量。我们假设虚拟相机的坐标系是一个右手坐标系。推导过程如下：</p>
-<img src="https://raw.githubusercontent.com/Zwei-Reverberate/Blog-Images/master/3D%20%E6%88%90%E5%83%8F%E5%8E%9F%E7%90%86/7.png">
+<p><img src="https://raw.githubusercontent.com/Zwei-Reverberate/Blog-Images/master/3D%20%E6%88%90%E5%83%8F%E5%8E%9F%E7%90%86/7.png"></p>
 <p>在上面的右手坐标系中，成像平面可以位于 -w 轴上的任意位置。</p>
- <img src="https://raw.githubusercontent.com/Zwei-Reverberate/Blog-Images/master/3D%20%E6%88%90%E5%83%8F%E5%8E%9F%E7%90%86/8.png">
+<p> <img src="https://raw.githubusercontent.com/Zwei-Reverberate/Blog-Images/master/3D%20%E6%88%90%E5%83%8F%E5%8E%9F%E7%90%86/8.png"></p>
 <p>而在 Ray Tracing 中，成像平面也可以位于 -w 轴上的任意位置。</p>
 <p>当视点和成像平面之间的距离为1时可以简化运算。</p>
-<h3 id="4-观察坐标和世界坐标的相互转化">4. 观察坐标和世界坐标的相互转化</h3>
-<p>是从观察坐标转换为世界坐标还是从世界坐标转化为观察坐标，取决于我们使用的渲染方式：</p>
+<h3 id="4-观察坐标和世界坐标的相互转化"><a href="#4-观察坐标和世界坐标的相互转化" class="headerlink" title="4. 观察坐标和世界坐标的相互转化"></a>4. 观察坐标和世界坐标的相互转化</h3><p>是从观察坐标转换为世界坐标还是从世界坐标转化为观察坐标，取决于我们使用的渲染方式：</p>
 <ul>
-<li>如果是光栅化过程，是将物体的顶点坐标从世界坐标转换为观察坐标
-<ul>
+<li>如果是光栅化过程，是将物体的顶点坐标从世界坐标转换为观察坐标<ul>
 <li>光栅化是以对象为中心的</li>
 <li>我们需要将对象的坐标经历一系列的转换过程：局部坐标—世界坐标—观察坐标—裁剪坐标—NDC 坐标—屏幕坐标</li>
 <li>图像是由投影到图像上的”点“（并不是点，只是比喻）集合而成的</li>
 </ul>
 </li>
-<li>而如果是 Ray Tracing，则是从观察坐标转换为世界坐标。因为我们的光线是以虚拟相机坐标系构建的
-<ul>
+<li>而如果是 Ray Tracing，则是从观察坐标转换为世界坐标。因为我们的光线是以虚拟相机坐标系构建的<ul>
 <li>Ray Tracing 的运作方式与光栅化相反，是以图像为中心的</li>
 <li>不是沿着光线的自然路径从对象到相机，而是沿着相反的方向由相机到对象</li>
 </ul>
 </li>
 </ul>
-<h1 id="3-最开始的问题">3. 最开始的问题</h1>
-<p>我们已经讨论完了 3D 成像的一些最基本的原理，尽管我们省略了很多细节。</p>
+<h1 id="3-最开始的问题"><a href="#3-最开始的问题" class="headerlink" title="3. 最开始的问题"></a>3. 最开始的问题</h1><p>我们已经讨论完了 3D 成像的一些最基本的原理，尽管我们省略了很多细节。</p>
 <p>让我们重新回到最开始的问题。</p>
 <p>在 Ray Tracing 中，我们从一个像素的位置开始，我们所做的主要工作就是将其转换为成像平面上的一个点 P，连接视点 C 和 P 就能够确认光线的方向，视点 C 就是光线的起点。</p>
 <p>我们拿到的是像素坐标，设这个坐标为 P，需要对其进行归一化，转换到 NDC 空间中。然而虽然我们的坐标得到了标准化，但是缺失第三个维度也就是 z 值，我们需要手动指定 z 值，正如上文所言，z 值表示成像平面距离视点的距离，只是在虚拟相机的 -w 方向的值均可。也就是说，这个值是根据虚拟相机得到的，所以 P 的坐标现在正处于相机坐标系中。我们就假设其为 1.0 好了，我们不关心 x, y 两个分量的值，所以现在 P 的坐标就是 (x, y, 1.0)。</p>
 <p>你这时就要问了，为什么是 1.0 而不是 -1.0 呢？问得好，这个 1.0  代表的是视点到成像平面之间的距离。那这岂不是意味着我们的成像平面位于 我们的视点之后了？确实！如果我们的观察坐标系是右手系的话确实如此，因为在观察坐标系中相机的坐标始终是 (0, 0, 0)，所以一旦我们指定了 P 的坐标是 (x, y, 1.0)，那么在后续的变换中就不能使用上面推导的观察矩阵了，因为我们是在假设它是右手系进行推导的，我们必须使用左手系推导得到的观察矩阵。这也很简单，在计算 w 轴的时候不乘以 -1 就好了：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">mat3 <span class="title">setCamera</span><span class="params">(vec3 ta, vec3 ro, <span class="keyword">float</span> cr)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    vec3 zaxis = normalize(ta - ro);</span><br><span class="line">    <span class="comment">// 当 cr 等于 0 度时，up = (0.0, 1.0, 0.0)</span></span><br><span class="line">    vec3 up = vec3(<span class="built_in">sin</span>(cr), <span class="built_in">cos</span>(cr), <span class="number">0.0</span>);</span><br><span class="line">    vec3 xaxis = normalize(cross(zaxis, up));</span><br><span class="line">    vec3 yaxis = cross(xaxis, zaxis);</span><br><span class="line">    <span class="keyword">return</span> mat3(xaxis, yaxis, zaxis);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">mat3 <span class="title">setCamera</span><span class="params">(vec3 ta, vec3 ro, <span class="keyword">float</span> cr)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    vec3 zaxis = normalize(ta - ro);</span><br><span class="line">    <span class="comment">// 当 cr 等于 0 度时，up = (0.0, 1.0, 0.0)</span></span><br><span class="line">    vec3 up = vec3(<span class="built_in">sin</span>(cr), <span class="built_in">cos</span>(cr), <span class="number">0.0</span>);</span><br><span class="line">    vec3 xaxis = normalize(cross(zaxis, up));</span><br><span class="line">    vec3 yaxis = cross(xaxis, zaxis);</span><br><span class="line">    <span class="keyword">return</span> mat3(xaxis, yaxis, zaxis);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
 <p>有了观察矩阵 cam，我们就可以将相机坐标转换为世界坐标了：cam * p(x, y, 1.0)。</p>
 <p>如果我们固执地要使用右手坐标系推导观察矩阵，那么 P 的观察坐标就应该预设为 (x, y, -1.0)。原则就是，成像平面一定要位于视点之前。</p>
 <p>至于为什么可以成像，让我们以一段 RayMarching 的代码为示例说明。可以看到，我们最后成像和着色的依据是 intersection 焦点，只要计算出光线和物体的交点就能够计算出着色！而这个交点即使物体在成像平面与摄像机之间也是可以计算出来的！我们亦可以用下面这段代码调试上文所说的左右手系问题和视点和成像平面之间的距离问题。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> TMIN  0.1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> TMAX  20.0</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RAYMARCH_TIME 128       <span class="comment">// 定义 RayMarching 最大的迭代次数</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PRECISION 0.001         <span class="comment">// 阈值</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> AA 3.0</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PI 3.14159265</span></span><br><span class="line"></span><br><span class="line"><span class="function">vec2 <span class="title">defineUV</span><span class="params">(vec2 fragCoord)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="number">2.0</span>*fragCoord - iResolution.xy)/iResolution.x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">float</span> <span class="title">sdfSphere</span><span class="params">(vec3 p, vec3 sphereCenter, <span class="keyword">float</span> radius)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> length(p - sphereCenter) - radius;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">float</span> <span class="title">rayMarch</span><span class="params">(vec3 ro, vec3 rd, vec3 sphereCenter, <span class="keyword">float</span> radius)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">float</span> t = TMIN;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;RAYMARCH_TIME &amp;&amp; t&lt; TMAX; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        vec3 p = ro + t*rd;</span><br><span class="line">        <span class="keyword">float</span> d = sdfSphere(p, sphereCenter, radius);</span><br><span class="line">        <span class="keyword">if</span>(d &lt; PRECISION)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 如果到球体的距离小于阈值，就认为射线打到球体上了，跳出循环</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 否则 t 加上一个到球体的最短距离</span></span><br><span class="line">        t += d;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> t;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 计算与球体交点的法向量</span></span><br><span class="line"><span class="function">vec3 <span class="title">calcNormal</span><span class="params">( vec3  p, vec3 sphereCenter, <span class="keyword">float</span> radius)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">float</span> h = <span class="number">0.0001</span>; </span><br><span class="line">    <span class="keyword">const</span> vec2 k = vec2(<span class="number">1</span>,<span class="number">-1</span>);</span><br><span class="line">    <span class="keyword">return</span> normalize( </span><br><span class="line">                      k.xyy*sdfSphere( p + k.xyy*h, sphereCenter, radius) + </span><br><span class="line">                      k.yyx*sdfSphere( p + k.yyx*h, sphereCenter, radius ) + </span><br><span class="line">                      k.yxy*sdfSphere( p + k.yxy*h, sphereCenter, radius ) + </span><br><span class="line">                      k.xxx*sdfSphere( p + k.xxx*h, sphereCenter, radius ) </span><br><span class="line">                    );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function">mat3 <span class="title">setCamera</span><span class="params">(vec3 ta, vec3 ro, <span class="keyword">float</span> cr)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    vec3 zaxis = normalize(ta - ro);</span><br><span class="line">    <span class="comment">// 当 cr 等于 0 度时，up = (0.0, 1.0, 0.0)</span></span><br><span class="line">    vec3 up = vec3(<span class="built_in">sin</span>(cr), <span class="built_in">cos</span>(cr), <span class="number">0.0</span>);</span><br><span class="line">    vec3 xaxis = normalize(cross(zaxis, up));</span><br><span class="line">    vec3 yaxis = cross(xaxis, zaxis);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> mat3(xaxis, yaxis, zaxis);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function">vec3 <span class="title">renderSphere</span><span class="params">(vec2 uv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    vec3 color;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 定义摄像机发出射线的位置</span></span><br><span class="line">    <span class="comment">//vec3 ro = vec3(2.0* cos(iTime), 1.0 + 0.4 * cos(iTime/2.0), 2.0*sin(iTime));</span></span><br><span class="line">    vec3 ro = vec3(<span class="number">0</span>, <span class="number">0</span>, <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">    vec3 ta = vec3(<span class="number">0.0</span>);</span><br><span class="line">    mat3 cam = setCamera(ta, ro, <span class="number">0.0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// rd 是从起始位置指向屏幕上每一个像素的向量</span></span><br><span class="line">    vec3 rd = normalize(cam * vec3(uv, <span class="number">1.0</span>));</span><br><span class="line">    </span><br><span class="line">    vec3 sphereCenter = vec3(<span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">2.0</span>*<span class="built_in">sin</span>(iTime));</span><br><span class="line">    <span class="keyword">float</span> radius = <span class="number">0.3</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">float</span> t = rayMarch(ro, rd, sphereCenter, radius);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// t &lt; TMAX 说明和球有交点</span></span><br><span class="line">    <span class="keyword">if</span>(t&lt;TMAX) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 交点坐标</span></span><br><span class="line">        vec3 intersection = ro + rd*t;</span><br><span class="line">        vec3 nor = calcNormal(intersection, sphereCenter, radius);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 为场景添加一个运动的灯光</span></span><br><span class="line">        vec3 light = vec3(<span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">1.0</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 计算灯光与法线的夹角并将其显示在0到1之间</span></span><br><span class="line">        <span class="keyword">float</span> dif = clamp(dot(normalize(light - intersection), nor), <span class="number">0.0</span>, <span class="number">1.0</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 添加一个恒定的环境光</span></span><br><span class="line">        vec3 ambient = vec3(<span class="number">0.2</span>);</span><br><span class="line"></span><br><span class="line">        color = ambient + dif * vec3(<span class="number">1.0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> color = vec3(<span class="number">0.0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> color;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mainImage</span><span class="params">(out vec4 fragColor, in vec2 fragCoord)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    vec2 uv = defineUV(fragCoord);</span><br><span class="line">    vec3 color = vec3(<span class="number">0.0</span>);</span><br><span class="line">    color = renderSphere(uv);</span><br><span class="line">    fragColor = vec4(color, <span class="number">1.0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> TMIN  0.1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> TMAX  20.0</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RAYMARCH_TIME 128       <span class="comment">// 定义 RayMarching 最大的迭代次数</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PRECISION 0.001         <span class="comment">// 阈值</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> AA 3.0</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PI 3.14159265</span></span><br><span class="line"></span><br><span class="line"><span class="function">vec2 <span class="title">defineUV</span><span class="params">(vec2 fragCoord)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">return</span> (<span class="number">2.0</span>*fragCoord - iResolution.xy)/iResolution.x;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">float</span> <span class="title">sdfSphere</span><span class="params">(vec3 p, vec3 sphereCenter, <span class="keyword">float</span> radius)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">return</span> length(p - sphereCenter) - radius;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">float</span> <span class="title">rayMarch</span><span class="params">(vec3 ro, vec3 rd, vec3 sphereCenter, <span class="keyword">float</span> radius)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">float</span> t = TMIN;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;RAYMARCH_TIME &amp;&amp; t&lt; TMAX; i++)</span><br><span class="line">    {</span><br><span class="line">        vec3 p = ro + t*rd;</span><br><span class="line">        <span class="keyword">float</span> d = sdfSphere(p, sphereCenter, radius);</span><br><span class="line">        <span class="keyword">if</span>(d &lt; PRECISION)</span><br><span class="line">        {</span><br><span class="line">            <span class="comment">// 如果到球体的距离小于阈值，就认为射线打到球体上了，跳出循环</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">// 否则 t 加上一个到球体的最短距离</span></span><br><span class="line">        t += d;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> t;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 计算与球体交点的法向量</span></span><br><span class="line"><span class="function">vec3 <span class="title">calcNormal</span><span class="params">( vec3  p, vec3 sphereCenter, <span class="keyword">float</span> radius)</span> </span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">float</span> h = <span class="number">0.0001</span>; </span><br><span class="line">    <span class="keyword">const</span> vec2 k = vec2(<span class="number">1</span>,<span class="number">-1</span>);</span><br><span class="line">    <span class="keyword">return</span> normalize( </span><br><span class="line">                      k.xyy*sdfSphere( p + k.xyy*h, sphereCenter, radius) + </span><br><span class="line">                      k.yyx*sdfSphere( p + k.yyx*h, sphereCenter, radius ) + </span><br><span class="line">                      k.yxy*sdfSphere( p + k.yxy*h, sphereCenter, radius ) + </span><br><span class="line">                      k.xxx*sdfSphere( p + k.xxx*h, sphereCenter, radius ) </span><br><span class="line">                    );</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function">mat3 <span class="title">setCamera</span><span class="params">(vec3 ta, vec3 ro, <span class="keyword">float</span> cr)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    vec3 zaxis = normalize(ta - ro);</span><br><span class="line">    <span class="comment">// 当 cr 等于 0 度时，up = (0.0, 1.0, 0.0)</span></span><br><span class="line">    vec3 up = vec3(<span class="built_in">sin</span>(cr), <span class="built_in">cos</span>(cr), <span class="number">0.0</span>);</span><br><span class="line">    vec3 xaxis = normalize(cross(zaxis, up));</span><br><span class="line">    vec3 yaxis = cross(xaxis, zaxis);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> mat3(xaxis, yaxis, zaxis);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function">vec3 <span class="title">renderSphere</span><span class="params">(vec2 uv)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    vec3 color;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 定义摄像机发出射线的位置</span></span><br><span class="line">    <span class="comment">//vec3 ro = vec3(2.0* cos(iTime), 1.0 + 0.4 * cos(iTime/2.0), 2.0*sin(iTime));</span></span><br><span class="line">    vec3 ro = vec3(<span class="number">0</span>, <span class="number">0</span>, <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">    vec3 ta = vec3(<span class="number">0.0</span>);</span><br><span class="line">    mat3 cam = setCamera(ta, ro, <span class="number">0.0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// rd 是从起始位置指向屏幕上每一个像素的向量</span></span><br><span class="line">    vec3 rd = normalize(cam * vec3(uv, <span class="number">1.0</span>));</span><br><span class="line">    </span><br><span class="line">    vec3 sphereCenter = vec3(<span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">2.0</span>*<span class="built_in">sin</span>(iTime));</span><br><span class="line">    <span class="keyword">float</span> radius = <span class="number">0.3</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">float</span> t = rayMarch(ro, rd, sphereCenter, radius);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// t &lt; TMAX 说明和球有交点</span></span><br><span class="line">    <span class="keyword">if</span>(t&lt;TMAX) </span><br><span class="line">    {</span><br><span class="line">        <span class="comment">// 交点坐标</span></span><br><span class="line">        vec3 intersection = ro + rd*t;</span><br><span class="line">        vec3 nor = calcNormal(intersection, sphereCenter, radius);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 为场景添加一个运动的灯光</span></span><br><span class="line">        vec3 light = vec3(<span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">1.0</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 计算灯光与法线的夹角并将其显示在0到1之间</span></span><br><span class="line">        <span class="keyword">float</span> dif = clamp(dot(normalize(light - intersection), nor), <span class="number">0.0</span>, <span class="number">1.0</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 添加一个恒定的环境光</span></span><br><span class="line">        vec3 ambient = vec3(<span class="number">0.2</span>);</span><br><span class="line"></span><br><span class="line">        color = ambient + dif * vec3(<span class="number">1.0</span>);</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">else</span> color = vec3(<span class="number">0.0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> color;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mainImage</span><span class="params">(out vec4 fragColor, in vec2 fragCoord)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    vec2 uv = defineUV(fragCoord);</span><br><span class="line">    vec3 color = vec3(<span class="number">0.0</span>);</span><br><span class="line">    color = renderSphere(uv);</span><br><span class="line">    fragColor = vec4(color, <span class="number">1.0</span>);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -262,5 +470,20 @@ let d=document,r=d.documentElement.style,f=r.setProperty.bind(r),l=localStorage,
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="//cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </body>
 </html>

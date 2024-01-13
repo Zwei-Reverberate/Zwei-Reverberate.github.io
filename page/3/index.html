@@ -24,7 +24,231 @@
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="Zwei">
 <meta name="twitter:card" content="summary"><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Zwei's Blog" type="application/atom+xml">
-</head>
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
 
 <body>
   <div id="wrapper">
@@ -80,45 +304,50 @@
       
         <p>计算机中的所有数据都以二进制的方式存储，位运算直接对<strong>整数</strong>在内存中的二进制位进行操作，执行效率很高。（一般不对浮点数作位运算和移位运算，因为它的 bits 有特殊含义）</p>
 <h3 id="1-位操作符"><a href="#1-位操作符" class="headerlink" title="1. 位操作符"></a>1. 位操作符</h3><p>要在逻辑上使用位操作符，先将整数转换成二进制表示</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center">符号</th>
-<th align="center">描述</th>
-<th align="center">规则</th>
+<th style="text-align:center">符号</th>
+<th style="text-align:center">描述</th>
+<th style="text-align:center">规则</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center"><code>&amp;</code></td>
-<td align="center">与</td>
-<td align="center">两位都为1时为1</td>
+<tbody>
+<tr>
+<td style="text-align:center"><code>&amp;</code></td>
+<td style="text-align:center">与</td>
+<td style="text-align:center">两位都为1时为1</td>
 </tr>
 <tr>
-<td align="center">|</td>
-<td align="center">或</td>
-<td align="center">两位都为0时为0</td>
+<td style="text-align:center">\</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">或</td>
+<td>两位都为0时为0</td>
 </tr>
 <tr>
-<td align="center"><code>^</code></td>
-<td align="center">异或</td>
-<td align="center">两位相同为0，相异为1</td>
+<td style="text-align:center"><code>^</code></td>
+<td style="text-align:center">异或</td>
+<td style="text-align:center">两位相同为0，相异为1</td>
 </tr>
 <tr>
-<td align="center"><code>~</code></td>
-<td align="center">取反</td>
-<td align="center">各位0变1，1变0</td>
+<td style="text-align:center"><code>~</code></td>
+<td style="text-align:center">取反</td>
+<td style="text-align:center">各位0变1，1变0</td>
 </tr>
 <tr>
-<td align="center"><code>&lt;&lt;</code></td>
-<td align="center">左移</td>
-<td align="center">向左进行移位操作，高位丢弃，低位补 0</td>
+<td style="text-align:center"><code>&lt;&lt;</code></td>
+<td style="text-align:center">左移</td>
+<td style="text-align:center">向左进行移位操作，高位丢弃，低位补 0</td>
 </tr>
 <tr>
-<td align="center"><code>&gt;&gt;</code></td>
-<td align="center">右移</td>
-<td align="center">向右进行移位操作，对无符号数，高位补 0。对于有符号数，高位补符号位（算术右移）</td>
+<td style="text-align:center"><code>&gt;&gt;</code></td>
+<td style="text-align:center">右移</td>
+<td style="text-align:center">向右进行移位操作，对无符号数，高位补 0。对于有符号数，高位补符号位（算术右移）</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>(*注：有的编译器对有符号数的右移是补0，即逻辑右移)</p>
 <p><em></em></p>
       
@@ -283,7 +512,7 @@
     <div class="article-entry" itemprop="articleBody">
       
       
-        <h1 id="1-C-Input-x2F-Output-Library"><a href="#1-C-Input-x2F-Output-Library" class="headerlink" title="1. C++ Input &#x2F; Output Library"></a>1. C++ Input &#x2F; Output Library</h1><p>C++ 借由标准库来处理输入输出。</p>
+        <h1 id="1-C-Input-Output-Library"><a href="#1-C-Input-Output-Library" class="headerlink" title="1. C++ Input / Output Library"></a>1. C++ Input / Output Library</h1><p>C++ 借由标准库来处理输入输出。</p>
 <p>特点：</p>
 <ul>
 <li><p>类型安全</p>
@@ -340,5 +569,20 @@ let d=document,r=d.documentElement.style,f=r.setProperty.bind(r),l=localStorage,
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="//cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </body>
 </html>
