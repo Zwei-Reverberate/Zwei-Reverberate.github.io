@@ -279,6 +279,56 @@ mjx-container[display="true"] + br {
     <div id="content">
       
   
+    <article id="post-Parallel-Programming" class="article article-type-post" itemprop="blogPost" itemscope>
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 class="article-title" itemprop="name">
+      <a href="/2022/10/31/Parallel-Programming/">Parallel Programming</a>
+      
+    </h2>
+  
+
+
+        <div class="article-meta">
+          <time class="article-date" datetime="2022-10-31T09:47:12.000Z" itemprop="datePublished">2022-10-31</time>
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        <p>本篇笔记源自 <a href="https://book.douban.com/subject/26386925/" target="_blank" rel="noopener">C++ 并发编程实战</a></p>
+<h1 id="1-预备知识"><a href="#1-预备知识" class="headerlink" title="1. 预备知识"></a>1. 预备知识</h1><h3 id="1-Main-函式"><a href="#1-Main-函式" class="headerlink" title="1. Main 函式"></a>1. Main 函式</h3><p>所有的 C++ 程序都必须包含一个 <code>main</code> 函式，否则编译器会报错。（动态链接库和静态库没有 <code>mian</code> 函式）。</p>
+<p><code>main</code> 函式是源代码开始执行的地方，但在进入 <code>mian</code> 函式子之前，所有没有显式初始化的静态类成员都被设置为0了。在 Microsoft C++ 中全局的静态对象也在进入 <code>main</code> 之前被初始化。</p>
+<p><code>main</code> 所受的限定：</p>
+<ul>
+<li>不能被重载</li>
+<li>不能被声明为内联函数</li>
+<li>不能被声明为静态函数</li>
+<li>无法获取其地址</li>
+<li>不能从其他地方被调用</li>
+</ul>
+<p><em></em></p>
+      
+    </div>
+    
+      <div class="article-more-link">
+        <a href="/2022/10/31/Parallel-Programming/#more">read more</a>
+      </div>
+    
+    
+    
+  </div>
+</article>
+
+
+
+  
     <article id="post-位运算" class="article article-type-post" itemprop="blogPost" itemscope>
   <div class="article-inner">
     
@@ -479,59 +529,6 @@ mjx-container[display="true"] + br {
     
       <div class="article-more-link">
         <a href="/2022/10/15/Real-time-Shadows/#more">read more</a>
-      </div>
-    
-    
-    
-  </div>
-</article>
-
-
-
-  
-    <article id="post-C-IO" class="article article-type-post" itemprop="blogPost" itemscope>
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 class="article-title" itemprop="name">
-      <a href="/2022/09/29/C-IO/">C++ IO</a>
-      
-    </h2>
-  
-
-
-        <div class="article-meta">
-          <time class="article-date" datetime="2022-09-28T17:17:37.000Z" itemprop="datePublished">2022-09-29</time>
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        <h1 id="1-C-Input-Output-Library"><a href="#1-C-Input-Output-Library" class="headerlink" title="1. C++ Input / Output Library"></a>1. C++ Input / Output Library</h1><p>C++ 借由标准库来处理输入输出。</p>
-<p>特点：</p>
-<ul>
-<li><p>类型安全</p>
-<blockquote>
-<p>IO operations are defined for each of the type. If IO operations are not defined for a particular type, compiler will generate an error.</p>
-</blockquote>
-</li>
-<li><p>基于 streams of bytes 且设备无关</p>
-<blockquote>
-<p>The same set of operations can be appiled to different types of IO devices</p>
-</blockquote>
-</li>
-</ul>
-<p><em></em></p>
-      
-    </div>
-    
-      <div class="article-more-link">
-        <a href="/2022/09/29/C-IO/#more">read more</a>
       </div>
     
     
