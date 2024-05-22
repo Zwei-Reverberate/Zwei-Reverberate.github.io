@@ -23,8 +23,7 @@
 <meta property="og:site_name" content="Zwei&#39;s Blog">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="Zwei">
-<meta name="twitter:card" content="summary"><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Zwei's Blog" type="application/atom+xml">
-<style>mjx-container[jax="SVG"] {
+<meta name="twitter:card" content="summary"><meta name="generator" content="Hexo 4.2.1"><style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
 
@@ -136,7 +135,8 @@ mjx-container[display="true"] {
 mjx-container[display="true"] + br {
   display: none;
 }
-</style><style>mjx-container[jax="SVG"] {
+</style><link rel="alternate" href="/atom.xml" title="Zwei's Blog" type="application/atom+xml">
+<style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
 
@@ -279,21 +279,21 @@ mjx-container[display="true"] + br {
     <div id="content">
       
   
-    <article id="post-悠久的刻度" class="article article-type-post" itemprop="blogPost" itemscope>
+    <article id="post-Graphic-Basis" class="article article-type-post" itemprop="blogPost" itemscope>
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h2 class="article-title" itemprop="name">
-      <a href="/2989/06/04/%E6%82%A0%E4%B9%85%E7%9A%84%E5%88%BB%E5%BA%A6/">悠久的刻度</a>
+      <a href="/2024/05/23/Graphic-Basis/">Graphic Basis</a>
       
     </h2>
   
 
 
         <div class="article-meta">
-          <time class="article-date" datetime="2989-06-04T09:06:23.000Z" itemprop="datePublished">2989-06-04</time>
+          <time class="article-date" datetime="2024-05-22T20:19:21.000Z" itemprop="datePublished">2024-05-23</time>
 
           
         </div>
@@ -302,52 +302,23 @@ mjx-container[display="true"] + br {
     <div class="article-entry" itemprop="articleBody">
       
       
-        <p>“你将遇到的不幸、是你所蹉跎时间的报应。”</p>
+        <h1 id="1-渲染管线">1. 渲染管线</h1>
+<ul>
+<li>
+<p>渲染管线是一个流水线过程。在给定虚拟相机，三维物体，光源，纹理等场景要素的前提一下生成一张二维图像。</p>
+</li>
+<li>
+<p>按照逻辑可划分为：应用程序阶段，几何阶段，光栅化阶段，像素处理阶段</p>
+<p>每个阶段会把前一个阶段的输出作为该阶段的输入</p>
+<p>通常应用程序阶段在 CPU 上完成，是完全可编程的。剩余阶段在 GPU 上完成，是部分可编程的。</p>
+</li>
+</ul>
 <p><em></em></p>
       
     </div>
     
       <div class="article-more-link">
-        <a href="/2989/06/04/%E6%82%A0%E4%B9%85%E7%9A%84%E5%88%BB%E5%BA%A6/#more">read more</a>
-      </div>
-    
-    
-    
-  </div>
-</article>
-
-
-
-  
-    <article id="post-Graphic-General-Theory" class="article article-type-post" itemprop="blogPost" itemscope>
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 class="article-title" itemprop="name">
-      <a href="/2024/01/14/Graphic-General-Theory/">Graphic General Theory</a>
-      
-    </h2>
-  
-
-
-        <div class="article-meta">
-          <time class="article-date" datetime="2024-01-14T12:39:09.000Z" itemprop="datePublished">2024-01-14</time>
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        <p><em></em></p>
-      
-    </div>
-    
-      <div class="article-more-link">
-        <a href="/2024/01/14/Graphic-General-Theory/#more">read more</a>
+        <a href="/2024/05/23/Graphic-Basis/#more">read more</a>
       </div>
     
     
@@ -470,6 +441,48 @@ mjx-container[display="true"] + br {
     
       <div class="article-more-link">
         <a href="/2023/02/26/Vulkan-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#more">read more</a>
+      </div>
+    
+    
+    
+  </div>
+</article>
+
+
+
+  
+    <article id="post-3D-成像原理" class="article article-type-post" itemprop="blogPost" itemscope>
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 class="article-title" itemprop="name">
+      <a href="/2023/01/02/3D-%E6%88%90%E5%83%8F%E5%8E%9F%E7%90%86/">3D 成像原理</a>
+      
+    </h2>
+  
+
+
+        <div class="article-meta">
+          <time class="article-date" datetime="2023-01-02T13:52:41.000Z" itemprop="datePublished">2023-01-02</time>
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        <p>虚拟相机是图形学实践无法回避的一个话题。</p>
+<p>曾经有一个问题困扰过我：在 Ray Tracing 中，我们从虚拟相机发射了一条光线，光线与屏幕相交然后和进入场景之中，击中场景中的物体，再从击中点要么寻求和光源是否有直接连线，要么从击中点发出新的光线，然后以此为依据队屏幕像素进行着色。</p>
+<p>这是一个非常合理的过程，屏幕和物体都处在合理的顺序上。但不要忘了虚拟相机和屏幕之间是有一部分间距的，要是物体位于这个间距之间呢？那我们刚刚的理论似乎说不通了，但事实是，这种情况仍然能够成像。这是为什么呢？让我们一起探讨一下成像原理吧。</p>
+<p><em></em></p>
+      
+    </div>
+    
+      <div class="article-more-link">
+        <a href="/2023/01/02/3D-%E6%88%90%E5%83%8F%E5%8E%9F%E7%90%86/#more">read more</a>
       </div>
     
     
