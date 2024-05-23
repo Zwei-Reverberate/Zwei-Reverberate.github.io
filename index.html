@@ -23,7 +23,8 @@
 <meta property="og:site_name" content="Zwei&#39;s Blog">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="Zwei">
-<meta name="twitter:card" content="summary"><meta name="generator" content="Hexo 4.2.1"><style>mjx-container[jax="SVG"] {
+<meta name="twitter:card" content="summary"><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Zwei's Blog" type="application/atom+xml">
+<style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
 
@@ -135,8 +136,7 @@ mjx-container[display="true"] {
 mjx-container[display="true"] + br {
   display: none;
 }
-</style><link rel="alternate" href="/atom.xml" title="Zwei's Blog" type="application/atom+xml">
-<style>mjx-container[jax="SVG"] {
+</style><style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
 
@@ -302,13 +302,10 @@ mjx-container[display="true"] + br {
     <div class="article-entry" itemprop="articleBody">
       
       
-        <h1 id="1-渲染管线">1. 渲染管线</h1>
-<ul>
-<li>
-<p>渲染管线是一个流水线过程。在给定虚拟相机，三维物体，光源，纹理等场景要素的前提一下生成一张二维图像。</p>
+        <h1 id="1-渲染管线"><a href="#1-渲染管线" class="headerlink" title="1. 渲染管线"></a>1. 渲染管线</h1><ul>
+<li><p>渲染管线是一个流水线过程。在给定虚拟相机，三维物体，光源，纹理等场景要素的前提一下生成一张二维图像。</p>
 </li>
-<li>
-<p>按照逻辑可划分为：应用程序阶段，几何阶段，光栅化阶段，像素处理阶段</p>
+<li><p>按照逻辑可划分为：应用程序阶段，几何阶段，光栅化阶段，像素处理阶段</p>
 <p>每个阶段会把前一个阶段的输出作为该阶段的输入</p>
 <p>通常应用程序阶段在 CPU 上完成，是完全可编程的。剩余阶段在 GPU 上完成，是部分可编程的。</p>
 </li>
