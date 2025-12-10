@@ -2,7 +2,7 @@
 图形 API 是一套预定义的函数、数据结构、协议和工具的集合。它是连接应用程序和图形硬件的桥梁。
 
 图形 API 规定了应用程序如何向 GPU 发出命令，以及 GPU 需要提供哪些功能。基于这份相同的协议， GPU 制造商和应用程序的开发者开发的产品就能兼容。
-如果"><meta name="keywords" content="Blog,博客,Hexo"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta id="site_root_url" data="/"><meta id="default-theme" data="dark"><meta name="renderer" content="webkit"><link rel="shortcut icon" type="image/x-icon" href="/images/avatar.png"><link rel="stylesheet" href="/css/theme/dark.css"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="/css/insight.css"><link rel="stylesheet" href="/css/search.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><script src="/js/utils/index.js"></script><script src="/js/lib/eventemitter3.umd.min.js"></script><script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0"></script><script src="/js/lib/jquery-migrate-1.2.1.min.js"></script><script src="/js/lib/jquery.appear.js"></script><script src="/js/anatolo.js"></script><script src="/js/router.js"></script><script src="/js/darkLightToggle.js"></script><script src="/js/share.js"></script><script>Anatolo.setCommentConfig({"valine":{"enable":false,"appid":null,"appkey":null,"notify":false,"verify":false,"avatar":"mm","placeholder":"hello, world"},"gitment":{"enable":false,"owner":"Your GitHub ID","repo":"Repo to store comments","client_id":"Your client ID","client_secret":"Your client secret"},"gitalk":{"enable":false,"owner":"Your GitHub ID","repo":"Repo to store comments","client_id":"Your client ID","client_secret":"Your client secret"},"duoshuo":null,"disqus":null,"gentie":null})</script><script src="/js/load-comment.js"></script><meta name="generator" content="Hexo 7.3.0"></head><body> <main-outlet><div class="page-top animated"><div class="nav"><li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li><li><a href="/tags">Tags</a></li><li><a href="/about">About</a></li></div><div class="information"><div class="nav_right_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li><li><a class="fa fa-search" onclick="Anatolo.search.openWindow();"></a></li><li><a class="far fa-sun" onclick="darkLightToggle();"></a></li></div><div class="avatar"><img src="/images/logo.png"></div></div></div><div class="toc-mobile"><div class="toc-button"><span>Menu</span></div><div class="toc-container in-page animated fadeInDown"><div class="toclist-container"><div class="tocmenu"><ol class="toclist"><li class="toclist-item toclist-level-1"><a class="toclist-link"><span class="toclist-text">1. Introducation</span></a></li><li class="toclist-item toclist-level-1"><a class="toclist-link"><span class="toclist-text">2. Physical Device</span></a></li></ol></div></div></div></div><div class="sidebar animated"><div class="sidebar-top"><div class="logo-title"><div class="title"><img src="/images/logo.png" style="width:248px;" alt="favicon"><h3 title=""><a href="/">Zwei</a></h3><div class="description"><p>在海月的虚空中，纵身飞过秋凉的时鸟</p></div></div><ul class="social-links"><li><a target="_blank" rel="noopener" href="https://github.com/Zwei-Reverberate"><i class="fab fa-github"></i></a></li><li><a href="mailto:ziqiu370@gmail.com"><i class="fa fa-envelope"></i></a></li></ul></div><div class="toc-container in-sidebar animated fadeInDown"><details class="ltr" open><summary>Menu</summary><div class="toclist-container"><div class="tocmenu"><ol class="toclist"><li class="toclist-item toclist-level-1"><a class="toclist-link"><span class="toclist-text">1. Introducation</span></a></li><li class="toclist-item toclist-level-1"><a class="toclist-link"><span class="toclist-text">2. Physical Device</span></a></li></ol></div></div></details></div></div><div class="footer"><div class="p"><span> </span><i class="fa fa-star"></i><span>Zwei</span></div><div class="by_farbox"><span>Powered by</span><a href="https://hexo.io/zh-cn/" target="_blank">Hexo</a><span>&</span><a href="https://github.com/Lhcfl/hexo-theme-anatolo" target="_blank">Anatolo</a></div><div class="beian"></div></div></div><div class="main animated fadeInDown"><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated"><div class="post-title"><h3><a>现代图形 API</a></h3></div><div class="post-content"><p><h1>1. Introducation</h1>
+如果"><meta name="keywords" content="Blog,博客,Hexo"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta id="site_root_url" data="/"><meta id="default-theme" data="dark"><meta name="renderer" content="webkit"><link rel="shortcut icon" type="image/x-icon" href="/images/avatar.png"><link rel="stylesheet" href="/css/theme/dark.css"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="/css/insight.css"><link rel="stylesheet" href="/css/search.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><script src="/js/utils/index.js"></script><script src="/js/lib/eventemitter3.umd.min.js"></script><script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0"></script><script src="/js/lib/jquery-migrate-1.2.1.min.js"></script><script src="/js/lib/jquery.appear.js"></script><script src="/js/anatolo.js"></script><script src="/js/router.js"></script><script src="/js/darkLightToggle.js"></script><script src="/js/share.js"></script><script>Anatolo.setCommentConfig({"valine":{"enable":false,"appid":null,"appkey":null,"notify":false,"verify":false,"avatar":"mm","placeholder":"hello, world"},"gitment":{"enable":false,"owner":"Your GitHub ID","repo":"Repo to store comments","client_id":"Your client ID","client_secret":"Your client secret"},"gitalk":{"enable":false,"owner":"Your GitHub ID","repo":"Repo to store comments","client_id":"Your client ID","client_secret":"Your client secret"},"duoshuo":null,"disqus":null,"gentie":null})</script><script src="/js/load-comment.js"></script><meta name="generator" content="Hexo 7.3.0"></head><body> <main-outlet><div class="page-top animated"><div class="nav"><li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li><li><a href="/tags">Tags</a></li><li><a href="/about">About</a></li></div><div class="information"><div class="nav_right_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li><li><a class="fa fa-search" onclick="Anatolo.search.openWindow();"></a></li><li><a class="far fa-sun" onclick="darkLightToggle();"></a></li></div><div class="avatar"><img src="/images/logo.png"></div></div></div><div class="toc-mobile"><div class="toc-button"><span>Menu</span></div><div class="toc-container in-page animated fadeInDown"><div class="toclist-container"><div class="tocmenu"><ol class="toclist"><li class="toclist-item toclist-level-1"><a class="toclist-link"><span class="toclist-text">1. Introducation</span></a></li><li class="toclist-item toclist-level-1"><a class="toclist-link"><span class="toclist-text">2. Physical Device</span></a></li><li class="toclist-item toclist-level-1"><a class="toclist-link"><span class="toclist-text">3. Logical Device</span></a></li></ol></div></div></div></div><div class="sidebar animated"><div class="sidebar-top"><div class="logo-title"><div class="title"><img src="/images/logo.png" style="width:248px;" alt="favicon"><h3 title=""><a href="/">Zwei</a></h3><div class="description"><p>在海月的虚空中，纵身飞过秋凉的时鸟</p></div></div><ul class="social-links"><li><a target="_blank" rel="noopener" href="https://github.com/Zwei-Reverberate"><i class="fab fa-github"></i></a></li><li><a href="mailto:ziqiu370@gmail.com"><i class="fa fa-envelope"></i></a></li></ul></div><div class="toc-container in-sidebar animated fadeInDown"><details class="ltr" open><summary>Menu</summary><div class="toclist-container"><div class="tocmenu"><ol class="toclist"><li class="toclist-item toclist-level-1"><a class="toclist-link"><span class="toclist-text">1. Introducation</span></a></li><li class="toclist-item toclist-level-1"><a class="toclist-link"><span class="toclist-text">2. Physical Device</span></a></li><li class="toclist-item toclist-level-1"><a class="toclist-link"><span class="toclist-text">3. Logical Device</span></a></li></ol></div></div></details></div></div><div class="footer"><div class="p"><span> </span><i class="fa fa-star"></i><span>Zwei</span></div><div class="by_farbox"><span>Powered by</span><a href="https://hexo.io/zh-cn/" target="_blank">Hexo</a><span>&</span><a href="https://github.com/Lhcfl/hexo-theme-anatolo" target="_blank">Anatolo</a></div><div class="beian"></div></div></div><div class="main animated fadeInDown"><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated"><div class="post-title"><h3><a>现代图形 API</a></h3></div><div class="post-content"><p><h1>1. Introducation</h1>
 <p>图形 API 是一套预定义的函数、数据结构、协议和工具的集合。它是连接应用程序和图形硬件的桥梁。</p>
 <blockquote>
 <p>图形 API 规定了应用程序如何向 GPU 发出命令，以及 GPU 需要提供哪些功能。基于这份相同的协议， GPU 制造商和应用程序的开发者开发的产品就能兼容。</p>
@@ -59,7 +59,117 @@
 <h1>2. Physical Device</h1>
 <p>在现代图形 API 中，Physical Device（物理设备）指的是图形处理器硬件——显卡。</p>
 <p>传统图形 API 高度抽象化，由驱动程序管理底层细节（内存，同步，多 GPU 等）。而现代图形 API 将控制权交还给开发者，为了实现这一点，首先需要暴露硬件本身，Physical Device 就是这个这个暴露的接口，开发者可以查询物理设备的信息，如支持特性、资源限制等。</p>
-</p></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2025-11-30</span><i class="fa fa-tag"></i><a class="tag" href="/tags/Graphics/" title="Graphics">Graphics </a><span class="leancloud_visitors"></span><span>About 1061 words, 3 min 32 sec  read</span></div></div></div></div><div class="share"><div class="share-btn linkonly"><a class="fa fa-link" onclick="Utils.copyToClipboard(window.location.href)" ref="sidebar"></a></div><div class="share-btn evernote"><a class="fa fa-share" onclick="Anatolo.share.native()" ref="sidebar"></a></div><div class="share-btn weibo"><a class="fab fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></div><div class="share-btn twitter"><a class="fab fa-twitter" target="_blank" rel="noopener" href="http://twitter.com/intent/tweet?text=I%20have%20found%20a%20great%20blog.%0A%0AZwei%20%C2%B7%20%E7%8E%B0%E4%BB%A3%E5%9B%BE%E5%BD%A2%20API%0Ahttps://zweireverberate.space/2025/11/30/%E7%8E%B0%E4%BB%A3%E5%9B%BE%E5%BD%A2-API/%0A"></a></div><div class="share-btn mastodon"><a class="fab fa-mastodon" target="_blank" rel="noopener" href="https://mastodonshare.com/?text=I%20have%20found%20a%20great%20blog.%0A%0AZwei%20%C2%B7%20%E7%8E%B0%E4%BB%A3%E5%9B%BE%E5%BD%A2%20API%0Ahttps://zweireverberate.space/2025/11/30/%E7%8E%B0%E4%BB%A3%E5%9B%BE%E5%BD%A2-API/%0A"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/2989/06/04/%E7%B4%A0%E5%BD%B1%E5%BE%AE%E8%A1%8C/" title="素影微行">Previous</a></li><li class="next pagbuttons"><a class="btn" role="navigation" href="/2025/11/09/C-General/" title="C++ General">Next</a></li></ul></div><script>Anatolo.setCommentConfig({"valine":{"enable":false,"appid":null,"appkey":null,"notify":false,"verify":false,"avatar":"mm","placeholder":"hello, world"},"gitment":{"enable":false,"owner":"Your GitHub ID","repo":"Repo to store comments","client_id":"Your client ID","client_secret":"Your client secret"},"gitalk":{"enable":false,"owner":"Your GitHub ID","repo":"Repo to store comments","client_id":"Your client ID","client_secret":"Your client secret"},"duoshuo":null,"disqus":null,"gentie":null})</script><script src="/js/visitors.js"></script></div></div></div></div></main-outlet><script>(async function(){ if (Anatolo.search == null) await Anatolo.getMsg("search-init"); Anatolo.search.config = {translation:{posts:"Posts",pages:"Pages",categories:"Categories",tags:"Tags",untitled:"(Untitled)",} }; })()</script><script src="/js/search.js" defer></script><div class="searchbox ins-search modal-cover"><div class="searchbox-container ins-search-container modal-container"><div class="searchbox-input-wrapper"><input class="searchbox-input ins-search-input" type="text" placeholder="Search..."><span class="searchbox-close"><a class="fa fa-times-circle" onclick="Anatolo.search.closeWindow();"></a></span></div><div class="searchbox-result-wrapper ins-section-wrapper"><div class="ins-section-container"><p>Seraching...</p></div></div></div></div><button class="float-button hide" id="scroll-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" type="button" title="Scroll to top"><i class="fa fa-angle-up"></i></button><script>$(document).on("scroll", () => {
+<p>当查询一个 Physical Device 时，主要获取以下几类关键信息：</p>
+<ol>
+<li>
+<p>属性与标识：</p>
+<ul>
+<li>设备名称（如 “NVIDIA GeForce RTX 4080”）、供应商ID（Vendor ID)、设备ID</li>
+<li>API 版本、驱动程序版本</li>
+<li>设备类型：集成显卡（<code>INTEGRATED_GPU</code>）、独立显卡（<code>DISCRETE_GPU</code>）、虚拟GPU还是CPU</li>
+</ul>
+</li>
+<li>
+<p>功能特性</p>
+<ul>
+<li>图形管线特性：支持哪些着色器阶段、顶点/实现属性上限等</li>
+<li>计算能力：支持的计算着色器工作组大小等</li>
+<li>可选功能：API 核心规范只保证一个最低标准，所有的高级功能（如几何着色器，曲面细分，条件渲染，片段存储读写，光线追踪，网格着色器）都以特性或者拓展的形式给出，开发者需要显式查询并启用特定的功能</li>
+<li>纹理/缓冲区格式支持：哪些像素格式可用于渲染、采样或存储</li>
+</ul>
+</li>
+<li>
+<p>队列家族（Queue Families）</p>
+<ul>
+<li>队列家族揭示了 GPU 内部的并行执行架构，一个物理设备包含多个队列家族，每个家族专精于不同类型的工作负载（图形绘制，通用计算，异步数据传输，视频编解码）</li>
+<li>查询结果包括：
+<ul>
+<li>每个家族支持的操作类型（<code>GRAPHICS</code>, <code>COMPUTE</code>, <code>TRANSFER</code>, <code>SPARSE_BINDING</code>等）</li>
+<li>每个家族可用的队列数量，这决定了可并行提交的任务流数量</li>
+<li>每个家族是否支持与特定的显示表面进行呈现操作（Presentation）</li>
+</ul>
+</li>
+<li>正确的队列选择是并行渲染、计算与传输重叠的关键</li>
+</ul>
+</li>
+<li>
+<p>内存属性</p>
+<p>物理设备将内存组织为内存堆和内存类型：</p>
+<ul>
+<li>内存堆：代表物理内存池（如独立的显存、共享的系统内存）。查询会提供每个堆的大小和标志</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>
+<p>内存类型：存在于堆中，是具有特定属性组合的逻辑划分，如：</p>
+<ul>
+<li>
+<p><code>DEVICE_LOCAL_BIT</code>：设备本地，访问速度最快，适合纹理和顶点缓冲区</p>
+</li>
+<li>
+<p><code>HOST_VISIBLE_BIT</code>：主机（CPU）可见，适合频繁更新的动态数据。</p>
+</li>
+<li>
+<p><code>HOST_COHERENT_BIT</code>：CPU与GPU缓存自动保持一致，简化操作但可能牺牲性能。</p>
+</li>
+<li>
+<p><code>HOST_CACHED_BIT</code>：主机端缓存，适合CPU随机读取的数据</p>
+</li>
+<li>
+<p>根据资源访问模式选择正确的内存类型（如将常变数据放在<code>HOST_VISIBLE</code>内存中，将静态纹理放在<code>DEVICE_LOCAL</code>内存中）是应遵循的性能优化原则</p>
+</li>
+</ul>
+</li>
+</ul>
+<ol start="5">
+<li>
+<p>格式支持</p>
+<p>查询特定纹理或缓冲区格式，对于给定的像素格式（如 <code>VK_FORMAT_R8G8B8A8_UNORM</code>）检查其支持的特性：</p>
+<ul>
+<li>
+<p><code>SAMPLED_IMAGE</code>：能否在着色器中采样。</p>
+</li>
+<li>
+<p><code>STORAGE_IMAGE</code>：能否在计算着色器中作为存储图像读写。</p>
+</li>
+<li>
+<p><code>COLOR_ATTACHMENT</code>：能否作为渲染目标。</p>
+</li>
+<li>
+<p><code>BLEND</code>：在作为渲染目标时是否支持混合</p>
+</li>
+</ul>
+</li>
+<li>
+<p>交换链支持</p>
+<p>此支持并非核心 API 的一部分，而是通过扩展实现。</p>
+<ul>
+<li>确认设备支持所需的窗口系统集成拓展（如 <code>VK_KHR_swapchain</code>）</li>
+<li>查询设备与特定窗口表面的兼容性，包括
+<ul>
+<li>支持的表面格式（像素格式，色彩空间）</li>
+<li>可用的呈现模式（立即模式、垂直同步 <code>FIFO</code>、无撕裂的 <code>MAILBOX</code> 等）</li>
+<li>表面能力（最小/最大图像数量、当前交换链图像分辨率范围等）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>高级架构特性</p>
+<ul>
+<li>多GPU支持：设备组（device groups）和链接设备（linked devices）的能力，用于协同多个GPU</li>
+<li>管线缓存：通过 <code>pipelineCacheUUID</code> 实现跨进程的管线缓存，加速管线创建</li>
+<li>稀疏内存：支持稀疏纹理和缓冲区，允许部分 residency 和动态映射，适用于流式加载大型纹理</li>
+<li>保守光栅化（Conservative Rasterization）、光栅顺序视图（Rasterization Order View）等高级渲染特性</li>
+<li>子组（Subgroup）操作：支持Wave操作，对计算着色器优化至关重要</li>
+<li>性能查询：支持时间戳和性能查询，用于性能分析</li>
+</ul>
+</li>
+</ol>
+<p> </p>
+<h1>3. Logical Device</h1>
+</p></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2025-11-30</span><i class="fa fa-tag"></i><a class="tag" href="/tags/Graphics/" title="Graphics">Graphics </a><span class="leancloud_visitors"></span><span>About 2177 words, 7 min 15 sec  read</span></div></div></div></div><div class="share"><div class="share-btn linkonly"><a class="fa fa-link" onclick="Utils.copyToClipboard(window.location.href)" ref="sidebar"></a></div><div class="share-btn evernote"><a class="fa fa-share" onclick="Anatolo.share.native()" ref="sidebar"></a></div><div class="share-btn weibo"><a class="fab fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></div><div class="share-btn twitter"><a class="fab fa-twitter" target="_blank" rel="noopener" href="http://twitter.com/intent/tweet?text=I%20have%20found%20a%20great%20blog.%0A%0AZwei%20%C2%B7%20%E7%8E%B0%E4%BB%A3%E5%9B%BE%E5%BD%A2%20API%0Ahttps://zweireverberate.space/2025/11/30/%E7%8E%B0%E4%BB%A3%E5%9B%BE%E5%BD%A2-API/%0A"></a></div><div class="share-btn mastodon"><a class="fab fa-mastodon" target="_blank" rel="noopener" href="https://mastodonshare.com/?text=I%20have%20found%20a%20great%20blog.%0A%0AZwei%20%C2%B7%20%E7%8E%B0%E4%BB%A3%E5%9B%BE%E5%BD%A2%20API%0Ahttps://zweireverberate.space/2025/11/30/%E7%8E%B0%E4%BB%A3%E5%9B%BE%E5%BD%A2-API/%0A"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/2989/06/04/%E7%B4%A0%E5%BD%B1%E5%BE%AE%E8%A1%8C/" title="素影微行">Previous</a></li><li class="next pagbuttons"><a class="btn" role="navigation" href="/2025/11/09/C-General/" title="C++ General">Next</a></li></ul></div><script>Anatolo.setCommentConfig({"valine":{"enable":false,"appid":null,"appkey":null,"notify":false,"verify":false,"avatar":"mm","placeholder":"hello, world"},"gitment":{"enable":false,"owner":"Your GitHub ID","repo":"Repo to store comments","client_id":"Your client ID","client_secret":"Your client secret"},"gitalk":{"enable":false,"owner":"Your GitHub ID","repo":"Repo to store comments","client_id":"Your client ID","client_secret":"Your client secret"},"duoshuo":null,"disqus":null,"gentie":null})</script><script src="/js/visitors.js"></script></div></div></div></div></main-outlet><script>(async function(){ if (Anatolo.search == null) await Anatolo.getMsg("search-init"); Anatolo.search.config = {translation:{posts:"Posts",pages:"Pages",categories:"Categories",tags:"Tags",untitled:"(Untitled)",} }; })()</script><script src="/js/search.js" defer></script><div class="searchbox ins-search modal-cover"><div class="searchbox-container ins-search-container modal-container"><div class="searchbox-input-wrapper"><input class="searchbox-input ins-search-input" type="text" placeholder="Search..."><span class="searchbox-close"><a class="fa fa-times-circle" onclick="Anatolo.search.closeWindow();"></a></span></div><div class="searchbox-result-wrapper ins-section-wrapper"><div class="ins-section-container"><p>Seraching...</p></div></div></div></div><button class="float-button hide" id="scroll-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" type="button" title="Scroll to top"><i class="fa fa-angle-up"></i></button><script>$(document).on("scroll", () => {
   if (window.scrollY < 200) $("#scroll-to-top.float-button").addClass("hide");
   else $("#scroll-to-top.float-button").removeClass("hide");
 });</script><div class="modal-cover" id="success-indicator"><div class="modal-container indicator"><i class="fa fa-check"></i></div></div></body></html>
